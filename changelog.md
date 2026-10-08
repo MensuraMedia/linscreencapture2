@@ -183,3 +183,19 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   the master Phosphor source (copy, not reference); no other icon type.
 - Renders: docs/design/r044_panes_expanded.png, r044_panes_collapsed.png.
 - Tests 14/14; compileall clean; desktop relaunched, 0 criticals.
+
+## 2026-10-08 - r045 spacing audit: even and minimal everywhere
+
+- Operator directive: check padding/margins around all symbols, buttons,
+  icons, labels, text - evenness and minimal sizing.
+- Full normalization to the 2/4/8 scale (no 6/10/12 leftovers):
+  header/action bar margins 8h/4v with spacing 4; chip 4x8 padding,
+  spacing 4, margin 4; options bar spacing 8, margins 8/4; rail and
+  footer spacing 4; profile rows flush 24px (padding 0 4); segments/
+  toggles/tabs/layer rows/HUD paddings 4x8; layer row internal spacing
+  4; flyout margins 4; page label and minimap margins 8/4; summary
+  margin 4. Canvas HUD stays at 16px from the corner per s044.
+- Bonus: the natural minimum height dropped - the window now opens at
+  exactly 960x640 (earlier 791 height caveat resolved).
+- Evidence: docs/design/r045_spacing_even.png; tests 14/14; desktop
+  relaunched, 0 criticals.

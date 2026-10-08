@@ -53,7 +53,7 @@ APP_CSS = f"""
 /* header doc block + stateful chip (contract #6, s044 hdr) */
 .docsub {{ color: {C['text_muted']}; font-size: 12px; }}
 .chip {{
-  border-radius: 6px; padding: 4px 10px;
+  border-radius: 6px; padding: 4px 8px;
   background-color: {C['surface']}; border: 1px solid {C['border']};
   font-size: 12px;
 }}
@@ -86,7 +86,7 @@ APP_CSS = f"""
 .icon-btn.active:hover {{ background-color: {C['accent_hover']}; }}
 
 /* profile rows: 6 rows, 40px, active raised (spec section 3) */
-.pirow {{ min-height: 28px; padding: 0 6px; border-radius: 6px; }}
+.pirow {{ min-height: 24px; padding: 0 4px; border-radius: 6px; }}
 .pirow.active {{ background-color: {C['surface_hover']}; }}
 
 .toolcell {{ min-width: 24px; min-height: 24px; }}
@@ -100,7 +100,7 @@ APP_CSS = f"""
 }}
 .seg button {{
   background-image: none; background-color: transparent; border: none;
-  box-shadow: none; padding: 4px 10px; border-radius: 4px;
+  box-shadow: none; padding: 4px 8px; border-radius: 4px;
   font-size: 12px; color: {C['text_muted']}; min-height: 0;
 }}
 .seg button:hover {{ background-color: {C['surface_hover']}; color: {C['text']}; }}
@@ -125,12 +125,12 @@ APP_CSS = f"""
 /* right panels: top tabs (s044 ptabs), layer rows, footer */
 .ptab {{
   background-image: none; background-color: transparent; border: none;
-  box-shadow: none; padding: 6px 12px; font-size: 13px;
+  box-shadow: none; padding: 4px 8px; font-size: 13px;
   color: {C['text_muted']}; border-bottom: 2px solid transparent;
   border-radius: 0; min-height: 0;
 }}
 .ptab.sel {{ color: {C['text']}; border-bottom-color: {C['accent']}; }}
-.lrow {{ padding: 6px 8px; }}
+.lrow {{ padding: 4px 8px; }}
 .lthumb {{
   min-width: 24px; min-height: 20px; border-radius: 3px;
   background-color: {C['surface_hover']}; border: 1px solid {C['border']};
@@ -154,7 +154,7 @@ APP_CSS = f"""
 /* canvas zoom HUD chip (spec section 3: 28px, radius 6) */
 .zoomhud {{
   background-color: {C['surface']}; border: 1px solid {C['border']};
-  border-radius: 6px; padding: 4px 10px; font-size: 12px;
+  border-radius: 6px; padding: 4px 8px; font-size: 12px;
 }}
 .zoomhud b {{ color: {C['text']}; font-weight: 600; }}
 """.encode()
@@ -233,8 +233,8 @@ def _flyout_button(icon: str, tooltip: str, buttons: list[Gtk.Button],
     """Consolidated button: hover pops out the full group (r044 collapse law).
     Icons per the vendored Phosphor set only."""
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-    box.set_margin_start(8); box.set_margin_end(8)
-    box.set_margin_top(8); box.set_margin_bottom(8)
+    box.set_margin_start(4); box.set_margin_end(4)
+    box.set_margin_top(4); box.set_margin_bottom(4)
     for b in buttons:
         box.append(b)
     pop = Gtk.Popover()
@@ -338,11 +338,11 @@ class StudioWindow(Gtk.ApplicationWindow):
     # --- header (s044 hdr: doc block, chip, spacer, zoom, Capture) ------------
 
     def _build_header(self):
-        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         bar.get_style_context().add_class("studio-header")
         bar.get_style_context().add_class("lt-header")
-        bar.set_margin_start(12); bar.set_margin_end(12)
-        bar.set_margin_top(8); bar.set_margin_bottom(8)
+        bar.set_margin_start(8); bar.set_margin_end(8)
+        bar.set_margin_top(4); bar.set_margin_bottom(4)
 
         doc = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self._doc_title = Gtk.Label(label="Untitled", halign=Gtk.Align.START)
@@ -353,14 +353,14 @@ class StudioWindow(Gtk.ApplicationWindow):
         doc.append(self._doc_title); doc.append(self._docsub)
         bar.append(doc)
 
-        self._chip = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        self._chip = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         chip_ctx = self._chip.get_style_context()
         chip_ctx.add_class("chip")
         self._chip_dot = Gtk.Box()
         self._chip_dot.get_style_context().add_class("dot")
         self._chip_word = Gtk.Label(label="Ready")
         self._chip.append(self._chip_dot); self._chip.append(self._chip_word)
-        self._chip.set_margin_start(8)
+        self._chip.set_margin_start(4)
         self._chip.set_valign(Gtk.Align.CENTER)
         self._chip.set_halign(Gtk.Align.START)
         self._chip.set_tooltip_text("All systems nominal - arm a capture profile")
@@ -488,7 +488,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     PANE_COLLAPSED_W = 100
 
     def _build_left_rail(self):
-        rail = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        rail = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         rail.get_style_context().add_class("studio-rail")
         rail.set_margin_start(8); rail.set_margin_end(8)
         rail.set_margin_top(8); rail.set_margin_bottom(8)
@@ -610,10 +610,10 @@ class StudioWindow(Gtk.ApplicationWindow):
         center = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         center.set_hexpand(True); center.set_vexpand(True)
 
-        self._options_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        self._options_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self._options_bar.get_style_context().add_class("studio-options")
-        self._options_bar.set_margin_start(12); self._options_bar.set_margin_end(12)
-        self._options_bar.set_margin_top(6); self._options_bar.set_margin_bottom(6)
+        self._options_bar.set_margin_start(8); self._options_bar.set_margin_end(8)
+        self._options_bar.set_margin_top(4); self._options_bar.set_margin_bottom(4)
         # horizontal scroll keeps the options bar's minimum width small, so
         # the window itself can shrink (r043); the bar scrolls when narrow
         opt_scroll = Gtk.ScrolledWindow()
@@ -849,8 +849,8 @@ class StudioWindow(Gtk.ApplicationWindow):
         mini.set_content_height(64)
         mini.set_hexpand(True)
         mini.set_draw_func(self._draw_minimap)
-        wrap.set_margin_start(8); wrap.set_margin_end(8)
-        wrap.set_margin_bottom(8)
+        wrap.set_margin_start(4); wrap.set_margin_end(4)
+        wrap.set_margin_bottom(4)
         wrap.append(mini)
         return wrap
 
@@ -880,7 +880,7 @@ class StudioWindow(Gtk.ApplicationWindow):
             empty.set_margin_top(8); empty.set_margin_start(8); empty.set_margin_end(8)
             self._layers_box.append(empty)
             return
-        row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         row.get_style_context().add_class("lrow")
         thumb = Gtk.Box()
         thumb.get_style_context().add_class("lthumb")
@@ -899,8 +899,8 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _build_panel_footer(self):
         """s044 pfoot, r043: colour well moved to the right pane, then
         quick styles, steps next-No, navigator minimap."""
-        foot = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        foot.set_margin_top(8); foot.set_margin_bottom(8)
+        foot = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+        foot.set_margin_top(4); foot.set_margin_bottom(4)
 
         colour_label = Gtk.Label(label="COLOUR", halign=Gtk.Align.START, xalign=0)
         colour_label.get_style_context().add_class("sect")
@@ -965,17 +965,17 @@ class StudioWindow(Gtk.ApplicationWindow):
 
     def _page_label(self, text):
         l = Gtk.Label(label=text); l.set_wrap(True); l.set_xalign(0)
-        l.set_margin_start(12); l.set_margin_end(12); l.set_margin_top(12)
+        l.set_margin_start(8); l.set_margin_end(8); l.set_margin_top(8)
         return l
 
     # --- action bar (s044 ab: Discard · Flatten · Captures-menu · summary ·
     #     Copy · Save; the status lives in the header chip only) -------------------
 
     def _build_action_bar(self):
-        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         bar.get_style_context().add_class("studio-actionbar")
-        bar.set_margin_start(12); bar.set_margin_end(12)
-        bar.set_margin_top(8); bar.set_margin_bottom(8)
+        bar.set_margin_start(8); bar.set_margin_end(8)
+        bar.set_margin_top(4); bar.set_margin_bottom(4)
 
         discard = _icon_button(
             "trash", "Discard - drop the current capture", 16,
@@ -1012,7 +1012,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         spacer = Gtk.Box(); bar.append(spacer); spacer.set_hexpand(True)
         self._summary = Gtk.Label(label="no capture")
         self._summary.get_style_context().add_class("muted")
-        self._summary.set_margin_start(8); self._summary.set_margin_end(8)
+        self._summary.set_margin_start(4); self._summary.set_margin_end(4)
         bar.append(self._summary)
 
         copy = _icon_button("copy", "Copy to clipboard", 16)
