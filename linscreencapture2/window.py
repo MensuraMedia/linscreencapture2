@@ -662,9 +662,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         bar = self._options_bar
         self._clear(bar)
         name = self._active_tool
-        icon = Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(
-            icons.pixbuf(TOOL_NAMES.get(name, "cursor"), 20)))
-        bar.append(icon)
+        bar.append(_icon_image(TOOL_NAMES.get(name, "cursor"), 16))
         label = Gtk.Label(label=name)
         label.get_style_context().add_class("lt-strong")
         bar.append(label)
@@ -1004,12 +1002,7 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         captures = Gtk.MenuButton()
         captures.set_tooltip_text("Captures - versions and the captures folder")
-        cap_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
-        cap_box.append(Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(
-            icons.pixbuf("images", 16))))
-        cap_box.append(Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(
-            icons.pixbuf("caret-down", 14))))
-        captures.set_child(cap_box)
+        captures.set_child(_icon_image("images", 16))
         ctx = captures.get_style_context()
         ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-24")
         popover = Gtk.Popover()

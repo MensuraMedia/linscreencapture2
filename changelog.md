@@ -257,3 +257,17 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   hover flyouts, 220ms grace), right-pane parity note. State table
   updated.
 - Docs-only change; no code touched. Tests 14/14 as due diligence.
+
+## 2026-10-08 - r049 application-wide icon unification
+
+- Operator directive (with collapsed-sidebar screenshot as reference):
+  this icon size is perfect - make all icons application-wide the same.
+- Last two non-standard sites fixed: the options bar tool identity icon
+  (20px unconstrained Image -> 16px _icon_image) and the Captures menu
+  button (16px + 14px caret pair -> single 16px glyph; popover
+  affordance unchanged, tooltip names it). Every icon in the app is now
+  a 16px Phosphor glyph in a 24px button. Colour swatches stay 20px per
+  contract #9 - they are colour cells, not icons.
+- Handoff 2b icon-standard note stands application-wide. Evidence:
+  docs/design/r049_uniform_icons.png; tests 14/14; desktop relaunched,
+  0 criticals.
