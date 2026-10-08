@@ -381,3 +381,16 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   background matches.
 - Evidence: docs/design/r055_stage242424_singleword.png; tests 17/17;
   desktop relaunched, 0 criticals.
+
+## 2026-10-08 - r056 minimal dark flyouts
+
+- Operator directive: hover captions dark gray #141414 and much more
+  minimal.
+- Hover flyout popovers (and the Captures popover for consistency) now
+  carry the `hoverfly` style: flat #141414 background, no border, no
+  shadow, 4px radius, 2px padding; content boxes tightened to 2px
+  spacing/margins. Flyouts read as a quiet extension of the sidebar
+  over the #242424 stage.
+- Evidence (profiles flyout popped via popover API):
+  docs/design/r056_minimal_flyout.png; tests 17/17; desktop relaunched,
+  0 criticals.

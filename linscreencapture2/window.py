@@ -104,6 +104,13 @@ menubutton.icon-btn > button > box {{ min-width: 16px; min-height: 16px; }}
   padding: 0; border: 1px solid {C['border']}; }}
 .hexentry {{ font-size: 12px; font-family: monospace; padding: 4px 6px; }}
 
+/* hover flyouts: flat dark-gray #141414, minimal chrome (r056) */
+popover.hoverfly > contents {{
+  background-color: #141414; border: none; box-shadow: none;
+  border-radius: 4px; padding: 2px;
+}}
+popover.hoverfly > arrow {{ background-color: #141414; border: none; }}
+
 /* options bar (s044 optbar): segments, swatches, numerics */
 .seg {{
   background-color: {C['surface']}; border-radius: 6px; padding: 2px;
@@ -255,9 +262,9 @@ def _flyout_button(icon: str, tooltip: str, buttons: list[Gtk.Button],
                    css: tuple[str, ...] = ("icon-24",)) -> Gtk.MenuButton:
     """Consolidated button: hover pops out the full group (r044 collapse law).
     Icons per the vendored Phosphor set only."""
-    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-    box.set_margin_start(4); box.set_margin_end(4)
-    box.set_margin_top(4); box.set_margin_bottom(4)
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+    box.set_margin_start(2); box.set_margin_end(2)
+    box.set_margin_top(2); box.set_margin_bottom(2)
     for b in buttons:
         box.append(b)
     return _flyout_box(icon, tooltip, box, css)
@@ -267,6 +274,7 @@ def _flyout_box(icon: str, tooltip: str, box: Gtk.Box,
                 css: tuple[str, ...] = ("icon-24",)) -> Gtk.MenuButton:
     """Hover flyout with arbitrary content (r053: panel pages live here)."""
     pop = Gtk.Popover()
+    pop.get_style_context().add_class("hoverfly")
     pop.set_child(box)
     pop.set_position(Gtk.PositionType.RIGHT)  # hover-expansion to the right
     mb = Gtk.MenuButton()
@@ -1146,9 +1154,10 @@ class StudioWindow(Gtk.ApplicationWindow):
         ctx = captures.get_style_context()
         ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-24")
         popover = Gtk.Popover()
-        pop_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-        pop_box.set_margin_start(8); pop_box.set_margin_end(8)
-        pop_box.set_margin_top(8); pop_box.set_margin_bottom(8)
+        popover.get_style_context().add_class("hoverfly")
+        pop_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+        pop_box.set_margin_start(4); pop_box.set_margin_end(4)
+        pop_box.set_margin_top(4); pop_box.set_margin_bottom(4)
         open_btn = Gtk.Button(label="Open captures folder")
         open_btn.connect("clicked", lambda *_: self._open_captures_folder())
         pop_box.append(open_btn)
