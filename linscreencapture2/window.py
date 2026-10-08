@@ -47,7 +47,7 @@ APP_CSS = f"""
 .studio-panels {{ border-left: 1px solid {C['border']}; }}
 .studio-actionbar {{ border-top: 1px solid {C['border']}; }}
 
-.sect {{ font-size: 11px; letter-spacing: 0.08em; }}
+.sect {{ font-size: 10px; letter-spacing: 0.04em; }}
 .grouplabel {{ font-size: 10px; letter-spacing: 0.06em; }}
 
 /* header doc block + stateful chip (contract #6, s044 hdr) */
@@ -86,7 +86,7 @@ APP_CSS = f"""
 .icon-btn.active:hover {{ background-color: {C['accent_hover']}; }}
 
 /* profile rows: 6 rows, 40px, active raised (spec section 3) */
-.pirow {{ min-height: 24px; padding: 0 4px; border-radius: 6px; }}
+.pirow {{ min-height: 24px; padding: 0; border-radius: 6px; }}
 .pirow.active {{ background-color: {C['surface_hover']}; }}
 
 .toolcell {{ min-width: 24px; min-height: 24px; }}
@@ -239,6 +239,7 @@ def _flyout_button(icon: str, tooltip: str, buttons: list[Gtk.Button],
         box.append(b)
     pop = Gtk.Popover()
     pop.set_child(box)
+    pop.set_position(Gtk.PositionType.RIGHT)  # hover-expansion to the right
     mb = Gtk.MenuButton()
     mb.set_child(_icon_image(icon, 16))
     mb.set_popover(pop)
@@ -326,12 +327,14 @@ class StudioWindow(Gtk.ApplicationWindow):
         self.set_child(root)
 
         root.append(self._build_header())
-        middle = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
+        # Grid, not Box: pane columns hold their exact fixed width and the
+        # canvas column absorbs all extra space (r047)
+        middle = Gtk.Grid()
         middle.set_vexpand(True)
         root.append(middle)
-        middle.append(self._build_left_rail())
-        middle.append(self._build_center())
-        middle.append(self._build_right_panels())
+        middle.attach(self._build_left_rail(), 0, 0, 1, 1)
+        middle.attach(self._build_center(), 1, 0, 1, 1)
+        middle.attach(self._build_right_panels(), 2, 0, 1, 1)
         root.append(self._build_action_bar())
         self._set_chip("ready")
 
@@ -370,19 +373,19 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         zoom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         zoom.get_style_context().add_class("zoom")
-        zoom.append(_icon_button("minus", "Zoom out (zoom model: HANDOFF 7.7)", 14))
+        zoom.append(_icon_button("minus", "Zoom out (zoom model: HANDOFF 7.7)", 16))
         self._zoom_val = Gtk.Label(label="100%")
         self._zoom_val.get_style_context().add_class("zv")
         self._zoom_val.set_margin_start(8)
         self._zoom_val.set_margin_end(8)
         zoom.append(self._zoom_val)
-        zoom.append(_icon_button("plus", "Zoom in (zoom model: HANDOFF 7.7)", 14))
-        zoom.append(_icon_button("arrows-in", "Fit to window (zoom model: HANDOFF 7.7)", 14))
+        zoom.append(_icon_button("plus", "Zoom in (zoom model: HANDOFF 7.7)", 16))
+        zoom.append(_icon_button("arrows-in", "Fit to window (zoom model: HANDOFF 7.7)", 16))
         bar.append(zoom)
 
         cap = _icon_button(
             "camera", "Capture - freeze the screen and select a region (PrintScreen)",
-            14, css=("icon-24", "primary"), color=C["on_accent"],
+            16, css=("icon-24", "primary"), color=C["on_accent"],
         )
         cap.connect("clicked", lambda *_: self._start_capture("region"))
         bar.append(cap)
@@ -487,7 +490,8 @@ class StudioWindow(Gtk.ApplicationWindow):
     # pane widths are FIXED pixels (r046: collapse/expand never scale by
     # percentage): expanded fits >=5 icons per row; the left sidebar
     # collapses to exactly one 24px icon plus its 8px pane margins
-    PANE_W = 216
+    LEFT_W = 100        # r047: expanded sidebar is 100px - three 24px
+    RIGHT_W = 100       # columns fill it accurately (hexpand cells)
     LEFT_COLLAPSED_W = 40   # 1 icon wide; remaining icons stack below
     RIGHT_COLLAPSED_W = 100
 
@@ -496,6 +500,9 @@ class StudioWindow(Gtk.ApplicationWindow):
         rail.get_style_context().add_class("studio-rail")
         rail.set_margin_start(8); rail.set_margin_end(8)
         rail.set_margin_top(8); rail.set_margin_bottom(8)
+        # explicit False: buttons inside have hexpand, and GTK4 propagates
+        # descendant expand to the pane unless pinned (r047)
+        rail.set_hexpand(False)
         self._left_rail = rail
         self._left_collapsed = False
         self._fill_left()
@@ -510,7 +517,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         rail = self._left_rail
         if self._left_collapsed:
             rail.set_size_request(self.LEFT_COLLAPSED_W, -1)
-            expand = _icon_button("caret-right", "Expand the capture pane", 14,
+            expand = _icon_button("caret-right", "Expand the capture pane", 16,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_left())
             rail.append(expand)
@@ -541,26 +548,27 @@ class StudioWindow(Gtk.ApplicationWindow):
             self._mark_active_tool()
             return
 
-        rail.set_size_request(self.PANE_W, -1)
+        rail.set_size_request(self.LEFT_W, -1)
         head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        cap = Gtk.Label(label="CAPTURE PROFILES", halign=Gtk.Align.START, xalign=0)
+        cap = Gtk.Label(label="PROFILES", halign=Gtk.Align.START, xalign=0)
         cap.get_style_context().add_class("sect"); cap.get_style_context().add_class("muted")
         cap.set_hexpand(True)
         head.append(cap)
-        collapse = _icon_button("caret-left", "Collapse pane to 100px", 14,
+        collapse = _icon_button("caret-left", "Collapse pane", 16,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_left())
         head.append(collapse)
         rail.append(head)
 
         self._profile_buttons = {}
-        pgrid = Gtk.Grid(row_spacing=4, column_spacing=4)  # 6 across (r046)
+        pgrid = Gtk.Grid(row_spacing=4, column_spacing=4)  # 3 across fills 100
         for pi, (name, (icon, meta)) in enumerate(PROFILE_META.items()):
             b = _icon_button(icon, f"{name} capture \u2014 {meta}", 16,
                              css=("icon-24", "pirow"))
+            b.set_hexpand(True)  # cells stretch so 3 columns fill the pane
             b.connect("clicked", lambda _b, n=name: self._profile(n))
             self._profile_buttons[name] = b
-            pgrid.attach(b, pi % 6, pi // 6, 1, 1)
+            pgrid.attach(b, pi % 3, pi // 3, 1, 1)
         rail.append(pgrid)
         self._mark_active_profile()
 
@@ -581,9 +589,10 @@ class StudioWindow(Gtk.ApplicationWindow):
             for ti, (name, icon) in enumerate(tools):
                 b = _icon_button(icon, f"{group}: {name} tool", 16,
                                  css=("icon-24", "toolcell"))
+                b.set_hexpand(True)  # 3 columns fill the 100px pane
                 b.connect("clicked", lambda _b, n=name: self._pick_tool(n))
                 self._tool_buttons[name] = b
-                grid.attach(b, ti % 7, ti // 7, 1, 1)
+                grid.attach(b, ti % 3, ti // 3, 1, 1)
             rail.append(grid)
         self._mark_active_tool()
 
@@ -749,8 +758,10 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _build_right_panels(self):
         right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         right.get_style_context().add_class("studio-panels")
-        right.set_margin_start(8); right.set_margin_end(8)
+        right.set_margin_start(2); right.set_margin_end(2)
         right.set_margin_top(8); right.set_margin_bottom(8)
+        # explicit False: see rail - tabs buttons expand inside, pane must not
+        right.set_hexpand(False)
         self._right_pane = right
         self._right_collapsed = False
         self._fill_right()
@@ -765,7 +776,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         right = self._right_pane
         if self._right_collapsed:
             right.set_size_request(self.RIGHT_COLLAPSED_W, -1)
-            expand = _icon_button("caret-left", "Expand the panels pane", 14,
+            expand = _icon_button("caret-left", "Expand the panels pane", 16,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_right())
             right.append(expand)
@@ -783,7 +794,7 @@ class StudioWindow(Gtk.ApplicationWindow):
                             "Foreground color - content palette", "sw", 20),
                 _hex_button(CONTENT_COLORS[9],
                             "Background color - content palette", "sw", 20),
-                _icon_button("swap", "Swap foreground and background (X)", 14),
+                _icon_button("swap", "Swap foreground and background (X)", 16),
             ]
             right.append(_flyout_button("palette", "Colour - hover: fg/bg/swap",
                                         colour_fly))
@@ -806,7 +817,7 @@ class StudioWindow(Gtk.ApplicationWindow):
             right.append(self._build_minimap())
             return
 
-        right.set_size_request(self.PANE_W, -1)
+        right.set_size_request(self.RIGHT_W, -1)
         tabs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         tabs.set_halign(Gtk.Align.FILL)
         self._panel_stack = Gtk.Stack()
@@ -814,15 +825,13 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._panel_stack.set_transition_type(Gtk.StackTransitionType.NONE)
         self._panel_tabs = {}
         for i, (name, (icon, page)) in enumerate(PANEL_PAGES.items()):
-            if i > 0:
-                tabs.append(Gtk.Separator(orientation=Gtk.Orientation.VERTICAL))
             b = _icon_button(icon, f"{name} panel", 16)
             b.get_style_context().add_class("ptab")
             b.set_hexpand(True)
             b.connect("clicked", lambda _b, p=name: self._show_panel(p))
             self._panel_tabs[name] = b
             tabs.append(b)
-        collapse = _icon_button("caret-right", "Collapse pane to 100px", 14,
+        collapse = _icon_button("caret-right", "Collapse pane", 16,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_right())
         tabs.append(collapse)
@@ -881,6 +890,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         if self._capture is None:
             empty = Gtk.Label(label="No capture yet - the Base layer appears here",
                               wrap=True, xalign=0)
+            empty.set_max_width_chars(12)
             empty.get_style_context().add_class("muted")
             empty.set_margin_top(8); empty.set_margin_start(8); empty.set_margin_end(8)
             self._layers_box.append(empty)
@@ -896,7 +906,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         kind = Gtk.Label(label="IMG")
         kind.get_style_context().add_class("lkind")
         row.append(kind)
-        eye = _icon_button("eye", "Toggle layer visibility", 14, css=("icon-24",))
+        eye = _icon_button("eye", "Toggle layer visibility", 16, css=("icon-24",))
         eye.set_sensitive(False)  # visibility toggles land with the object model
         row.append(eye)
         self._layers_box.append(row)
@@ -917,7 +927,7 @@ class StudioWindow(Gtk.ApplicationWindow):
                                 "Foreground color - content palette", "sw", 20))
         well.append(_hex_button(CONTENT_COLORS[9],
                                 "Background color - content palette", "sw", 20))
-        well.append(_icon_button("swap", "Swap foreground and background (X)", 14))
+        well.append(_icon_button("swap", "Swap foreground and background (X)", 16))
         foot.append(well)
 
         qs_label = Gtk.Label(label="QUICK STYLES", halign=Gtk.Align.START, xalign=0)
@@ -932,7 +942,8 @@ class StudioWindow(Gtk.ApplicationWindow):
         badge = Gtk.Label(label="1")
         badge.get_style_context().add_class("badge")
         steps.append(badge)
-        step_text = Gtk.Label(label="Steps - next \u2116, auto-increment", xalign=0)
+        step_text = Gtk.Label(label="Steps - next \u2116", xalign=0)
+        step_text.set_tooltip_text("Steps - auto-increments per capture")
         step_text.get_style_context().add_class("muted")
         steps.append(step_text)
         foot.append(steps)
@@ -970,6 +981,7 @@ class StudioWindow(Gtk.ApplicationWindow):
 
     def _page_label(self, text):
         l = Gtk.Label(label=text); l.set_wrap(True); l.set_xalign(0)
+        l.set_max_width_chars(12)  # caps NATURAL width (width_chars only raised minimum)
         l.set_margin_start(8); l.set_margin_end(8); l.set_margin_top(8)
         return l
 
@@ -996,7 +1008,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         cap_box.append(Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(
             icons.pixbuf("images", 16))))
         cap_box.append(Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(
-            icons.pixbuf("caret-down", 12))))
+            icons.pixbuf("caret-down", 14))))
         captures.set_child(cap_box)
         ctx = captures.get_style_context()
         ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-24")
@@ -1025,7 +1037,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         bar.append(copy)
         save = _icon_button(
             "download-simple", "Save PNG to the captures folder",
-            14, css=("icon-24", "primary"), color=C["on_accent"],
+            16, css=("icon-24", "primary"), color=C["on_accent"],
         )
         save.connect("clicked", lambda *_: self._save())
         bar.append(save)

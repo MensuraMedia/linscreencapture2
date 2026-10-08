@@ -217,3 +217,27 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Evidence: docs/design/r046_sidebar_expanded.png,
   r046_sidebar_collapsed_1icon.png; tests 14/14; desktop relaunched
   960x640, 0 criticals.
+
+## 2026-10-08 - r047 uniform 24px icons, right-side flyouts, 100px panes
+
+- Operator directives: collapsed-state icons are the ideal size - resize
+  all icons to match; hover-expansion to the RIGHT of similar-size
+  icons; expanded sidebar only 100px wide with icons filling it
+  accurately.
+- All glyphs normalized to 16px in 24px buttons (header zoom/capture,
+  carets, eye, swap, save/discard were 14px). Flyout popovers now open
+  to the RIGHT of their anchor (Gtk.PositionType.RIGHT).
+- Left AND right panes fixed at exactly 100px expanded (RIGHT_W 216 ->
+  100 per the r044 parity law at the new size); collapsed widths
+  unchanged (left 40 = one icon, right 100).
+- GTK4 layout bugs found and fixed (recorded in HANDOFF pitfalls):
+  expand flags propagate from descendants (tabs buttons expanded the
+  whole pane - panes now pin set_hexpand(False)); Grid/Box distribute
+  extra to non-expanding children up to NATURAL, so pane naturals had
+  to be capped (wrapping labels need max_width_chars, not width_chars
+  - width_chars raised minimums instead); middle layout moved from Box
+  to Grid (only the canvas column expands). Tabs row separators
+  removed; steps label shortened (detail in tooltip); section labels
+  10px/0.04em so the 100px header fits.
+- Evidence: docs/design/r047_100px_panes.png; tests 14/14; desktop
+  relaunched 960x640, 0 criticals.
