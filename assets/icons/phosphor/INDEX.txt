@@ -1,0 +1,1256 @@
+Phosphor Icons v2.0.8 - icon index
+1248 icons x 6 weights = 7488 SVG files. MIT licence (see LICENSE).
+Paths: regular/<name>.svg, and <weight>/<name>-<weight>.svg for thin, light, bold, fill, duotone
+  e.g. regular/arrow-clockwise.svg, bold/arrow-clockwise-bold.svg
+Search tags come from the Phosphor catalogue (src/icons.ts).
+
+    #  Name                                 Category               Tags
+--------------------------------------------------------------------------------------------------------------
+    1  address-book                         communication          contacts, roledex
+    2  air-traffic-control                  map                    airport, travel, transportation, buildings
+    3  airplane                             map, objects           vehicles, airports, flights, flying, planes, transit, transportation, traveling
+    4  airplane-in-flight                   map, objects           vehicles, airports, flights, flying, planes, transit, transportation, traveling, arrival
+    5  airplane-landing                     map, objects           vehicles, airports, flights, flying, planes, transit, transportation, traveling, arrival
+    6  airplane-takeoff                     map, objects           vehicles, airports, flights, flying, planes, transit, transportation, traveling, departure
+    7  airplane-tilt                        map, objects           vehicles, airports, flights, flying, planes, transit, transportation, traveling, departure
+    8  airplay                              media, system          apple, screencasting, television, tv
+    9  alarm                                system                 times, timer, clock, schedule, events, watch
+   10  alien                                games                  ufo, space, flying saucer, extra terrestrial, sci-fi
+   11  align-bottom                         design, editor         alignment, arrangement, layout, flush bottom
+   12  align-bottom-simple                  design, editor         alignment, arrangement, layout, flush bottom
+   13  align-center-horizontal              design, editor         alignment, arrangement, layout, centered, middle
+   14  align-center-horizontal-simple       design, editor         alignment, arrangement, layout, centered, middle
+   15  align-center-vertical                design, editor         alignment, arrangement, layout, centered, middle
+   16  align-center-vertical-simple         design, editor         alignment, arrangement, layout, centered, middle
+   17  align-left                           design, editor         alignment, arrangement, layout, flush left
+   18  align-left-simple                    design, editor         alignment, arrangement, layout, flush left
+   19  align-right                          design, editor         alignment, arrangement, layout, flush right
+   20  align-right-simple                   design, editor         alignment, arrangement, layout, flush right
+   21  align-top                            design, editor         alignment, arrangement, layout, flush top
+   22  align-top-simple                     design, editor         alignment, arrangement, layout, flush top
+   23  amazon-logo                          brand                  ecommerce, shopping, logos
+   24  anchor                               communication, map, objects nautical, boats, ships, hope, safety, insurance
+   25  anchor-simple                        communication, map, objects nautical, boats, ships, hope, safety, insurance
+   26  android-logo                         brand, development, system logos, google, mobile, phone, cellular, cellphone
+   27  angular-logo                         brand, development     framework, javascript, google, web
+   28  aperture                             design, media          photography, cameras, pictures, lens
+   29  app-store-logo                       brand                  macintosh, imac, iphone, ipad, macos, ios
+   30  app-window                           communication, system  windows, software, programs, applications
+   31  apple-logo                           brand                  macintosh, imac, iphone, ipad, macos, ios
+   32  apple-podcasts-logo                  brand, media           macintosh, imac, iphone, ipad, macos, ios
+   33  archive                              office, system         saved, saving, archived, archiving, archival, downloaded, downloading
+   34  archive-box                          office, system         saved, saving, archived, archiving, archival, downloaded, downloading
+   35  archive-tray                         office, system         saved, saving, archived, archiving, archival, downloaded, downloading
+   36  armchair                             objects, commerce      seat, furniture
+   37  arrow-arc-left                       arrows                 directional, pointer, pointing, arrowhead
+   38  arrow-arc-right                      arrows                 directional, pointer, pointing, arrowhead
+   39  arrow-bend-double-up-left            arrows                 directional, pointer, pointing, arrowhead, reply-all
+   40  arrow-bend-double-up-right           arrows                 directional, pointer, pointing, arrowhead
+   41  arrow-bend-down-left                 arrows                 directional, pointer, pointing, arrowhead
+   42  arrow-bend-down-right                arrows                 directional, pointer, pointing, arrowhead
+   43  arrow-bend-left-down                 arrows                 directional, pointer, pointing, arrowhead
+   44  arrow-bend-left-up                   arrows                 directional, pointer, pointing, arrowhead
+   45  arrow-bend-right-down                arrows                 directional, pointer, pointing, arrowhead
+   46  arrow-bend-right-up                  arrows                 directional, pointer, pointing, arrowhead
+   47  arrow-bend-up-left                   arrows                 directional, pointer, pointing, arrowhead, reply, re
+   48  arrow-bend-up-right                  arrows                 directional, pointer, pointing, arrowhead, forward, fwd
+   49  arrow-circle-down                    arrows                 directional, pointer, pointing, arrowhead
+   50  arrow-circle-down-left               arrows                 directional, pointer, pointing, arrowhead
+   51  arrow-circle-down-right              arrows                 directional, pointer, pointing, arrowhead
+   52  arrow-circle-left                    arrows                 directional, pointer, pointing, arrowhead
+   53  arrow-circle-right                   arrows                 directional, pointer, pointing, arrowhead
+   54  arrow-circle-up                      arrows                 directional, pointer, pointing, arrowhead
+   55  arrow-circle-up-left                 arrows                 directional, pointer, pointing, arrowhead
+   56  arrow-circle-up-right                arrows                 directional, pointer, pointing, arrowhead
+   57  arrow-clockwise                      arrows                 directional, pointer, pointing, arrowhead, redo, refreshing, rotate, spin
+   58  arrow-counter-clockwise              arrows                 directional, pointer, pointing, arrowhead, undo, refreshing, rotate, spin
+   59  arrow-down                           arrows                 directional, pointer, pointing, arrowhead
+   60  arrow-down-left                      arrows                 directional, pointer, pointing, arrowhead
+   61  arrow-down-right                     arrows                 directional, pointer, pointing, arrowhead
+   62  arrow-elbow-down-left                arrows                 directional, pointer, pointing, arrowhead
+   63  arrow-elbow-down-right               arrows                 directional, pointer, pointing, arrowhead
+   64  arrow-elbow-left                     arrows                 directional, pointer, pointing, arrowhead
+   65  arrow-elbow-left-down                arrows                 directional, pointer, pointing, arrowhead
+   66  arrow-elbow-left-up                  arrows                 directional, pointer, pointing, arrowhead
+   67  arrow-elbow-right                    arrows                 directional, pointer, pointing, arrowhead
+   68  arrow-elbow-right-down               arrows                 directional, pointer, pointing, arrowhead
+   69  arrow-elbow-right-up                 arrows                 directional, pointer, pointing, arrowhead
+   70  arrow-elbow-up-left                  arrows                 directional, pointer, pointing, arrowhead
+   71  arrow-elbow-up-right                 arrows                 directional, pointer, pointing, arrowhead
+   72  arrow-fat-down                       arrows                 directional, pointer, pointing, arrowhead, outlined
+   73  arrow-fat-left                       arrows                 directional, pointer, pointing, arrowhead, outlined
+   74  arrow-fat-line-down                  arrows                 directional, pointer, pointing, arrowhead, outlined
+   75  arrow-fat-line-left                  arrows                 directional, pointer, pointing, arrowhead, outlined
+   76  arrow-fat-line-right                 arrows                 directional, pointer, pointing, arrowhead, outlined
+   77  arrow-fat-line-up                    arrows                 directional, pointer, pointing, arrowhead, caps lock, outlined
+   78  arrow-fat-lines-down                 arrows                 directional, pointer, pointing, arrowhead, outlined
+   79  arrow-fat-lines-left                 arrows                 directional, pointer, pointing, arrowhead, outlined
+   80  arrow-fat-lines-right                arrows                 directional, pointer, pointing, arrowhead, outlined
+   81  arrow-fat-lines-up                   arrows                 directional, pointer, pointing, arrowhead, outlined
+   82  arrow-fat-right                      arrows                 directional, pointer, pointing, arrowhead, outlined
+   83  arrow-fat-up                         arrows                 directional, pointer, pointing, arrowhead, shift, outlined
+   84  arrow-left                           arrows                 directional, pointer, pointing, arrowhead
+   85  arrow-line-down                      arrows                 directional, pointer, pointing, arrowhead, bottom
+   86  arrow-line-down-left                 arrows                 directional, pointer, pointing, arrowhead
+   87  arrow-line-down-right                arrows                 directional, pointer, pointing, arrowhead
+   88  arrow-line-left                      arrows                 directional, pointer, pointing, arrowhead
+   89  arrow-line-right                     arrows                 directional, pointer, pointing, arrowhead
+   90  arrow-line-up                        arrows                 directional, pointer, pointing, arrowhead, top
+   91  arrow-line-up-left                   arrows                 directional, pointer, pointing, arrowhead
+   92  arrow-line-up-right                  arrows                 directional, pointer, pointing, arrowhead
+   93  arrow-right                          arrows                 directional, pointer, pointing, arrowhead
+   94  arrow-square-down                    arrows                 directional, pointer, pointing, arrowhead
+   95  arrow-square-down-left               arrows                 directional, pointer, pointing, arrowhead
+   96  arrow-square-down-right              arrows                 directional, pointer, pointing, arrowhead
+   97  arrow-square-in                      arrows                 import, directional, pointer, pointing, arrowhead
+   98  arrow-square-left                    arrows                 directional, pointer, pointing, arrowhead
+   99  arrow-square-out                     arrows                 export, external, directional, pointer, pointing, arrowhead
+  100  arrow-square-right                   arrows                 directional, pointer, pointing, arrowhead
+  101  arrow-square-up                      arrows                 directional, pointer, pointing, arrowhead
+  102  arrow-square-up-left                 arrows                 directional, pointer, pointing, arrowhead
+  103  arrow-square-up-right                arrows                 directional, pointer, pointing, arrowhead
+  104  arrow-u-down-left                    arrows                 directional, pointer, pointing, arrowhead, undo, return, u-turns
+  105  arrow-u-down-right                   arrows                 directional, pointer, pointing, arrowhead, redo, u-turns
+  106  arrow-u-left-down                    arrows                 directional, pointer, pointing, arrowhead, undo, return, u-turns
+  107  arrow-u-left-up                      arrows                 directional, pointer, pointing, arrowhead, redo, u-turns
+  108  arrow-u-right-down                   arrows                 directional, pointer, pointing, arrowhead, undo, return, u-turns
+  109  arrow-u-right-up                     arrows                 directional, pointer, pointing, arrowhead, redo, u-turns
+  110  arrow-u-up-left                      arrows                 directional, pointer, pointing, arrowhead, undo, return, u-turns
+  111  arrow-u-up-right                     arrows                 directional, pointer, pointing, arrowhead, redo, u-turns
+  112  arrow-up                             arrows                 directional, pointer, pointing, arrowhead
+  113  arrow-up-left                        arrows                 directional, pointer, pointing, arrowhead
+  114  arrow-up-right                       arrows                 directional, pointer, pointing, arrowhead
+  115  arrows-clockwise                     arrows                 directional, pointer, pointing, arrowhead, redo, refreshing, sync, synchronize, rotate, spin
+  116  arrows-counter-clockwise             arrows                 directional, pointer, pointing, arrowhead, undo, refreshing, rotate, spin
+  117  arrows-down-up                       arrows                 directional, pointer, pointing, arrowhead
+  118  arrows-horizontal                    arrows                 directional, pointer, cursor, resize, expand, left, right
+  119  arrows-in                            arrows                 directional, pointer, pointing, arrowhead, collapse, minimize, resize, shrink
+  120  arrows-in-cardinal                   arrows                 directional, pointer, pointing, arrowhead, collapse, minimize, resize, shrink
+  121  arrows-in-line-horizontal            arrows, design, editor directional, pointer, pointing, arrowhead, close, center, align
+  122  arrows-in-line-vertical              arrows, design, editor directional, pointer, pointing, arrowhead, close, center, align
+  123  arrows-in-simple                     arrows                 directional, pointer, pointing, arrowhead, collapse, minimize, resize
+  124  arrows-left-right                    arrows                 directional, pointer, pointing, arrowhead
+  125  arrows-merge                         arrows                 arrowheads, join, combine
+  126  arrows-out                           arrows                 directional, pointer, pointing, arrowhead, expand, fullscreen, resize, grow
+  127  arrows-out-cardinal                  arrows                 directional, pointer, pointing, arrowhead, expand, fullscreen, resize, pan, move, grow
+  128  arrows-out-line-horizontal           arrows, design, editor directional, pointer, pointing, arrowhead, open, split
+  129  arrows-out-line-vertical             arrows, design, editor directional, pointer, pointing, arrowhead, open, split
+  130  arrows-out-simple                    arrows                 directional, pointer, pointing, arrowhead, expand, fullscreen, resize
+  131  arrows-split                         arrows                 arrowheads, fork
+  132  arrows-vertical                      arrows                 directional, pointer, cursor, resize, expand, up, down
+  133  article                              media, objects         reading, writing, journals, periodicals, text, newspaper
+  134  article-medium                       media, objects         reading, writing, journals, periodicals, text, newspaper
+  135  article-ny-times                     media, objects         reading, writing, journals, periodicals, text, news, newspaper, nyt, new york times
+  136  asterisk                             communication          star, wildcard, bullet point, 6, emergency
+  137  asterisk-simple                      communication          star, wildcard, bullet point, 5, emergency
+  138  at                                   communication          @, address, email, at symbol, commercial at, arobase
+  139  atom                                 development, nature    atomic, nucleus, nuclear, reactor, science, physics, electron, automation, react
+  140  baby                                 people, health         infant, child, children, toddler
+  141  backpack                             commerce, objects      knapsack, camping, school, bag
+  142  backspace                            system                 keyboard, remove, delete
+  143  bag                                  commerce, objects      suitcase, valise, baggage, folders, portfolio
+  144  bag-simple                           commerce, objects      suitcase, valise, baggage, folders, portfolio
+  145  balloon                              commerce, objects      helium, birthday, party
+  146  bandaids                             health                 bandages, medical, medicine, first aid, injury
+  147  bank                                 finance, map           banking, checking, money, savings, deposit, withdraw, places, locations
+  148  barbell                              health                 *updated*, gym, weights, dumbbells, strength training, workout, exercises, fitness
+  149  barcode                              commerce, system       upc, qr, products, shopping, scanner
+  150  barricade                            map, objects           construction, safety, gate
+  151  baseball                             games, health          sports, mlb
+  152  baseball-cap                         commerce, objects      clothes, clothing, sports, hat
+  153  basket                               commerce, objects      ecommerce, market, cart, buying, shopping, groceries, checkout, places, locations
+  154  basketball                           games, health          sports, nba
+  155  bathtub                              objects                bath, shower, bathroom, faucet
+  156  battery-charging                     system                 *updated*, charged, charger, charging, power
+  157  battery-charging-vertical            system                 *updated*, charged, charger, charging, power
+  158  battery-empty                        system                 *updated*, charged, charger, charging, power, dead
+  159  battery-full                         system                 *updated*, charged, charger, charging, power, filled
+  160  battery-high                         system                 *updated*, charged, charger, charging, power
+  161  battery-low                          system                 *updated*, charged, charger, charging, power
+  162  battery-medium                       system                 *updated*, charged, charger, charging, power
+  163  battery-plus                         system                 *updated*, charged, charger, charging, power
+  164  battery-plus-vertical                system                 charged, charger, charging, power
+  165  battery-vertical-empty               system                 charged, charger, charging, power, dead
+  166  battery-vertical-full                system                 charged, charger, charging, power
+  167  battery-vertical-high                system                 charged, charger, charging, power
+  168  battery-vertical-low                 system                 charged, charger, charging, power
+  169  battery-vertical-medium              system                 charged, charger, charging, power
+  170  battery-warning                      system                 charged, charger, charging, power, empty, critical
+  171  battery-warning-vertical             system                 charged, charger, charging, power, empty, critical
+  172  bed                                  health, map, objects   hotels, accommodations, sleeping, places, locations, medical, hospital
+  173  beer-bottle                          commerce, map, objects drinks, beverages, places, locations, bars, restaurants, food, dining
+  174  beer-stein                           commerce, map, objects drinks, beverages, places, locations, bars, restaurants, food, dining
+  175  behance-logo                         brand, design          logos, illustration, ui, interface
+  176  bell                                 system, objects        alarm, notifications, times, timer, clock, schedule, events, ringer, calls
+  177  bell-ringing                         system                 alarm, notifications, times, timer, clock, schedule, events, ringer, calls
+  178  bell-simple                          system, objects        alarm, notifications, times, timer, clock, schedule, events, ringer, calls
+  179  bell-simple-ringing                  system                 alarm, notifications, times, timer, clock, schedule, events, ringer, calls
+  180  bell-simple-slash                    system                 alarm, notifications, times, timer, clock, schedule, events, ringer, silent, silenced, disabled
+  181  bell-simple-z                        system                 alarm, notifications, times, timer, clock, schedule, events, ringer, snooze
+  182  bell-slash                           system                 alarm, notifications, times, timer, clock, schedule, events, silent, silenced, ringer, calls, disabled
+  183  bell-z                               system                 alarm, notifications, times, timer, clock, schedule, events, ringer, snooze
+  184  bezier-curve                         design                 shapes, drawing, path, pen, vector
+  185  bicycle                              health, map, objects   bikers, bicycling, cyclists, transit, transportation, commuter, exercises, fitness
+  186  binoculars                           nature, objects, map   telescope, glasses, search, find, explore
+  187  bird                                 nature                 animals, pets
+  188  bluetooth                            system                 wireless, connection, connected, connectivity
+  189  bluetooth-connected                  system                 wireless, connection, connected, connectivity
+  190  bluetooth-slash                      system                 wireless, connection, connectivity, disconnected, disabled
+  191  bluetooth-x                          system                 wireless, connection, connectivity, disconnected, errors
+  192  boat                                 map, objects           ferry, ship, cruise, vehicles, public transit, transportation, commuter, traveling, sailing, places, locations
+  193  bone                                 nature, health         dogbone
+  194  book                                 office, media, objects reading, reader, novel, story, library
+  195  book-bookmark                        office, media, objects reading, reader, novel, story, library, favorites, favorited
+  196  book-open                            office, media, objects reading, reader, novel, story, library
+  197  book-open-text                       office, media, objects, map reading, reader, novel, story, library
+  198  bookmark                             office, media, objects reading, reader, novel, story, placeholder, favorites, favorited, library
+  199  bookmark-simple                      office, media, objects reading, reader, novel, story, placeholder, favorites, favorited, library
+  200  bookmarks                            office, objects        reading, reader, novel, story, placeholder, favorites, favorited, library
+  201  bookmarks-simple                     office, objects        reading, reader, novel, story, placeholder, favorites, favorited, library
+  202  books                                office, map, media, objects *updated*, reading, reader, bookshelf, library, places, locations
+  203  boot                                 commerce, objects, health hiking, shoes, sports, exercise
+  204  bounding-box                         design                 polygon, shapes, outline, corners, rectangle
+  205  bowl-food                            commerce, map, objects ramen, food, meal, eating, restaurants, dining, locations
+  206  brackets-angle                       development, editor    code, angle brackets, angle braces
+  207  brackets-curly                       development, editor    code, curly brackets, curly braces
+  208  brackets-round                       development, editor    code, parentheses, round brackets, round braces
+  209  brackets-square                      development, editor    code, square brackets, square braces, array
+  210  brain                                health, nature         mind, mental
+  211  brandy                               commerce, map, objects drinks, beverages, whiskey, cocktail, places, locations, bars, restaurants, food, dining
+  212  bridge                               map, objects           travel, transportation, infrastucture
+  213  briefcase                            office, objects        suitcase, valise, baggage, folders, portfolio
+  214  briefcase-metal                      office, objects        suitcase, valise, baggage, folders, portfolio
+  215  broadcast                            communication, media, system radio, hotspot, wifi, emit
+  216  broom                                objects                sweeping, cleaning
+  217  browser                              communication, system  web browsers, windows, internet, website, webpage, chrome, edge, firefox
+  218  browsers                             communication, system  web browsers, windows, internet, website, webpage, chrome, edge, firefox
+  219  bug                                  development, nature    debug, errors, insect, ladybug
+  220  bug-beetle                           development, nature    debug, errors, insect, ladybug
+  221  bug-droid                            development, nature    debug, errors, insect, android, google
+  222  buildings                            commerce, map          *updated*, places, locations, company, business
+  223  bus                                  map, objects           *updated*, vehicles, automobile, public transit, transportation, commuter, traveling, places, locations
+  224  butterfly                            nature                 animals, insects, moth
+  225  cactus                               nature                 plants, cacti, desert, western
+  226  cake                                 objects                *updated*, dessert, birthday, celebration, event
+  227  calculator                           development, finance, office, objects addition, sum, subtraction, difference, multiply, multiplication, product, divide, division, divisor, dividend, quotient, equals, equality, mathematics, arithmetic, +, -, ±, ×, ÷, =
+  228  calendar                             office, system         *updated*, dates, times, events, schedule, 12
+  229  calendar-blank                       office, system         dates, times, events, schedule, none
+  230  calendar-check                       office, system         dates, times, events, schedule, todo, checklist
+  231  calendar-plus                        office, system         dates, times, events, schedule, add
+  232  calendar-x                           office, system         dates, times, events, schedule, closed, cancelled
+  233  call-bell                            map, objects           service bell, reception, attendant, concierge bell
+  234  camera                               media, system, objects photography, pictures, lens
+  235  camera-plus                          media, system          photography, pictures, album, add
+  236  camera-rotate                        media, system          photography, pictures, orientation, portrait, landscape, selfie
+  237  camera-slash                         media, system          photography, pictures, lens, disabled
+  238  campfire                             nature                 camping, flame, bonfire, outdoors
+  239  car                                  map, objects           cars, vehicles, automobile, transit, transportation, traveling
+  240  car-profile                          map, objects           cars, vehicles, automobile, transit, transportation, traveling
+  241  car-simple                           map, objects           cars, vehicles, automobile, transit, transportation, traveling
+  242  cardholder                           commerce, finance, objects wallet, money, payment, paying, purchase
+  243  cards                                design, system         card, slides, slideshow, windows, website, webpage, layers
+  244  caret-circle-double-down             arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  245  caret-circle-double-left             arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  246  caret-circle-double-right            arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  247  caret-circle-double-up               arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  248  caret-circle-down                    arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  249  caret-circle-left                    arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  250  caret-circle-right                   arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  251  caret-circle-up                      arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  252  caret-circle-up-down                 arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  253  caret-double-down                    arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  254  caret-double-left                    arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  255  caret-double-right                   arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  256  caret-double-up                      arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  257  caret-down                           arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  258  caret-left                           arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  259  caret-right                          arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  260  caret-up                             arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  261  caret-up-down                        arrows                 chevron, directional, pointer, pointing, arrowhead, triangle
+  262  carrot                               commerce, nature       food, vegetable, veggie, groceries, market
+  263  cassette-tape                        media, objects         recording, audio, album, music
+  264  castle-turret                        map, objects, games    chess, rook
+  265  cat                                  nature                 pets, animals, kitty, kitten
+  266  cell-signal-full                     system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, service
+  267  cell-signal-high                     system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, service
+  268  cell-signal-low                      system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, service
+  269  cell-signal-medium                   system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, service
+  270  cell-signal-none                     system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, service
+  271  cell-signal-slash                    system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, disconnected, disabled, reception, service
+  272  cell-signal-x                        system                 *updated*, wireless, cellular, phone, mobile, network, connection, connectivity, reception, disconnected, errors, service
+  273  certificate                          objects                awards, certification, degree, diploma
+  274  chair                                objects, commerce      seat, furniture
+  275  chalkboard                           map, objects           blackboard, whiteboard, classroom, teacher, education, school, college, university
+  276  chalkboard-simple                    map, objects           blackboard, whiteboard, classroom, teacher, education, school, college, university
+  277  chalkboard-teacher                   map, objects, people   blackboard, whiteboard, classroom, education, school, college, university
+  278  champagne                            map, commerce, objects glass, drinks, beverages, wine, places, locations, bars, restaurants, food, dining
+  279  charging-station                     map, objects           ev, charge, fuel, pump
+  280  chart-bar                            finance, office        graphs, graphing, charts, statistics, histogram, analyze, analysis
+  281  chart-bar-horizontal                 finance, office        graphs, graphing, charts, statistics, histogram, analyze, analysis
+  282  chart-donut                          finance, office        graphs, graphing, charts, statistics, analyze, analysis, circle
+  283  chart-line                           finance, office        graphs, graphing, charts, statistics, analyze, analysis, stocks
+  284  chart-line-down                      finance, office        graphs, graphing, charts, statistics, analyze, analysis, stocks
+  285  chart-line-up                        finance, office        graphs, graphing, charts, statistics, analyze, analysis, stocks
+  286  chart-pie                            finance, office        graphs, graphing, charts, statistics, circle, analyze, analysis
+  287  chart-pie-slice                      finance, office        graphs, graphing, charts, statistics, circle, analyze, analysis
+  288  chart-polar                          finance, office        graphs, graphing, charts, statistics, analyze, analysis, circle
+  289  chart-scatter                        finance, office        graphs, graphing, charts, statistics, analyze, analysis
+  290  chat                                 communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  291  chat-centered                        communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  292  chat-centered-dots                   communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  293  chat-centered-text                   communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  294  chat-circle                          communication          send, sent, messages, messaging, sms, texting, comment, round, bubble
+  295  chat-circle-dots                     communication          send, sent, messages, messaging, sms, texting, comment, round, bubble
+  296  chat-circle-text                     communication          send, sent, messages, messaging, sms, texting, comment, round, bubble
+  297  chat-dots                            communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  298  chat-teardrop                        communication          send, sent, messages, messaging, sms, texting, comment, bubble
+  299  chat-teardrop-dots                   communication          send, sent, messages, messaging, sms, texting, comment, bubble
+  300  chat-teardrop-text                   communication          send, sent, messages, messaging, sms, texting, comment, bubble
+  301  chat-text                            communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  302  chats                                communication          send, sent, messages, messaging, sms, texting, comment, square, bubble
+  303  chats-circle                         communication          send, sent, messages, messaging, sms, texting, comment, round, bubble
+  304  chats-teardrop                       communication          send, sent, messages, messaging, sms, texting, comment, bubble
+  305  check                                system                 todo, to-do, task, list, checkbox, ok, done
+  306  check-circle                         system                 todo, to-do, task, list, checkbox, round, ok, done
+  307  check-fat                            system                 todo, to-do, task, list, checkbox, ok, done
+  308  check-square                         system                 todo, to-do, task, list, checkbox, rectangle, ok, done
+  309  check-square-offset                  system                 todo, to-do, task, list, checkbox, rectangle, ok, done
+  310  checks                               system                 todo, task, to-do, list, checkbox, ok, done
+  311  church                               map                    christ, christianity, cathedral, religion, worship
+  312  circle                               design                 round, shapes, polygons
+  313  circle-dashed                        design                 missing, round, shapes, polygons
+  314  circle-half                          design, editor         round, shapes, contrast, brightness
+  315  circle-half-tilt                     design, editor         round, shapes, contrast, brightness
+  316  circle-notch                         system                 round, shapes, loading, loader, spinner, waiting, progress
+  317  circles-four                         design                 round, shapes, polygons, 4
+  318  circles-three                        design                 round, shapes, polygons, 3, asana
+  319  circles-three-plus                   design                 round, shapes, polygons, 3, +
+  320  circuitry                            development            processor, microchip, computer, circuit, electronics, motherboard
+  321  clipboard                            office, editor, system copy, copied, checklist
+  322  clipboard-text                       office, editor, system copy, copied, checklist
+  323  clock                                system, objects        times, timer, alarm, schedule, events, watch
+  324  clock-afternoon                      system                 times, timer, alarm, schedule, events, watch
+  325  clock-clockwise                      system                 times, timer, alarm, schedule, events, restore, fast forward, update
+  326  clock-countdown                      system                 times, timer, alarm, schedule, events, watch
+  327  clock-counter-clockwise              system                 times, timer, alarm, schedule, events, backup, rewind, history
+  328  closed-captioning                    media                  subtitles, television, tv, transcribed, transcription, accessibility, a11y
+  329  cloud                                system, weather        serverless, backup, storage, meteorology, cloudy, overcast
+  330  cloud-arrow-down                     system                 serverless, backup, storage, download
+  331  cloud-arrow-up                       system                 serverless, backup, storage, upload
+  332  cloud-check                          system                 serverless, backup, storage, sync, synchronized
+  333  cloud-fog                            weather                meteorology, cloudy, overcast, foggy, misty, haze, hazy
+  334  cloud-lightning                      weather                meteorology, cloudy, overcast, stormy, thunderstorm
+  335  cloud-moon                           weather                meteorology, cloudy, partly cloudy, night, evening
+  336  cloud-rain                           weather                meteorology, cloudy, rainy, raining, stormy, rainstorm
+  337  cloud-slash                          system                 serverless, backup, storage, sync, disabled
+  338  cloud-snow                           weather                meteorology, cloudy, snowy, snowing, stormy, snowstorm
+  339  cloud-sun                            weather                meteorology, cloudy, partly cloudy, partly sunny
+  340  cloud-warning                        system                 serverless, backup, storage, errors
+  341  cloud-x                              system                 serverless, backup, storage, errors
+  342  club                                 games                  clubs, suits, cards, gambling, casino, gaming
+  343  coat-hanger                          commerce               clothing, clothes, closet
+  344  coda-logo                            brand                  project management, productivity, documentation, wiki, logos
+  345  code                                 development, editor    angle brackets, angle braces, snippets
+  346  code-block                           development, editor    angle brackets, angle braces, snippets
+  347  code-simple                          development, editor    angle brackets, angle braces, snippets
+  348  codepen-logo                         brand, development     ide, logos
+  349  codesandbox-logo                     brand, development     ide, logos
+  350  coffee                               commerce, objects, map tea, java, beverages, drinks, cafe, cup, mug, espresso, cappuccino, latte, places, locations, bars, restaurants, food, dining
+  351  coin                                 commerce, finance      coins, cents, change, money, currency, payment, paying, purchase, price, sell
+  352  coin-vertical                        commerce, finance      cents, change, money, currency, payment, paying, purchase, price, sell
+  353  coins                                commerce, finance      cents, change, money, currency, payment, paying, purchase, price, sell
+  354  columns                              design                 2, shapes, polygons, box, stack, list, table, cards
+  355  command                              editor, system         apple, keyboard, shortcut, modifier, looped square, bowen knot, saint john's arms
+  356  compass                              map, objects           navigation, directions, maps, safari, apple
+  357  compass-tool                         design, objects        drawing, arc, geometry
+  358  computer-tower                       development, objects   desktop, pc, imac
+  359  confetti                             communication          tada, party, emoji
+  360  contactless-payment                  commerce               purchase, credit card, nfc
+  361  control                              system                 ctrl, key, keyboard, shortcut, caret
+  362  cookie                               map, objects, development privacy, dessert, food, dining
+  363  cooking-pot                          map, objects           stew, kitchen, steaming, restaurants, food, dining
+  364  copy                                 editor, system         duplicated, copied, clipboard
+  365  copy-simple                          editor, system         duplicated, copied, clipboard
+  366  copyleft                             commerce, media        🄯, intellectual property, copr., symbol
+  367  copyright                            commerce, media        ©, intellectual property, copr., symbol
+  368  corners-in                           system                 collapse, windowed, minimized
+  369  corners-out                          system                 expand, fullscreen, maximized
+  370  couch                                objects, commerce      furniture, seat
+  371  cpu                                  development            processor, microchip, computer, circuit
+  372  credit-card                          commerce, finance      debit, visa, mastercard, money, payment, paying, purchase, swipe
+  373  crop                                 design, editor         photography, clip, screenshots
+  374  cross                                design, communication  dagger, crucifix, christ, christianity, religion, worship, symbol
+  375  crosshair                            map, system            geolocation, gps, aiming, targeting
+  376  crosshair-simple                     map, system            geolocation, gps, aiming, targeting
+  377  crown                                games, objects         king, queen, royalty, monarch, ruler, leader
+  378  crown-simple                         games, objects         king, queen, royalty, monarch, ruler, leader
+  379  cube                                 design, games, objects square, box, 3d, volume, blocks
+  380  cube-focus                           games, objects         augmented reality, ar, virual reality, vr, 3d, scan
+  381  cube-transparent                     design, games, objects square, box, 3d, volume, blocks, necker
+  382  currency-btc                         commerce, finance      money, btc, bitcoin, crypto, cryptocurrency, payment, paying, purchase
+  383  currency-circle-dollar               commerce, finance      money, usd, payment, paying, purchase
+  384  currency-cny                         commerce, finance      money, yuan, payment, paying, purchase
+  385  currency-dollar                      commerce, finance      money, usd, payment, paying, purchase
+  386  currency-dollar-simple               commerce, finance      money, usd, payment, paying, purchase
+  387  currency-eth                         commerce, finance      money, ethereum, crypto, cryptocurrency, payment, paying, purchase
+  388  currency-eur                         commerce, finance      money, euros, payment, paying, purchase
+  389  currency-gbp                         commerce, finance      money, pounds sterling, payment, paying, purchase
+  390  currency-inr                         commerce, finance      money, rupees, payment, paying, purchase
+  391  currency-jpy                         commerce, finance      money, yen, payment, paying, purchase
+  392  currency-krw                         commerce, finance      money, won, payment, paying, purchase
+  393  currency-kzt                         commerce, finance      money, kazakhstan, tenge, payment, paying, purchase
+  394  currency-ngn                         commerce, finance      money, nigeria, naira, payment, paying, purchase
+  395  currency-rub                         commerce, finance      money, rubles, payment, paying, purchase
+  396  cursor                               design, system         *updated*, pointer, arrowhead, mouse, click
+  397  cursor-click                         design, system         pointer, arrowhead, mouse
+  398  cursor-text                          editor, system         i-beam, input, select
+  399  cylinder                             design                 shapes, tube
+  400  database                             development, system    saved, saving, archived, archiving, archival, hard disk, storage, hdd, servers, databases
+  401  desktop                              development, objects   computer, pc, imac, tower
+  402  desktop-tower                        development, objects   computer, pc, imac
+  403  detective                            people, system         incognito, police, law enforcement, spy, secret
+  404  dev-to-logo                          brand, development     reading, writing, social media, logos
+  405  device-mobile                        objects                cellphone, cellular
+  406  device-mobile-camera                 objects                cellphone, cellular
+  407  device-mobile-speaker                objects                cellphone, cellular
+  408  device-tablet                        objects                cellphone, cellular, ipad, phablet
+  409  device-tablet-camera                 objects                cellphone, cellular, ipad, phablet
+  410  device-tablet-speaker                objects                cellphone, cellular, ipad, phablet
+  411  devices                              objects                responsive, cellphone, cellular, tablet, destop
+  412  diamond                              design, games          rectangle, shapes, polygons, diamonds, suits, cards, gambling, casino, gaming
+  413  diamonds-four                        design                 shapes, grid, component
+  414  dice-five                            games, objects         die, rolling, gamble, gambling, casino, gaming, 5
+  415  dice-four                            games, objects         die, rolling, gamble, gambling, casino, gaming, 4
+  416  dice-one                             games, objects         die, rolling, gamble, gambling, casino, gaming, 1
+  417  dice-six                             games, objects         die, rolling, gamble, gambling, casino, gaming, 6
+  418  dice-three                           games, objects         die, rolling, gamble, gambling, casino, gaming, 3
+  419  dice-two                             games, objects         die, rolling, gamble, gambling, casino, gaming, 2
+  420  disc                                 development, media, objects cd-rom, compact disk, album, record
+  421  discord-logo                         brand, communication   logos, messages, messaging, chat
+  422  divide                               development, finance   division, divisor, dividend, quotient, mathematics, arithmetic, calculator
+  423  dna                                  health, nature         double helix, gene, genetics
+  424  dog                                  nature                 pets, animals, puppy
+  425  door                                 objects                entrance, exit
+  426  door-open                            objects                entrance, exit
+  427  dot                                  system                 dots, circles, shapes, polygons
+  428  dot-outline                          system                 dots, circles, shapes, polygons
+  429  dots-nine                            design                 grid, circles, shapes, polygons, 9
+  430  dots-six                             system                 drag handle, knurling, circles, shapes, polygons, 6
+  431  dots-six-vertical                    system                 drag handle, knurling, circles, shapes, polygons, 6
+  432  dots-three                           system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  433  dots-three-circle                    system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  434  dots-three-circle-vertical           system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  435  dots-three-outline                   system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  436  dots-three-outline-vertical          system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  437  dots-three-vertical                  system                 menu, overflow, circles, shapes, polygons, 3, ellipsis, ellipses, more
+  438  download                             system                 saved, saving, archived, archiving, archival, downloaded, downloading, hard drive, disk
+  439  download-simple                      system                 saved, saving, archived, archiving, archival, downloaded, downloading, hard drive, disk, import
+  440  dress                                commerce, objects      clothes, clothing
+  441  dribbble-logo                        brand, design          logos, round, basketball, sports, design
+  442  drop                                 nature, weather        droplet, teardrop, raindrop, raining, meteorology, water, blur
+  443  drop-half                            design, editor, nature, weather droplet, teardrop, raindrop, humidity, water, contrast, brightness
+  444  drop-half-bottom                     design, editor, nature, weather droplet, teardrop, raindrop, humidity, water, contrast, brightness
+  445  dropbox-logo                         brand                  cloud, storage, backup, logos
+  446  ear                                  media, system          hearing, audio, sound
+  447  ear-slash                            media, system          hearing, audio, sound, mute, accessible
+  448  egg                                  commerce, nature       chicken, food, meal, baby, hatch
+  449  egg-crack                            commerce, nature       chicken, food, meal, baby, hatch, break
+  450  eject                                media                  disconnect
+  451  eject-simple                         media                  disconnect
+  452  elevator                             objects, map           lift
+  453  engine                               map, objects           motor, repair, vehicles, automobile
+  454  envelope                             communication          mail, email, send, sent, message, post, letter
+  455  envelope-open                        communication          mail, email, send, sent, message, read, post, letter
+  456  envelope-simple                      communication          mail, email, send, sent, message, post, letter
+  457  envelope-simple-open                 communication          mail, email, send, sent, message, read, post, letter
+  458  equalizer                            media, system          music, audio, meter, volume, spectrum, eq, deezer
+  459  equals                               development, finance   =, equality, equivalent, equivalence, mathematics, arithmetic, calculator
+  460  eraser                               design, editor         write, writing, editing, undo, deleted
+  461  escalator-down                       map, objects           stairs
+  462  escalator-up                         map, objects           stairs
+  463  exam                                 objects                text, examination, paper, school, grade
+  464  exclude                              design, editor         venn-diagram, difference, intersection
+  465  exclude-square                       design, editor         venn-diagram, difference, intersection
+  466  export                               communication, system  share, send to, arrows
+  467  eye                                  design, editor         visible, hidden, show, hide, visibility, view
+  468  eye-closed                           design, editor         visible, hidden, show, hide, visibility, view, invisible, private
+  469  eye-slash                            design, editor         visible, hidden, show, hide, visibility, view, invisible, eyelashes, disabled, private
+  470  eyedropper                           design, editor, objects colors, color picker, sample, arts
+  471  eyedropper-sample                    design, editor, objects colors, color picker, arts
+  472  eyeglasses                           health, objects        vision, spectacles
+  473  face-mask                            health                 ppe, facemask, covid-19, coronavirus, flu, cold
+  474  facebook-logo                        brand, communication   logos, social media
+  475  factory                              commerce, map          industry, manufacture, buildings, places, locations
+  476  faders                               media, system          music, audio, sliders, filters, equalizer, volume, settings, preferences
+  477  faders-horizontal                    media, system          music, audio, sliders, filters, equalizer, volume, settings, preferences
+  478  fan                                  commerce, objects      desk fan, air conditioning
+  479  fast-forward                         media, system          audio, music, seek, scrub, scan, ahead, skip
+  480  fast-forward-circle                  media, system          audio, music, seek, scrub, scan, ahead, skip
+  481  feather                              nature, objects        bird
+  482  figma-logo                           brand, design          logos, drawing, art, illustration, ui, interface, prototype, prototyping
+  483  file                                 office, editor         documents, files, save, write, page
+  484  file-archive                         system, office, editor documents, zip, compression
+  485  file-arrow-down                      office, editor         documents, files, save, write, download, directional, pointer, pointing, arrowhead
+  486  file-arrow-up                        office, editor         documents, files, save, write, upload, directional, pointer, pointing, arrowhead
+  487  file-audio                           office, editor, media  documents, music, sound
+  488  file-cloud                           office, editor         documents, sync
+  489  file-code                            office, editor, development documents
+  490  file-css                             office, editor, development documents, code
+  491  file-csv                             office, editor         documents, data
+  492  file-dashed                                                 
+  493  file-doc                             office, editor         documents, word, microsoft
+  494  file-html                            office, editor, development documents, code
+  495  file-image                           office, editor, media  documents, pictures, photograph
+  496  file-jpg                             office, editor, media  documents, pictures, photograph, jpeg
+  497  file-js                              office, editor, development documents, code, javascript
+  498  file-jsx                             office, editor, development documents, code, javascript
+  499  file-lock                            office, editor, system documents, secure, locked, private
+  500  file-magnifying-glass                                       
+  501  file-minus                           office, editor         documents, files, delete, write, remove, -
+  502  file-pdf                             office, editor         documents, files, acrobat
+  503  file-plus                            office, editor         documents, files, save, write, add, new, create, +
+  504  file-png                             office, editor, media  documents, pictures, photograph
+  505  file-ppt                             office, editor         documents, powerpoint, microsoft
+  506  file-rs                              office, editor, development documents, code, rust
+  507  file-sql                             system, development    documents, database
+  508  file-svg                             system, media          documents, images, vector
+  509  file-text                            office, editor         documents, files, save, write
+  510  file-ts                              office, editor, development documents, code, typescript
+  511  file-tsx                             office, editor, development documents, code, typescript
+  512  file-video                           office, editor, media  documents, movie
+  513  file-vue                             office, editor, development documents, code
+  514  file-x                               office, editor         documents, files, cancelled, deleted, removed, errors
+  515  file-xls                             office, editor         documents, excel, microsoft
+  516  file-zip                             office, editor, system documents, archive, compression
+  517  files                                office, editor         documents, open, library
+  518  film-reel                            media, objects         videography, films, movies, recording
+  519  film-script                          office, media          screenplay, movie
+  520  film-slate                           media, objects         clapper, movie
+  521  film-strip                           media                  camera, photography, darkroom, movie, analog
+  522  fingerprint                          system                 security, secured, authentication, authenticated, login, locked, biometrics, encrypted, encryption
+  523  fingerprint-simple                   system                 security, secured, authentication, authenticated, login, locked, biometrics, encrypted, encryption
+  524  finn-the-human                       games                  adventure time, cartoons, television, tv, character
+  525  fire                                 nature, weather        flame, burning, match, lighter
+  526  fire-extinguisher                    objects                safety
+  527  fire-simple                          nature, weather        flame, burning, match, lighter
+  528  first-aid                            health                 hospital, cross, medical, medicine, injury, safety, emergency, doctor
+  529  first-aid-kit                        health                 bandages, medical, medicine, injury, safety, emergency, doctor
+  530  fish                                 nature, commerce       animals, pets, food, seafood, restaurants, dining
+  531  fish-simple                          nature, commerce       animals, pets, food, seafood, restaurants, dining
+  532  flag                                 objects, map, system   country, countries, finished, completed, flags
+  533  flag-banner                          objects, map, system   *updated*, ribbon, country, countries, finished, completed, flags, swallowtail
+  534  flag-checkered                       map, objects, games    flags, race, racing, finish line
+  535  flag-pennant                         objects, map, system, games flags, race, sports, team
+  536  flame                                nature, weather        fire, burning, match, lighter
+  537  flashlight                           system, objects        torch, find, search, locate
+  538  flask                                development, nature    beaker, science, chemistry, experiment, erlenmeyer
+  539  floppy-disk                          office, editor, system diskette, directory, directories, folders, documents, files, save, write
+  540  floppy-disk-back                     office, editor, system diskette, directory, directories, folders, documents, files, save, write
+  541  flow-arrow                           arrows, design, office flowchart, arrowhead
+  542  flower                               nature                 plants, green, environmental
+  543  flower-lotus                         nature                 plants, green, environmental, spirituality
+  544  flower-tulip                         nature                 plants, green, environmental
+  545  flying-saucer                        games, objects         ufo, space, aliens, extra terrestrial, sci-fi
+  546  folder                               office, editor, system directory, directories, files, folders
+  547  folder-dashed                                               
+  548  folder-lock                          office, editor, system directory, directories, files, folders, private, secure
+  549  folder-minus                         office, editor, system directory, directories, files, delete, write, remove, -
+  550  folder-notch                         office, editor, system directory, directories, files, folders
+  551  folder-notch-minus                   office, editor, system directory, directories, files, delete, write, remove, -
+  552  folder-notch-open                    office, editor, system directory, directories, files, folders, load
+  553  folder-notch-plus                    office, editor, system directory, directories, files, save, write, add, new, create, +
+  554  folder-open                          office, editor, system directory, directories, files, folders, load
+  555  folder-plus                          office, editor, system directory, directories, files, save, write, add, new, create, +
+  556  folder-simple                        office, editor, system directory, directories, files, folders
+  557  folder-simple-dashed                                        
+  558  folder-simple-lock                   office, editor, system directory, directories, files, folders, private, secure
+  559  folder-simple-minus                  office, editor, system directory, directories, files, delete, write, remove, -
+  560  folder-simple-plus                   office, editor, system directory, directories, files, save, write, add, new, create, +
+  561  folder-simple-star                   office, editor, system directory, directories, files, folders, favorite, starred
+  562  folder-simple-user                   office, editor, system directory, directories, files, folders, personal
+  563  folder-star                          office, editor, system directory, directories, files, folders, favorite, starred
+  564  folder-user                          office, editor, system directory, directories, files, folders, personal
+  565  folders                              office, editor, system directory, directories, files, folders, copy, copied, duplicated
+  566  football                             games, health          sports, american football, nfl
+  567  footprints                           health, map            path, trail, walk, route, hike, hiking
+  568  fork-knife                           commerce, map, objects food, meal, eating, restaurants, dining, utensils
+  569  frame-corners                        system                 expand, fullscreen, maximized, resize, windowed, capture
+  570  framer-logo                          brand, design          logos, interface, ui, motion, prototype, prototyping
+  571  function                             development            mathematics, arithmetic, f-stop
+  572  funnel                               editor, objects        filters, refine, sorting
+  573  funnel-simple                        editor, objects        filters, refine, sorting
+  574  game-controller                      games, media, objects  gaming, video games, nintendo switch, sony playstation, microsoft xbox
+  575  garage                               commerce, map          vehicles, automobile, buildings, transportation
+  576  gas-can                              map, objects           jerrycan, petrol, fuel, gasoline
+  577  gas-pump                             map, objects           gas station, petrol, fuel, gasoline
+  578  gauge                                development, objects, system dashboard, meter, speed, speedometer, odometer, performance
+  579  gavel                                commerce, objects      judge, justice, legal, law, court, hammer, government
+  580  gear                                 system                 8, settings, setup, preferences, cogs, gears, machinery, mechanical
+  581  gear-fine                            system                 setup, preferences, cogs, gears, machinery, mechanical
+  582  gear-six                             system                 6, settings, setup, preferences, cogs, gears, machinery, mechanical
+  583  gender-female                        people                 woman, feminine, venus
+  584  gender-intersex                      people                 transgender, non-binary
+  585  gender-male                          people                 man, masculine, mars
+  586  gender-neuter                        people                 agender, non-binary, asexual
+  587  gender-nonbinary                     people                 intersex, non-binary
+  588  gender-transgender                   people                 intersex, non-binary
+  589  ghost                                games, objects         pac-man, spirit, scary, halloween
+  590  gif                                  media                  gifs, .gif, giphy
+  591  gift                                 commerce, objects      presents, holiday, birthday
+  592  git-branch                           development            github, vcs, source control, version control, versioning, branches
+  593  git-commit                           development            github, vcs, source control, version control, versioning, commits
+  594  git-diff                             development            github, vcs, source control, version control, versioning, difference, compare
+  595  git-fork                             development            github, vcs, source control, version control, versioning, split
+  596  git-merge                            development            github, vcs, source control, version control, versioning, split
+  597  git-pull-request                     development            github, vcs, source control, version control, versioning, merge request
+  598  github-logo                          development, brand     *updated*, octocat, vcs, source control, version control, versioning, branches
+  599  gitlab-logo                          brand, development     *updated*, vcs, source control, version control, versioning, branches
+  600  gitlab-logo-simple                   brand, development     *updated*, vcs, source control, version control, versioning, branches
+  601  globe                                map                    world, earth, global, planet, circle, round, internationalization, i18n, languages, country, countries, geography, internet
+  602  globe-hemisphere-east                map                    world, earth, global, planet, circle, round, internationalization, i18n, languages, country, countries, geography, europe, africa, asia, australia
+  603  globe-hemisphere-west                map                    world, earth, global, planet, circle, round, internationalization, i18n, languages, country, countries, geography, north america, south america
+  604  globe-simple                         map                    world, earth, global, planet, circle, round, internationalization, i18n, languages, country, countries, geography
+  605  globe-stand                          map                    world, global, planet, circle, round, internationalization, i18n, languages, country, countries, geography
+  606  goggles                              health, objects        swim, swimming, sports, exercise, olympics, aquatics
+  607  goodreads-logo                       brand                  reading, books, social media, logos
+  608  google-cardboard-logo                brand                  virtual reality, vr, logos
+  609  google-chrome-logo                   brand                  web browsers, internet
+  610  google-drive-logo                    brand                  cloud, storage, backup, logos
+  611  google-logo                          brand                  logos, search engine, phone, mobile, android
+  612  google-photos-logo                   brand, media           album, pictures, photography
+  613  google-play-logo                     brand, system, media   logos, games, apps, applications, play store, app store, phone, mobile, android
+  614  google-podcasts-logo                 brand, media           audio
+  615  gradient                             design                 fade, ombre, opacity
+  616  graduation-cap                       map, objects           classroom, teacher, education, school, college, university, degree, graduate, hat
+  617  grains                               commerce, nature       wheat, gluten, farm, farming, agriculture
+  618  grains-slash                         commerce               gluten-free, wheat, gluten, farm, farming, agriculture
+  619  graph                                office, development    nodes, tree
+  620  grid-four                            design, system         *updated*, 4, apps, applications, squares, tiles, cells, tables, tabular, spreadsheets, excel
+  621  grid-nine                            design, system         9, apps, applications, squares, tiles, cells, tables, tabular, spreadsheets, excel
+  622  guitar                               media, objects         music, instrument
+  623  hamburger                            commerce, map          fast food, party, places, locations, restaurants, food, dining
+  624  hammer                               objects, system, commerce tools, carpentry, construction
+  625  hand                                 system, people         pointers, cursors, emoji, backhand
+  626  hand-coins                           people, commerce, finance donation, payment, money, paying, purchase
+  627  hand-eye                             people                 pointers, cursors, emoji, hamsa, evil eye
+  628  hand-fist                            people                 pointers, cursors, emoji, power, protest, blm
+  629  hand-grabbing                        system, people         pointers, cursors, emoji, drag, hold
+  630  hand-heart                           people                 donation, care, emoji
+  631  hand-palm                            system, people         pointers, cursors, emoji, palm, stop, wait, hamsa, 5
+  632  hand-pointing                        system, people         pointers, cursors, emoji, fingers, clicks, mouse
+  633  hand-soap                            health                 dispenser, pump, sanitizer, disinfectant
+  634  hand-swipe-left                      people, system         pointers, cursors, gesture
+  635  hand-swipe-right                     people, system         pointers, cursors, gesture
+  636  hand-tap                             people, system         pointers, cursors, gesture
+  637  hand-waving                          system, people         pointers, cursors, emoji, palm, wave, hello, goodbye
+  638  handbag                              commerce, objects      suitcases, valises, baggage, purses
+  639  handbag-simple                       commerce, objects      suitcases, valises, baggage, purses
+  640  hands-clapping                       system, people         emoji, clap, applause
+  641  hands-praying                        people                 religion, worship, prayer, thanks, thank you
+  642  handshake                            people, commerce       pointers, cursors, emoji, deal, agreement
+  643  hard-drive                           system                 saved, saving, archived, archiving, archival, hard disk, storage, hdd, servers, databases
+  644  hard-drives                          system                 saved, saving, archived, archiving, archival, hard disk, storage, hdd, servers, databases
+  645  hash                                 communication          hashtag, octothorpe, pound sign, number sign, tic-tac-toe, symbol
+  646  hash-straight                        communication          hashtag, octothorpe, pound sign, number sign, tic-tac-toe, symbol
+  647  headlights                           map, objects           brights, high beams
+  648  headphones                           media, objects         music, audio, listening
+  649  headset                              media, games, objects  music, audio, listening, gaming, voice chat, microphone, headphones, support, customer-service, call-center
+  650  heart                                communication, games, health wellness, love, healthy, like, favorites, favorited, suits, cards, gambling, casino, gaming, emoji
+  651  heart-break                          communication          love, hate, crack, split, divorce, emoji
+  652  heart-half                           communication, games, health wellness, love, healthy, like, favorites, favorited
+  653  heart-straight                       communication, games, health wellness, love, healthy, like, favorites, favorited, suits, cards, gambling, casino, gaming, emoji
+  654  heart-straight-break                 communication          love, hate, crack, split, divorce, emoji
+  655  heartbeat                            health, system         wellness, healthy, ecg, ekg, vitals, monitor
+  656  hexagon                              design                 6, shapes, polygons
+  657  high-heel                            commerce, objects      pumps, clothes, clothing, shoes
+  658  highlighter-circle                   design, editor, office write, writing, editing, drawing
+  659  hoodie                               commerce, objects      clothes, clothing, sweatshirt
+  660  horse                                games, health, nature  animals, equestrian, chess, knight, sports
+  661  hourglass                            system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  662  hourglass-high                       system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  663  hourglass-low                        system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  664  hourglass-medium                     system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  665  hourglass-simple                     system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  666  hourglass-simple-high                system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  667  hourglass-simple-low                 system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  668  hourglass-simple-medium              system, objects        times, timer, alarms, clock, schedule, events, waiting, progress
+  669  house                                map, system            homes, buildings, places, locations
+  670  house-line                           map, system            homes, buildings, places, locations
+  671  house-simple                         map, system            homes, buildings, places, locations
+  672  ice-cream                            commerce, map, objects food, dessert, cone
+  673  identification-badge                 people                 license, credentials, nametag, user, verification
+  674  identification-card                  people                 license, badge, credentials, nametag, user, verification
+  675  image                                media, system          *updated*, pictures, photographs, photography, wallpapers, gallery, landscape
+  676  image-square                         media, system          *updated*, pictures, photographs, photography, wallpapers, gallery, landscape
+  677  images                               media, system          pictures, photographs, photography, wallpapers, gallery, landscape, album
+  678  images-square                        media, system          pictures, photographs, photography, wallpapers, gallery, landscape, album
+  679  infinity                                                    
+  680  info                                 system                 information, help, support
+  681  instagram-logo                       brand, communication   logos, social media, photography, camera
+  682  intersect                            design, editor         round, join, union, merge, combine, intersecting, intersection
+  683  intersect-square                     design, editor         venn-diagram, join, intersection
+  684  intersect-three                      people, design, editor venn-diagram, join, intersection, gender, pronouns
+  685  jeep                                 map, objects           vehicles, automobile, suv, cars, trucks, wrangler, off-road, transit, transportation, traveling
+  686  kanban                               office                 scheduling, tasks, project management, process, lean, agile
+  687  key                                  objects, system        padlock, security, secured, authentication, authenticated, login, locked, encrypted, encryption
+  688  key-return                           system                 keyboard, enter
+  689  keyboard                             system                 typing, type, keys, input
+  690  keyhole                              objects, system        lock, security, secured, authentication, authenticated, login, locked, encrypted, encryption, privacy, private
+  691  knife                                commerce, objects      tools, food, meal, eating, restaurants, dining, utensils
+  692  ladder                               objects                stairs, steps, climbing
+  693  ladder-simple                        objects                stairs, steps, climbing
+  694  lamp                                 objects, commerce      light, furniture, appliances
+  695  laptop                               development, objects   computer, notebook, pc, macbook
+  696  layout                               design, editor         wireframe, sidebar, ui, interface
+  697  leaf                                 nature                 *updated*, plants, trees, branches, leaves, nodes, green, environmental
+  698  lifebuoy                             health, objects, system lifebelt, lifesaver, safety, help, support, nautical, boats, ships
+  699  lightbulb                            system, objects        flashlight, bulbs, lighting, led, energy, idea
+  700  lightbulb-filament                   system, objects        flashlight, bulbs, lighting, led, energy, idea
+  701  lighthouse                           map                    buildings, nautical, navigation, boats, ships, safety
+  702  lightning                            weather, system        meteorology, stormy, thunderstorm, thunderbolt, charged, charger, charging, power, electricity, flash
+  703  lightning-a                          system                 flash, auto
+  704  lightning-slash                      system                 thunderbolt, charged, charger, charging, power, electricity, disabled, flash
+  705  line-segment                         design                 shapes, drawing, path, pen, vector
+  706  line-segments                        design                 shapes, drawing, path, pen, vector
+  707  link                                 communication, objects anchor, hyperlink, hypertext, chains, chained
+  708  link-break                           communication, objects anchor, hyperlink, hypertext, chains, chained, errors, broken
+  709  link-simple                          communication, objects anchor, hyperlink, hypertext, chains, chained
+  710  link-simple-break                    communication, objects anchor, hyperlink, hypertext, chains, chained, errors, broken
+  711  link-simple-horizontal               communication, objects anchor, hyperlink, hypertext, chains, chained
+  712  link-simple-horizontal-break         communication, objects anchor, hyperlink, hypertext, chains, chained, errors, broken
+  713  linkedin-logo                        brand, communication   logos, jobs, employment, social media
+  714  linux-logo                           brand, development     penguin, computer, animals
+  715  list                                 system, editor         hamburger menu, overflow menu, sidebar, 3, ul, ol, unordered list, ordered list, checklist, lines
+  716  list-bullets                         editor                 ul, unordered list, bulleted list, checklist
+  717  list-checks                          office, editor         checklist, todo
+  718  list-dashes                          editor                 ul, unordered list, dashed list, checklist
+  719  list-magnifying-glass                editor, system         search, find, locate, query, inspect
+  720  list-numbers                         editor                 ol, ordered list, numbered list, checklist
+  721  list-plus                            editor                 ul, ol, unordered list, ordered list, checklist, add, +
+  722  lock                                 objects, system        padlock, security, secured, authentication, authenticated, login, locked, encrypted, encryption, privacy, private
+  723  lock-key                             objects, system        padlock, security, secured, authentication, authenticated, login, locked, encrypted, encryption, privacy, private
+  724  lock-key-open                        objects, system        padlock, security, unsecured, authentication, unauthenticated, login, unlocked, unencrypted, encryption, privacy
+  725  lock-laminated                       objects, system        padlock, security, secured, authentication, authenticated, login, locked, encrypted, encryption, privacy, private
+  726  lock-laminated-open                  objects, system        padlock, security, unsecured, authentication, unauthenticated, login, unlocked, unencrypted, encryption, privacy, private
+  727  lock-open                            objects, system        padlock, security, unsecured, authentication, unauthenticated, login, unlocked, unencrypted, encryption, privacy
+  728  lock-simple                          objects, system        padlock, security, secured, authentication, authenticated, login, locked, encrypted, encryption, privacy, private
+  729  lock-simple-open                     objects, system        padlock, security, unsecured, authentication, unauthenticated, login, unlocked, unencrypted, encryption, privacy, private
+  730  lockers                              map                    locker room, gym, storage
+  731  magic-wand                           design, games, objects selection, wizard, games
+  732  magnet                               development, objects   magnetism, science, physics
+  733  magnet-straight                      development, objects   magnetism, science, physics
+  734  magnifying-glass                     editor, system         search, find, locate, query, inspect
+  735  magnifying-glass-minus               editor, system         search, find, locate, query, inspect, zoom out, -
+  736  magnifying-glass-plus                editor, system         search, find, locate, query, inspect, zoom in, +
+  737  map-pin                              map                    maps, places, markers, pins, locations
+  738  map-pin-line                         map                    maps, places, markers, pins, locations
+  739  map-trifold                          map                    *updated*, maps, places, locations, cartography, geography
+  740  marker-circle                        design, editor, office write, writing, editing, drawing
+  741  martini                              commerce, map, objects glass, drinks, beverages, cocktails, places, locations, bars, restaurants, food, dining
+  742  mask-happy                           communication, games   theater, costume, smile, smiling, thalia
+  743  mask-sad                             communication, games   theater, costume, cry, crying, melpomene
+  744  math-operations                      development, finance   addition, sum, subtraction, difference, multiply, multiplication, product, divide, division, divisor, dividend, quotient, equals, equality, mathematics, arithmetic, calculator, +, -, ±, ×, ÷, =
+  745  medal                                objects, games         ribbons, winning, victory, awards, rosette
+  746  medal-military                       objects, games         ribbons, winning, victory, awards, military
+  747  medium-logo                          brand                  logos, reading, writing, news, social media
+  748  megaphone                            communication, objects bullhorn, announcements, loudspeaker, broadcast
+  749  megaphone-simple                     communication, objects bullhorn, announcements, loudspeaker, broadcast
+  750  messenger-logo                       brand, communication   logos, facebook, social media
+  751  meta-logo                            brand                  facebook, logos, social media, logos
+  752  metronome                            objects, media         music, beat, tempo, bpm
+  753  microphone                           communication, media, system audio, recording, music, sound, podcast, studio
+  754  microphone-slash                     communication, media, system audio, recording, music, sound, podcast, studio, muted, disabled
+  755  microphone-stage                     communication, media, system audio, recording, music, sound, performance, concert
+  756  microsoft-excel-logo                 brand, office          tables, spreadsheets, tabular
+  757  microsoft-outlook-logo               brand, communication, office email, logos
+  758  microsoft-powerpoint-logo            brand, office          slides, slideshow, presentation
+  759  microsoft-teams-logo                 brand, communication   chat, video conference
+  760  microsoft-word-logo                  brand, editor, office  documents, word processor, doc, docx
+  761  minus                                development, finance, system -, subtraction, difference, mathematics, arithmetic, calculator, line, horizontal, divider
+  762  minus-circle                         development, finance, system -, subtraction, difference, mathematics, arithmetic, calculator, round
+  763  minus-square                         finance, system        -, subtraction, difference, mathematics, arithmetic, calculator
+  764  money                                commerce, finance      *updated*, cash, dollars, paper bills, payment, paying, purchase
+  765  monitor                              system                 screen, television, tv, displays
+  766  monitor-play                         system, media          screen, television, tv, displays, screencast, video, movie
+  767  moon                                 nature, system, weather night, evening, clear, sleep, snooze, night mode, dark mode, astronomy, stargazing
+  768  moon-stars                           nature, weather        night, evening, clear, sleep, snooze, night mode, dark mode, astronomy, stargazing, constellation
+  769  moped                                map, objects           scooter, vehicle, vespa, transportation, travel
+  770  moped-front                          map, objects           scooter, vehicle, vespa, transportation, travel
+  771  mosque                               map                    islam, muslim, religion, worship
+  772  motorcycle                           map, objects           vehicle, motorbike, transportation, travel
+  773  mountains                            nature, map            hills, outdoors, terrain, geology, adventure
+  774  mouse                                system                 clicks, input
+  775  mouse-simple                         system                 clicks, input
+  776  music-note                           media                  songs, audio, playlist, albums
+  777  music-note-simple                    media                  songs, audio, playlist, albums
+  778  music-notes                          media                  songs, audio, playlist, albums
+  779  music-notes-plus                     media                  songs, audio, playlist, albums, add
+  780  music-notes-simple                   media                  songs, audio, playlist, albums
+  781  navigation-arrow                     map                    location, directions, compass, gps
+  782  needle                               objects, commerce      sewing, thread, awl, tailor
+  783  newspaper                            media, objects         reading, writing, journals, periodicals
+  784  newspaper-clipping                   media, objects         reading, writing, journals, periodicals
+  785  notches                              system, editor         textarea, resize, drag handle, knurling
+  786  note                                 office, editor         notes, note-taking, memorandum, post-it, reminders
+  787  note-blank                           office, editor         notes, note-taking, memorandum, post-it, reminders
+  788  note-pencil                          office, editor         notes, note-taking, memorandum, post-it, reminders
+  789  notebook                             office, editor         notes, note-taking, memorandum, journal, diary, logs, logbook
+  790  notepad                              office, editor         logs, logbook, notes, note-taking, memorandum, journal, diary
+  791  notification                         system                 badge, pip
+  792  notion-logo                          brand                  documentation, productivity, wiki, logos
+  793  number-circle-eight                  finance                8, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  794  number-circle-five                   finance                5, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  795  number-circle-four                   finance                4, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  796  number-circle-nine                   finance                9, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  797  number-circle-one                    finance                1, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  798  number-circle-seven                  finance                7, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  799  number-circle-six                    finance                6, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  800  number-circle-three                  finance                3, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  801  number-circle-two                    finance                2, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  802  number-circle-zero                   finance                0, round, numbers, numerals, digits, mathematics, arithmetic, calculator
+  803  number-eight                         finance                8, numbers, numerals, digits, mathematics, arithmetic, calculator
+  804  number-five                          finance                5, numbers, numerals, digits, mathematics, arithmetic, calculator
+  805  number-four                          finance                4, numbers, numerals, digits, mathematics, arithmetic, calculator
+  806  number-nine                          finance                9, numbers, numerals, digits, mathematics, arithmetic, calculator
+  807  number-one                           finance                1, numbers, numerals, digits, mathematics, arithmetic, calculator
+  808  number-seven                         finance                7, numbers, numerals, digits, mathematics, arithmetic, calculator
+  809  number-six                           finance                6, numbers, numerals, digits, mathematics, arithmetic, calculator
+  810  number-square-eight                  finance                8, numbers, numerals, digits, mathematics, arithmetic, calculator
+  811  number-square-five                   finance                5, numbers, numerals, digits, mathematics, arithmetic, calculator
+  812  number-square-four                   finance                4, numbers, numerals, digits, mathematics, arithmetic, calculator
+  813  number-square-nine                   finance                9, numbers, numerals, digits, mathematics, arithmetic, calculator
+  814  number-square-one                    finance                1, numbers, numerals, digits, mathematics, arithmetic, calculator
+  815  number-square-seven                  finance                7, numbers, numerals, digits, mathematics, arithmetic, calculator
+  816  number-square-six                    finance                6, numbers, numerals, digits, mathematics, arithmetic, calculator
+  817  number-square-three                  finance                3, numbers, numerals, digits, mathematics, arithmetic, calculator
+  818  number-square-two                    finance                2, numbers, numerals, digits, mathematics, arithmetic, calculator
+  819  number-square-zero                   finance                0, numbers, numerals, digits, mathematics, arithmetic, calculator
+  820  number-three                         finance                3, numbers, numerals, digits, mathematics, arithmetic, calculator
+  821  number-two                           finance                2, numbers, numerals, digits, mathematics, arithmetic, calculator
+  822  number-zero                          finance                0, numbers, numerals, digits, mathematics, arithmetic, calculator
+  823  nut                                  objects, system        bolts, screws, machinery, tools, hexagon
+  824  ny-times-logo                        brand                  nyt, new york times, logos, reading, writing, news, newspaper
+  825  octagon                              design                 8, shapes, polygons
+  826  office-chair                         objects, commerce      furniture, seat
+  827  option                               system, editor         keyboard, shortcut, modifier
+  828  orange-slice                         map, commerce, nature  food, fruit, juice, citrus, groceries, market
+  829  package                              development, objects   packages, boxes, delivery, mail, postal service, bundles, library, libraries, shipping
+  830  paint-brush                          design, editor, objects colors, color picker, arts
+  831  paint-brush-broad                    design, editor, objects fill, colors, color picker, arts
+  832  paint-brush-household                design, editor, objects colors, color picker, arts
+  833  paint-bucket                         design, editor, objects paintbucket, colors, color picker, fill, arts
+  834  paint-roller                         design, editor, objects colors, color picker, fill, arts, theme
+  835  palette                              design, editor, objects paint, colors, color picker, arts
+  836  pants                                commerce               clothing, clothes, jeans
+  837  paper-plane                          communication, map, objects mail, email, send, sent, messages, messaging, toys, games
+  838  paper-plane-right                    communication, map, objects mail, email, send, sent, messages, messaging, toys, games
+  839  paper-plane-tilt                     communication, map, objects mail, email, send, sent, messages, messaging, toys, games
+  840  paperclip                            communication, editor, office, objects attachments, mail, email, office
+  841  paperclip-horizontal                 communication, editor, office, objects attachments, mail, email, office
+  842  parachute                            objects, development   skydiving, safety
+  843  paragraph                            editor                 pilcrow
+  844  parallelogram                        brand, media, design   shapes, bandcamp, logos
+  845  park                                 map, nature            bench, outdoors
+  846  password                             system                 security, secured, authentication, authenticated, login, locked, encrypted, encryption
+  847  path                                 design, map            transit, travel, trail, gps, navigation, route, destination, vector
+  848  patreon-logo                         brand                  crowdfunding, logos
+  849  pause                                media, system          music, audio, resume, start, stop
+  850  pause-circle                         media, system          music, audio, resume, start, stop, round
+  851  paw-print                            nature, commerce, health pets, pet store, pet shop, animals, cat, dog, veterinarian
+  852  paypal-logo                          brand, finance, commerce payments, paying, purchase, logos
+  853  peace                                communication          love, hippies, peace sign, symbols
+  854  pen                                  design, editor, office ink, write, writing, editing, sign, signature
+  855  pen-nib                              design, editor, office ink, write, writing, editing, sign, signature, fountain pen, illustrator
+  856  pen-nib-straight                     design, editor, office ink, write, writing, editing, sign, signature, fountain pen, illustrator
+  857  pencil                               design, editor, office write, writing, editing, sign, signature
+  858  pencil-circle                        design, editor, office write, writing, editing, sign, signature
+  859  pencil-line                          design, editor, office write, writing, editing, sign, signature
+  860  pencil-simple                        design, editor, office write, writing, editing, sign, signature
+  861  pencil-simple-line                   design, editor, office write, writing, editing, sign, signature
+  862  pencil-simple-slash                  design, editor, office read-only, write, writing, editing
+  863  pencil-slash                         design, editor, office read-only, write, writing, editing
+  864  pentagram                            games, design          star, wicca, satan, satanism, religion, spirituality, evil, magic
+  865  pepper                               commerce, nature       food, spicy, chile, vegetable
+  866  percent                              development, finance   %, percentage, percentile, ratio, delta, mathematics, arithmetic, calculator
+  867  person                               map, people            walking, human, woman, man, body, transit, transportation, travel, commuter, user
+  868  person-arms-spread                   health, map, people    accessibility, vitruvian, stretch, sports
+  869  person-simple                        map, people, health    pedestrian, walking, human, woman, man, body, transit, transportation, travel, commuter, user, exercise
+  870  person-simple-bike                   map, people, health    pedestrian, biking, bicycle, human, woman, man, body, sports, exercise
+  871  person-simple-run                    map, people, health    pedestrian, running, human, woman, man, body, transit, transportation, travel, commuter, user, exercise
+  872  person-simple-throw                  map, people, health    pedestrian, tennis, human, woman, man, body, sports, exercise
+  873  person-simple-walk                   map, people, health    pedestrian, walking, human, woman, man, body, transit, transportation, travel, commuter, user, exercise
+  874  perspective                          design, editor         3d, skew, warp, trapezoid
+  875  phone                                communication, system  calls, telephone, landline, talk
+  876  phone-call                           communication, system  calls, calling, ringing, telephone, landline, talk
+  877  phone-disconnect                     communication, system  calls, hang up, disconnected, telephone, landline, talk
+  878  phone-incoming                       communication, system  calls, calling, telephone, landline, talk
+  879  phone-outgoing                       communication, system  calls, calling, telephone, landline, talk
+  880  phone-plus                           communication, system  calls, telephone, landline, talk, conference, add
+  881  phone-slash                          communication, system  calls, disabled, disconnected, telephone, landline, talk
+  882  phone-x                              communication, system  calls, missed, errors, telephone, landline, talk
+  883  phosphor-logo                        brand                  logos
+  884  pi                                   finance, development   π, symbol, mathematics, circle
+  885  piano-keys                           media, objects         music, instrument, keyboard
+  886  picture-in-picture                   media, system          pip, pop-out, minimize, maximize
+  887  piggy-bank                           finance, objects       savings, deposit, money, coins
+  888  pill                                 health                 capsule, medicine, rx, pharmacy, pharmacist, pharmaceuticals, prescription, drugs
+  889  pinterest-logo                       brand, communication   logos, vision board, mood board, social media
+  890  pinwheel                             games, objects         toys, whirligig
+  891  pizza                                commerce, map          fast food, party, places, locations, restaurants, food, dining
+  892  placeholder                          design, editor         empty, notdef, tofu, rectangle slash, missing
+  893  planet                               nature                 saturn, world, globe, astronomy, space
+  894  plant                                commerce, nature       sprout, vegan, farm, farming, garden, gardening
+  895  play                                 media, system          music, audio, resume, start
+  896  play-circle                          media, system          music, audio, resume, start, round
+  897  play-pause                           media, system          music, audio, resume, start, stop
+  898  playlist                             media, system          music, audio, queue
+  899  plug                                 system, objects        outlet, socket, plugin, integration
+  900  plug-charging                        system, objects        outlet, socket, plugin, integration, charge, charging
+  901  plugs                                system, objects        outlet, socket, plugin, integration, disconnected
+  902  plugs-connected                      system, objects        outlet, socket, plugin, integration
+  903  plus                                 development, finance, system addition, sum, mathematics, arithmetic, calculator, +
+  904  plus-circle                          development, finance, system addition, sum, mathematics, arithmetic, calculator, round, +
+  905  plus-minus                           development, finance   plus or minus, plus/minus, add/subtract, addition, sum, subtraction, difference, mathematics, arithmetic, calculator, +, -, ±
+  906  plus-square                          finance, development, system addition, sum, mathematics, arithmetic, calculator, +
+  907  poker-chip                           games                  chips, tokens, cards, gambling, casino
+  908  police-car                           map, objects           vehicles, cars, automobiles, law enforcement
+  909  polygon                              design                 shapes, drawing
+  910  popcorn                              map, commerce          food, movies, theater
+  911  potted-plant                         commerce, nature       sprout, vegan, garden, gardening
+  912  power                                system                 charged, charger, charging, on, off, on/off, switch, power switch
+  913  prescription                         health                 rx, medicine, drugs, pharmacy, pharmacist, pharmaceuticals, doctor
+  914  presentation                         finance, office        whiteboard, flipchart, charts, statistics, analyze, analysis, meeting
+  915  presentation-chart                   finance, office        whiteboard, flipchart, graphs, graphing, charts, statistics, analyze, analysis, meeting
+  916  printer                              editor, office         printing
+  917  prohibit                             map, system            forbidden, prohibited, cancelled, prevent, stop, do not enter
+  918  prohibit-inset                       map, system            forbidden, prohibited, cancelled, prevent, stop, do not enter
+  919  projector-screen                     finance, media, office projection, presentation, slideshow, movies, charts, statistics, analyze, analysis
+  920  projector-screen-chart               finance, office        projection, presentation, slideshow, graphs, graphing, charts, statistics, analyze, analysis
+  921  pulse                                                       
+  922  push-pin                             office, map, objects   favorites, favorited, pushpin
+  923  push-pin-simple                      office, map, objects   favorites, favorited, pushpin
+  924  push-pin-simple-slash                office, map, objects   favorites, favorited, pushpin, disabled
+  925  push-pin-slash                       office, map, objects   favorites, favorited, pushpin, disabled
+  926  puzzle-piece                         games, development     board game, element, component, extension, plugin
+  927  qr-code                              system                 upc, barcode, products, shopping, scanner
+  928  question                             system                 information, help, support, questions
+  929  queue                                media, system          music, audio, playlist
+  930  quotes                               communication, editor, media quoations, quotation marks, double-quotes, writing, books
+  931  radical                              development, finance   √, radix, radicand, square root, squareroot, mathematics, arithmetic, calculator
+  932  radio                                communication, media, objects broadcast, fm, am, xm, transmitter, receiver
+  933  radio-button                         system                 input, checkbox, checked
+  934  radioactive                          nature, health         radiation, danger, warning, nuclear, atomic
+  935  rainbow                              weather                meteorology, rainstorm, arc, pride, lgbtq+, leprechaun
+  936  rainbow-cloud                        weather                meteorology, rainstorm, cloudy, partly cloudy, partly sunny, pride, lgbtq+, leprechaun
+  937  read-cv-logo                         brand                  resume, jobs, logos
+  938  receipt                              commerce, finance      purchased, money, clipping, expenses
+  939  receipt-x                            commerce, finance      purchased, money, clipping, expenses, cancel
+  940  record                               media, system          music, audio, recording, recorder, voice memo
+  941  rectangle                            design                 4, shapes, polygons, box
+  942  recycle                              arrows, nature         recycling, trash, environmental, green
+  943  reddit-logo                          brand, communication   logos, subreddit, snoo, social media
+  944  repeat                               media, system          music, audio, recycle
+  945  repeat-once                          media, system          music, audio, recycle
+  946  rewind                               media, system          music, audio, seek, scrub, scan, skip, back, backwards, reverse
+  947  rewind-circle                        media, system          music, audio, seek, scrub, scan, skip, back, backwards, reverse
+  948  road-horizon                         map                    trip, drive, road, travel, transportation, highway
+  949  robot                                development, objects   automaton, artificial intelligence, ai
+  950  rocket                               development, map, objects spaceship, launch, deployment, rocketship
+  951  rocket-launch                        development, map, objects spaceship, flying, blastoff, deployment, rocketship
+  952  rows                                 design                 2, shapes, polygons, box, stack, list, table, cards
+  953  rss                                  communication          radio, broadcast, web feed, news, aggregator
+  954  rss-simple                           communication          radio, broadcast, web feed, news, aggregator
+  955  rug                                  objects                tapestry, carpet
+  956  ruler                                design, editor, objects measure, scale, distance
+  957  scales                               commerce, map, objects measure, balance, law, justice, government
+  958  scan                                 system                 upc, barcode, products, shopping, scanner
+  959  scissors                             design, editor, office, system cut, snip, clipboard
+  960  scooter                              map, health            vehicle, transportation, travel, transit
+  961  screencast                           media, system          apple, airplay, screencasting, screen share, television, tv
+  962  scribble-loop                        design                 doodles, drawing, sign, signature
+  963  scroll                               games, objects         parchment, paper, script, spell, fantasy
+  964  seal                                                        
+  965  seal-check                                                  
+  966  seal-question                                               
+  967  seal-warning                                                
+  968  selection                            design, editor         marquis, select
+  969  selection-all                        design, editor         marquis, select all
+  970  selection-background                 design, editor         marquis
+  971  selection-foreground                 design, editor         marquis
+  972  selection-inverse                    design, editor         marquis, invert
+  973  selection-plus                       design, editor         marquis, add
+  974  selection-slash                      design, editor         marquis, unselect
+  975  shapes                               design                 geometry, square, circle, triangle
+  976  share                                communication, system  send to, export, arrows
+  977  share-fat                            arrows, system, communication export, send to
+  978  share-network                        communication, system  send to, export
+  979  shield                               system, objects        badge, security, secured, defense, defended, authentication, authenticated, guarded, locked, encrypted, encryption
+  980  shield-check                         system, objects        badge, security, defense, authentication, authenticated, guarded, locked, encrypted, encryption
+  981  shield-checkered                     system, objects        badge, security, defense, authentication, authenticated, guarded, locked, encrypted, encryption
+  982  shield-chevron                       system, objects        badge, security, defense, authentication, authenticated, guarded, locked, encrypted, encryption
+  983  shield-plus                          system, objects        badge, security, defense, authentication, authenticated, guarded, locked, encrypted, encryption
+  984  shield-slash                         system, objects        badge, security, unsecured, defense, undefended, authentication, unauthenticated, unguarded, unlocked, unencrypted, encryption, disabled
+  985  shield-star                          objects, system        badge, security, defense, authentication, authenticated, guarded, locked, encrypted, encryption
+  986  shield-warning                       system, objects        badge, security, unsecured, defense, undefended, authentication, unauthenticated, unguarded, unlocked, unencrypted, encryption, errors
+  987  shirt-folded                         commerce, objects      clothes, clothing
+  988  shooting-star                        nature                 wish, comet, meteor
+  989  shopping-bag                         commerce, map, objects ecommerce, market, basket, cart, buying, checkout, places, locations
+  990  shopping-bag-open                    commerce, map, objects ecommerce, market, basket, cart, buying, checkout, places, locations
+  991  shopping-cart                        commerce, map, objects ecommerce, market, basket, buying, groceries, checkout, places, locations
+  992  shopping-cart-simple                 commerce, map, objects ecommerce, market, basket, buying, groceries, checkout, places, locations
+  993  shower                               objects                bath, bathtub, bathroom, faucet
+  994  shrimp                               commerce               food, seafood, prawn
+  995  shuffle                              media, arrows, system  music, audio, randomize, crossed
+  996  shuffle-angular                      media, arrows, system  music, audio, randomize, crossed
+  997  shuffle-simple                       media, arrows, system  music, audio, randomize, crossed
+  998  sidebar                              design, editor         left rail, wireframe, ui, interface
+  999  sidebar-simple                       design, editor         left rail, wireframe, ui, interface
+ 1000  sigma                                finance, development   σ, symbol, mathematics, sum
+ 1001  sign-in                              system                 signin, login, log in, enter
+ 1002  sign-out                             system                 signout, logout, log out, exit
+ 1003  signature                            communication, office  sign, autograph, verify
+ 1004  signpost                             map                    direction, traffic, road sign, transit, transportation
+ 1005  sim-card                             communication, system  cellular, cellphone, mobile
+ 1006  siren                                objects, map           alarm, police, lights, warning
+ 1007  sketch-logo                          design                 drawing, art, illustration, ui, interface, prototype, prototyping, gemstone, diamond
+ 1008  skip-back                            media, system          music, audio, seek, scrub, scan, back, backwards, reverse, previous
+ 1009  skip-back-circle                     media, system          music, audio, seek, scrub, scan, back, backwards, reverse, previous
+ 1010  skip-forward                         media, system          music, audio, seek, scrub, scan, ahead, next
+ 1011  skip-forward-circle                  media, system          music, audio, seek, scrub, scan, ahead, next
+ 1012  skull                                games                  death, dead, kill
+ 1013  slack-logo                           brand, communication   logos, messaging
+ 1014  sliders                              media, system          music, audio, faders, filters, equalizer, volume, settings, preferences
+ 1015  sliders-horizontal                   media, system          music, audio, faders, filters, equalizer, volume, settings, preferences
+ 1016  slideshow                            media, system          pictures, images, photography, gallery, carousel
+ 1017  smiley                               communication, people  face, emoji, happy, grinning, smiling
+ 1018  smiley-angry                         communication, people  face, emoji, mad, frown
+ 1019  smiley-blank                         communication, people  face, emoji, unimpressed, no face
+ 1020  smiley-meh                           communication, people  face, emoji, unimpressed, neutral
+ 1021  smiley-nervous                       communication, people  face, smiley, emoji, anxious, uncomfortable, uneasy, queasy, sick, ill
+ 1022  smiley-sad                           communication, people  face, emoji, unhappy, frowning
+ 1023  smiley-sticker                       communication, people  face, emoji, happy, grinning, smiling
+ 1024  smiley-wink                          communication, people  face, emoji, winking, flirting, cute
+ 1025  smiley-x-eyes                        communication, people  face, emoji, dead, killed, unconscious
+ 1026  snapchat-logo                        brand, communication   logos, messaging, social media
+ 1027  sneaker                              commerce, objects, health clothes, clothing, shoes, trainers, sports
+ 1028  sneaker-move                         commerce, objects, health clothes, clothing, shoes, trainers, sports
+ 1029  snowflake                            weather                meteorology, snowy, snowing, snowstorm
+ 1030  soccer-ball                          games, health          sports, football, mls
+ 1031  sort-ascending                       editor                 sorted, sorting, increasing, a to z, arrows, list
+ 1032  sort-descending                      editor                 sorted, sorting, decreasing, z to a, arrows, list
+ 1033  soundcloud-logo                      brand, media           music, social media, logos
+ 1034  spade                                games                  spades, suits, cards, gambling, casino, gaming
+ 1035  sparkle                              communication, nature  star, rate, ratings, favorites, favorited
+ 1036  speaker-hifi                         media, objects         music, audio, sound, stereo
+ 1037  speaker-high                         media, system          music, audio, volume, sound
+ 1038  speaker-low                          media, system          music, audio, volume, sound
+ 1039  speaker-none                         media, system          music, audio, muted, volume, sound
+ 1040  speaker-simple-high                  media, system          music, audio, volume, sound
+ 1041  speaker-simple-low                   media, system          music, audio, volume, sound
+ 1042  speaker-simple-none                  media, system          music, audio, muted, volume, sound
+ 1043  speaker-simple-slash                 media, system          music, audio, muted, volume, sound, disabled
+ 1044  speaker-simple-x                     media, system          music, audio, muted, volume, sound, disabled, errors
+ 1045  speaker-slash                        media, system          music, audio, muted, volume, sound, disabled
+ 1046  speaker-x                            media, system          music, audio, muted, volume, sound, disabled, errors
+ 1047  spinner                              system                 loading, loader, waiting, progress
+ 1048  spinner-gap                          system                 loading, loader, waiting, progress
+ 1049  spiral                               communication, design  spin, rotate, dizzy
+ 1050  split-horizontal                     arrows, design, editor resize, columns
+ 1051  split-vertical                       arrows, design, editor resize, rows
+ 1052  spotify-logo                         brand, media           music, player, streaming
+ 1053  square                               design                 4, shapes, polygons, box
+ 1054  square-half                          design                 4, shapes, polygons, box, columns, sidebar, split vertical
+ 1055  square-half-bottom                   design                 4, shapes, polygons, box, columns, sidebar, split vertical
+ 1056  square-logo                          brand, commerce, finance squareup, payment
+ 1057  square-split-horizontal              design, editor         shapes, polygons, columns
+ 1058  square-split-vertical                design, editor         shapes, polygons, rows
+ 1059  squares-four                         design, system         4, shapes, polygons, apps, applications, grid, table, microsoft, logos
+ 1060  stack                                design, office, editor cards, layers
+ 1061  stack-overflow-logo                  brand, development     logos, code
+ 1062  stack-simple                         design, office, editor cards, layers
+ 1063  stairs                               commerce, objects      staircase, steps, escalator, exit, signs
+ 1064  stamp                                design, objects        clone, seal, official
+ 1065  star                                 communication, map, nature rate, ratings, favorites, favorited
+ 1066  star-and-crescent                    communication, people  islam, muslim, moon, religion, worship, symbol
+ 1067  star-four                            communication, nature  rate, ratings, favorites, favorited
+ 1068  star-half                            communication          rate, ratings
+ 1069  star-of-david                        communication, people  judaism, jewish, hexagram, religion, worship, symbol
+ 1070  steering-wheel                       map, objects           cars, vehicles, automobiles, driving
+ 1071  steps                                commerce, objects      stairs, staircase, exit, signs
+ 1072  stethoscope                          health, objects        hospital, medical, medicine, injury, safety, emergency, doctor, heart
+ 1073  sticker                              communication          stickers, sticker pack, labels
+ 1074  stool                                objects, commerce      chair, seat, furniture
+ 1075  stop                                 media, system          music, audio
+ 1076  stop-circle                          media, system          music, audio, round
+ 1077  storefront                           commerce, map          shops, shopping, markets, stores, buildings, places, locations
+ 1078  strategy                             games, finance         sports, strategem, plan, tic-tac-toe
+ 1079  stripe-logo                          brand, commerce, finance payment
+ 1080  student                              people                 pupil, graduate, classroom, teacher, education, school, college, university
+ 1081  subtitles                            media                  subtitles, television, tv, transcribed, transcription, accessibility, a11y
+ 1082  subtract                             design, editor         boolean, intersection, combine, split, merge, union
+ 1083  subtract-square                      design, editor         boolean, intersection, combine, split, merge, union
+ 1084  suitcase                             office, objects        briefcase, valise, baggage, folders, portfolio
+ 1085  suitcase-rolling                     map, objects           suitcase, luggage, travel, transportation
+ 1086  suitcase-simple                      office, objects        briefcase, valise, baggage, folders, portfolio
+ 1087  sun                                  nature, system, weather day, daytime, daylight, clear, sunny, sunshine, light mode, brightness, lighten, brighten
+ 1088  sun-dim                              nature, system, weather day, daytime, daylight, clear, sunny, sunshine, light mode, brightness, darken
+ 1089  sun-horizon                          nature, weather        day, daytime, daylight, clear, sunny, sunshine, sunrise, sunset
+ 1090  sunglasses                           health, objects        vision, sun, spectacles
+ 1091  swap                                 design, editor         layers, replace, exchange, reverse
+ 1092  swatches                             design, editor, objects colors, color picker, samples, pantone
+ 1093  swimming-pool                        health, map            swim, sports, exercise, olympics, aquatics
+ 1094  sword                                games, objects         weapon, knife, dagger, gladius, video games, rpg, gaming, war
+ 1095  synagogue                            map                    jewish, judaism, temple, religion, worship
+ 1096  syringe                              health                 needle, vaccine, medicine, doctor, shot, hospital
+ 1097  t-shirt                              objects, commerce      clothes, clothing
+ 1098  table                                finance, office, editor tables, tabular, speadsheets, excel, grid, form
+ 1099  tabs                                 system                 browser, window, folders, files
+ 1100  tag                                  commerce, development, objects tags, hashtag, labels, sale, sell, price, discount
+ 1101  tag-chevron                          commerce, development, objects tags, hashtag, labels, sale
+ 1102  tag-simple                           commerce, development, objects tags, hashtag, labels, sale, sell, price, discount
+ 1103  target                               map, objects           bullseye, radar, archery, accuracy, precision
+ 1104  taxi                                 map, objects           vehicles, cars, automobiles, livery, limousine, uber
+ 1105  telegram-logo                        brand, communication   logos, messages, messaging
+ 1106  television                           system, objects        screen, tv, displays
+ 1107  television-simple                    system, objects        screen, tv, displays
+ 1108  tennis-ball                          games, health, objects sports, mlb
+ 1109  tent                                 health, objects, nature, map camping, outdoors, tarp
+ 1110  terminal                             development, system    command line, cli, bash, shell, caret, console
+ 1111  terminal-window                      development, system    command line, cli, bash, shell, caret, console
+ 1112  test-tube                            development, nature, health science, chemistry, experiment, vial
+ 1113  text-a-underline                     design, editor         typography, typeface, print, font, underscore, emphasis
+ 1114  text-aa                              design, editor         typography, typeface, print, font
+ 1115  text-align-center                    design, editor         typography, print, font, alignment, centered
+ 1116  text-align-justify                   design, editor         typography, print, font, alignment, justified
+ 1117  text-align-left                      design, editor         typography, print, font, alignment, flush left
+ 1118  text-align-right                     design, editor         typography, print, font, alignment, flush right
+ 1119  text-b                                                      
+ 1120  text-columns                         design, editor         typography, print, font, alignment, article
+ 1121  text-h                               design, editor         heading, typography, print
+ 1122  text-h-five                          design, editor         heading, h5, typography, print
+ 1123  text-h-four                          design, editor         heading, h4, typography, print
+ 1124  text-h-one                           design, editor         heading, h1, typography, print
+ 1125  text-h-six                           design, editor         heading, h6, typography, print
+ 1126  text-h-three                         design, editor         heading, h3, typography, print
+ 1127  text-h-two                           design, editor         heading, h2, typography, print
+ 1128  text-indent                          design, editor         alignment, tab
+ 1129  text-italic                          design, editor         typography, typeface, print, font, slant, oblique, stress, emphasis, calligraphy
+ 1130  text-outdent                         design, editor         alignment, tab, unindent, dedent
+ 1131  text-strikethrough                   design, editor         typography, typeface, print, font, struck, remove, delete, change
+ 1132  text-t                               design, editor         typography, typeface, print, font
+ 1133  text-underline                       design, editor         typography, typeface, print, font, underscore, emphasis
+ 1134  textbox                              editor, system         input, cursor, field
+ 1135  thermometer                          weather, health, objects meteorology, temperature, degrees, °, celcius, centigrade, kelvin, fahrenheit, hot, warm, cold
+ 1136  thermometer-cold                     weather, health, objects meteorology, temperature, degrees, °, celcius, centigrade, kelvin, fahrenheit
+ 1137  thermometer-hot                      weather, health, objects meteorology, temperature, degrees, °, celcius, centigrade, kelvin, fahrenheit, warm
+ 1138  thermometer-simple                   weather, health, objects meteorology, temperature, degrees, °, celcius, centigrade, kelvin, fahrenheit, hot, warm, cold
+ 1139  thumbs-down                          communication, people  dislike, hate, emoji, no
+ 1140  thumbs-up                            communication, people  like, love, favorited, favorites, emoji, yes
+ 1141  ticket                               commerce, map, objects ticketstub, movie ticket, entry, admissions, events
+ 1142  tidal-logo                           brand, media           music, logos
+ 1143  tiktok-logo                          brand, communication   logos, social media
+ 1144  timer                                system, objects        clock, alarm, schedule, events, stopwatch, sports
+ 1145  tipi                                 nature, objects, map   teepee, lodge, tent, outdoors, camping, tarp
+ 1146  toggle-left                          system                 switch, controls, settings, preferences
+ 1147  toggle-right                         system                 switch, controls, settings, preferences
+ 1148  toilet                               health, objects        bathroom, restroom, lavatory, water closet
+ 1149  toilet-paper                         health, objects        bathroom, restroom, lavatory, water closet
+ 1150  toolbox                              objects, system, commerce tools, carpentry, construction
+ 1151  tooth                                health                 teeth, dentistry, medical, medicine, doctor, cavity
+ 1152  tote                                 commerce, objects      suitcases, valises, baggage, tote-bag, portfolios
+ 1153  tote-simple                          commerce, objects      suitcases, valises, baggage, tote-bag, portfolios
+ 1154  trademark                            commerce               tm, ®, ™, intellectual property
+ 1155  trademark-registered                 commerce               ®, ™, intellectual property
+ 1156  traffic-cone                         map                    pylon, safety, transit, transportation
+ 1157  traffic-sign                         map                    road signs, transit, transportation
+ 1158  traffic-signal                       map                    stop light, safety, transit, transportation
+ 1159  train                                map, objects           vehicles, subway, light rail, public transit, transportation, commuter, traveling, places, locations
+ 1160  train-regional                       map, objects           vehicles, subway, railroad, public transit, transportation, commuter, freight, shipping, traveling, places, locations
+ 1161  train-simple                         map, objects           vehicles, subway, light rail, public transit, transportation, commuter, traveling, places, locations
+ 1162  tram                                 map, objects           vehicles, subway, railroad, public transit, transportation, commuter, light rail, shipping, traveling, places, locations
+ 1163  translate                            communication, system  translation, languages, internationalization, i18n, speech
+ 1164  trash                                office, system         garbage, remove, delete, destroy, recycle, recycling
+ 1165  trash-simple                         office, system         garbage, remove, delete, destroy, recycle, recycling
+ 1166  tray                                 office, communication, system inbox, mailbox, bin
+ 1167  tree                                 nature                 plants, branches, leaves, green, environmental
+ 1168  tree-evergreen                       nature                 plants, branches, leaves, pine, conifer, green, environmental
+ 1169  tree-palm                            nature                 tropical, beach, plants, branches, leaves, green, environmental
+ 1170  tree-structure                       development, office    data structures, family tree, genealogy, hierarchy, taxonomy, charts, flowchart
+ 1171  trend-down                           finance, office        graphs, graphing, charts, statistics, analyze, analysis, decrease, arrows
+ 1172  trend-up                             finance, office        graphs, graphing, charts, statistics, analyze, analysis, increase, arrows
+ 1173  triangle                             design                 3, shapes, polygons
+ 1174  trophy                               games, objects         ribbons, medals, winning, victory, awards, prize
+ 1175  truck                                commerce, map, objects trucks, cars, vehicles, automobile, shipping, delivery
+ 1176  twitch-logo                          brand, communication, games logos, streaming, livestream, gaming, video games, social media
+ 1177  twitter-logo                         brand, communication   logos, social media, tweets, birds
+ 1178  umbrella                             objects, weather       raining, rainy, insurance
+ 1179  umbrella-simple                      objects, weather       raining, rainy, insurance
+ 1180  unite                                design, editor         round, join, union, merge, combine, intersecting, intersection
+ 1181  unite-square                         design, editor         join, union, merge, combine, intersecting, intersection
+ 1182  upload                               system                 saved, saving, archived, archiving, archival, uploaded, uploading, hard drive, disk
+ 1183  upload-simple                        system                 saved, saving, archived, archiving, archival, uploaded, uploading, hard drive, disk
+ 1184  usb                                  objects, system        serial, port, plug, peripheral, device
+ 1185  user                                 people                 person, users, profile, account, contact, login
+ 1186  user-circle                          people                 person, users, profile, account, contact, login
+ 1187  user-circle-gear                     people                 person, users, profile, account, contact, settings, preferences
+ 1188  user-circle-minus                    people                 person, users, profile, account, contact, delete, remove, -
+ 1189  user-circle-plus                     people                 person, users, profile, account, contact, add, create, +
+ 1190  user-focus                           people                 identification, biometrics, facial recognition, profile, person, account, autofocus
+ 1191  user-gear                            people                 person, users, profile, account, contact, settings, preferences
+ 1192  user-list                            people                 person, users, profiles, accounts, members, address book
+ 1193  user-minus                           people                 person, users, profile, account, contact, delete, remove, -
+ 1194  user-plus                            people                 person, users, profile, account, contact, add, create, +
+ 1195  user-rectangle                       people                 person, users, profile, account, contact, login
+ 1196  user-square                          people                 person, users, profile, account, contact, login
+ 1197  user-switch                          people                 person, users, profile, account, login, logout, signin, signout, settings, preferences
+ 1198  users                                people                 user, group, team, people, profiles, accounts, contacts
+ 1199  users-four                           people                 user, group, team, department, community, people, profiles, accounts, contacts
+ 1200  users-three                          people                 user, group, team, community, people, profiles, accounts, contacts
+ 1201  van                                  map, objects           westfalia, microbus, vanagon, cars, vehicles, automobile, transit, transportation, traveling
+ 1202  vault                                objects, system, finance safe, bank, security, secured, authentication, authenticated, locked, encrypted, encryption
+ 1203  vibrate                              system                 audio, volume, viration, ringer, calls, silent, silenced
+ 1204  video                                people                 training, course, education, tutorial
+ 1205  video-camera                         media, system, objects videography, films, movies, recording
+ 1206  video-camera-slash                   media, system          videography, films, movies, recording, disabled
+ 1207  vignette                             design                 photography, darkroom, movie, analog
+ 1208  vinyl-record                         media, office          recording, audio, album, music, ep, lp
+ 1209  virtual-reality                      games, media           virtual reality, vr, headset, metaverse
+ 1210  virus                                health                 germs, disease, illness
+ 1211  voicemail                            system                 phonecalls, missed, recording, telephone, landline
+ 1212  volleyball                           games, health          sports
+ 1213  wall                                 objects, system        firewall, security, secured, blocks, bricks
+ 1214  wallet                               commerce, finance, objects money, payment, paying, purchase
+ 1215  warehouse                            commerce, map          storage, industry, manufacture, buildings, places, locations
+ 1216  warning                              system                 alert, danger, dangerous, caution, errors
+ 1217  warning-circle                       system                 alert, danger, dangerous, caution, errors, round
+ 1218  warning-diamond                      system                 alert, danger, dangerous, caution, errors
+ 1219  warning-octagon                      system                 alert, danger, dangerous, caution, errors, 8, eight
+ 1220  watch                                system, objects        times, timer, alarm, schedule, events, clock, wristwatch, wearable
+ 1221  wave-sawtooth                        media                  synth, synthesizer, sound, audio, music, waveform
+ 1222  wave-sine                            media                  synth, synthesizer, sound, audio, music, waveform
+ 1223  wave-square                          media                  synth, synthesizer, sound, audio, music, waveform
+ 1224  wave-triangle                        media                  synth, synthesizer, sound, audio, music, waveform
+ 1225  waveform                             media                  audio, sound, spectrum, spectrograph, music
+ 1226  waves                                nature, weather        ocean, tides, surf
+ 1227  webcam                               objects, system, communication camera, video conference
+ 1228  webcam-slash                         communication, objects, system camera, video conference
+ 1229  webhooks-logo                        development, brand     api
+ 1230  wechat-logo                          brand                  weixin, logos
+ 1231  whatsapp-logo                        brand, communication   logos, messages, messaging
+ 1232  wheelchair                           health, map, people    handicapped, medical, disabled, differently abled, accessible, accessibility, a11y
+ 1233  wheelchair-motion                    health, map, people    handicapped, medical, disabled, differently abled, accessible, accessibility, a11y
+ 1234  wifi-high                            system                 wireless, internet, network, connection, connectivity
+ 1235  wifi-low                             system                 wireless, internet, network, connection, connectivity
+ 1236  wifi-medium                          system                 wireless, internet, network, connection, connectivity
+ 1237  wifi-none                            system                 wireless, internet, network, connection, connectivity
+ 1238  wifi-slash                           system                 wireless, internet, network, connection, connectivity, disabled, disconnected
+ 1239  wifi-x                               system                 wireless, internet, network, connection, connectivity, disconnected, errors
+ 1240  wind                                 weather                meteorology, windy, stormy, blustery, gusty, air
+ 1241  windows-logo                         brand, development     microsoft, computers
+ 1242  wine                                 commerce, map, objects drinks, beverages, vineyard, places, locations, bars, restaurants, food, dining
+ 1243  wrench                               system, objects, commerce settings, setup, preferences, tools, machinery, mechanical, repairs
+ 1244  x                                    development, finance, system ×, closed, cancelled, dismissed, times, multiply, mulitplication, product, mathematics, arithmetic, calculator
+ 1245  x-circle                             system                 closed, cancelled, dismissed, round
+ 1246  x-square                             system                 closed, cancelled, dismissed
+ 1247  yin-yang                             communication          symbol, good, evil, black, white
+ 1248  youtube-logo                         brand, communication, media logos, google, videos, movies, social media

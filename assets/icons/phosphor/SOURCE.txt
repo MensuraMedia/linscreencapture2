@@ -1,0 +1,14 @@
+Phosphor Icons v2.0.8 (@phosphor-icons/core), by Helena Zhang and Tobias Fried
+Website:  https://phosphoricons.com/
+Source:   https://github.com/phosphor-icons/core (tag v2.0.8)
+Download: https://github.com/phosphor-icons/core/archive/refs/tags/v2.0.8.tar.gz
+SHA-256:  8b4dd9afb96b50c92a613f5786af6a7dcff6e416442c42c12ed831cea050a698
+Licence:  MIT (see LICENSE), Copyright (c) 2023 Phosphor Icons.
+          Free for personal and commercial use; may be bundled, modified and
+          redistributed, including inside free or paid software. Keep the
+          copyright and licence notice with the icons. Attribution is not
+          required in the app, but credit is appreciated.
+Fetched:  2026-09-21
+
+Weights (1248 icons each, 256x256 viewBox, drawn with currentColor):
+  regular  thin  light  bold  fill  duotone
