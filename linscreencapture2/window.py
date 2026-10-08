@@ -753,7 +753,7 @@ class StudioWindow(Gtk.ApplicationWindow):
             sw = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
             sw.get_style_context().add_class("swrow")
             for i, hexc in enumerate(CONTENT_COLORS):
-                b = _hex_button(hexc, f"Content color {hexc}", "sw")
+                b = _hex_button(hexc, f"Content color {hexc}", "sw", 18)
                 if i == 0:
                     b.get_style_context().add_class("sel")
                 sw.append(b)
