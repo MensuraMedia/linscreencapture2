@@ -364,6 +364,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._capturing = False
         self._active_profile = "Region"
         self._active_tool = "Arrow"  # s044 shows the Arrow tool active
+        self._zoom = 1.0  # stage shows captures at ORIGINAL size (r057)
         self._build()
 
     def _install_css(self):
@@ -695,14 +696,19 @@ class StudioWindow(Gtk.ApplicationWindow):
         canvas.set_hexpand(True); canvas.set_vexpand(True)
         canvas.set_draw_func(self._draw_canvas)
         self._canvas = canvas
+        scroll = Gtk.EventControllerScroll.new(
+            Gtk.EventControllerScrollFlags.BOTH_AXES
+            | Gtk.EventControllerScrollFlags.DISCRETE)
+        scroll.connect("scroll", self._canvas_scroll)
+        canvas.add_controller(scroll)
         overlay.set_child(canvas)
 
         hud = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         hud.get_style_context().add_class("zoomhud")
-        pct = Gtk.Label(); pct.get_style_context().add_class("zv")
-        pct.set_markup("<b>100%</b>")
-        hud.append(pct)
-        hud.append(Gtk.Label(label="· Fit"))
+        self._hud_pct = Gtk.Label()
+        self._hud_pct.get_style_context().add_class("zv")
+        self._hud_pct.set_markup("<b>100%</b>")
+        hud.append(self._hud_pct)
         hud.set_halign(Gtk.Align.START); hud.set_valign(Gtk.Align.END)
         hud.set_margin_start(16); hud.set_margin_bottom(16)
         overlay.add_overlay(hud)
@@ -788,7 +794,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         pw, ph = self._capture.get_width(), self._capture.get_height()
         if pw <= 0 or ph <= 0:
             return
-        scale = min(w / pw, h / ph)
+        scale = self._zoom  # original size unless ctrl+scroll zoomed (r057)
         dw, dh = pw * scale, ph * scale
         cr.save()
         cr.translate((w - dw) / 2, (h - dh) / 2)
@@ -798,6 +804,21 @@ class StudioWindow(Gtk.ApplicationWindow):
         Gdk.cairo_set_source_pixbuf(cr, self._capture, 0, 0)
         cr.paint()
         cr.restore()
+
+    def _canvas_scroll(self, controller, dx, dy):
+        """Ctrl + mouse wheel zooms the stage image (r057)."""
+        if not (controller.get_current_event_state() & Gdk.ModifierType.CONTROL_MASK):
+            return False
+        delta = dy or dx
+        self._set_zoom(self._zoom * (1.1 ** -delta))
+        return True
+
+    def _set_zoom(self, zoom: float):
+        self._zoom = max(0.1, min(8.0, zoom))
+        pct = f"{round(self._zoom * 100)}%"
+        self._zoom_val.set_text(pct)
+        self._hud_pct.set_markup(f"<b>{pct}</b>")
+        self._canvas.queue_draw()
 
     # --- right panels (r044: 216px like the left, collapsible to 100px) ---------
 
