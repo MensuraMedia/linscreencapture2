@@ -41,11 +41,7 @@ CONTENT_COLORS = [
 # the kit substitutes token values in Python (GTK 4.14 has no CSS var())
 # GTK CSS paints only: layout (spacing/size/alignment) is widget properties
 APP_CSS = f"""
-.studio-header {{ border-bottom: 1px solid {C['border']}; }}
-.studio-options {{ border-bottom: 1px solid {C['border']}; }}
-.studio-rail {{ border-right: 1px solid {C['border']}; }}
-.studio-panels {{ border-left: 1px solid {C['border']}; }}
-.studio-actionbar {{ border-top: 1px solid {C['border']}; }}
+/* r057: pane margin lines removed - the bars read as one continuous stage */
 
 .sect {{ font-size: 10px; letter-spacing: 0.04em; }}
 .grouplabel {{ font-size: 10px; letter-spacing: 0.06em; }}
