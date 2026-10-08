@@ -44,7 +44,7 @@ universal standards here.
    assets/icons/phosphor/regular (copy, not reference). No other icon
    type anywhere. Icons render at 2x and constrain to display size
    (never stretch a smaller texture - that is what blurred buttons);
-   glyphs are ink-normalized (14px marks, r058) on STANDARDIZED 24x24
+   glyphs are ink-normalized 10px marks (r060) on STANDARDIZED 24x24
    buttons (26px measured outer) - no other button size for icon
    controls; swatch squares share the 24px standard.
 6. Layout (operator r052): NO bottom action bar - the action icons
@@ -57,6 +57,11 @@ universal standards here.
    only). The canvas stage background is #242424; captures render at
    ORIGINAL size (never auto-fit) and ctrl+mouse-wheel zooms (0.1x-8x,
    live % in the HUD and header).
+8. Buttons and tooltips (operator r059): buttons are SQUARE - no
+   border-radius anywhere on button chrome; glyphs 12px. NO hover
+   flyouts - when a sidebar is closed, ALL of its buttons are listed
+   stacked (overflow is reached by expanding; never a scroller).
+   Tooltips: flat #141414 background, 11px text, square.
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry

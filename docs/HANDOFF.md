@@ -94,13 +94,17 @@ switch between the two fixed constants. The collapse transition is instant
 | Expanded | 100px (`LEFT_W`) | 8px pane margins + 84px content: three 24px columns (4px gaps) whose cells stretch to fill exactly |
 | Collapsed | 40px (`LEFT_COLLAPSED_W`) | 8px pane margins + one 24px icon column |
 
-**Icon/button standard (everywhere, r047/r050/r058).** 14px Phosphor glyph
-(ink-normalized: rendered at 4×, cropped to drawn bounds, long-edge fit,
-centered — every mark measures the same) inside a standardized 24×24px
-button (26px measured outer with borders; MenuButton internals pinned via
-`menubutton.icon-btn > button`). Swatch buttons share the same 24px
-square. Collapsed, expanded and flyout buttons are identical. Active
-state: accent fill + on-accent glyph. MenuButton caveat: the anchor's INTERNAL theme-padded
+**Icon/button standard (everywhere, r047/r050/r058/r060).** 10px Phosphor
+glyph (ink-normalized: rendered at 4×, cropped to drawn bounds, long-edge
+fit, centered — every mark measures the same) inside a standardized
+SQUARE 24×24px button (26px measured outer with borders; no
+border-radius anywhere on button chrome — r059; MenuButton internals
+pinned via `menubutton.icon-btn > button`). Swatch buttons share the
+same square 24px. Active state: accent fill + on-accent glyph.
+**No hover flyouts (r059)**: when a sidebar is closed, ALL of its
+buttons are listed stacked (no scroller — overflow is reached by
+expanding). Panel content shows in-pane, switched by the panel buttons.
+Tooltips: flat #141414, square, 11px label. MenuButton caveat: the anchor's INTERNAL theme-padded
 button needs its own CSS (`menubutton.icon-btn > button`); classes on the
 MenuButton node alone leave the inner button at ~32px, which read as an
 oversized first anchor (r050).

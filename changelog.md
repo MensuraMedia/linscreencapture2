@@ -438,3 +438,31 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Measured post-fix: 65/65 icon buttons at identical minimum width.
 - Evidence: docs/design/r058_standard_buttons.png; tests 17/17; desktop
   relaunched, 0 criticals.
+
+## 2026-10-08 - r059 three-phase pass: square buttons, full sidebar lists, minimal tooltips
+
+- Phase 1: buttons are SQUARE - every border-radius on button chrome
+  removed (icon buttons, profile rows, segments, swatches, colour
+  circle, zoom container, chip, flyout popover). Glyphs reduced
+  14 -> 12px for clarity on the 24px buttons.
+- Phase 2: hover flyouts removed entirely (_flyout_button/_flyout_box
+  deleted). When a sidebar is closed, ALL of its buttons are listed
+  stacked - left: caret, 6 profiles, 19 tools, 5 actions; right: caret,
+  3 panels, 12-swatch palette, eyedropper. No scroller: overflow is
+  reached by expanding the sidebar. Expanded right pane: the panel
+  buttons now switch an in-pane content box (Layers shows live rows).
+- Phase 3: tooltips flat #141414, square, 11px label, 1px/4px padding.
+- AGENTS rule 8 records the button/tooltip/flyout law; HANDOFF 2b
+  standard updated. Evidence: docs/design/r059_phase1_3_expanded.png,
+  r059_phase2_collapsed_full_list.png. Tests 17/17; desktop relaunched,
+  0 criticals.
+
+## 2026-10-08 - r060 icon glyphs reduced to 10px
+
+- Operator directive: reduce the size of the icons on the buttons.
+- All glyph sites swept 12 -> 10px (23 sites: sidebar grids/anchors,
+  header zoom + Capture, options-bar identity, action icons, panel
+  tabs, layer eye, eyedropper, menu glyph) with the menubutton inner
+  box CSS matched. Buttons stay the standardized 24x24 square.
+- Evidence: docs/design/r060_glyphs_10px.png; tests 17/17; desktop
+  relaunched, 0 criticals.

@@ -76,7 +76,7 @@ APP_CSS = f"""
 /* MenuButton carries an internal theme-padded button: size IT to the same
    24px square or flyout anchors render larger than plain buttons (r050) */
 menubutton.icon-btn > button {{ padding: 0; min-width: 26px; min-height: 26px; }}
-menubutton.icon-btn > button > box {{ min-width: 12px; min-height: 12px; }}
+menubutton.icon-btn > button > box {{ min-width: 10px; min-height: 10px; }}
 .icon-24.primary {{ background-color: {C['accent']}; }}
 .icon-24.primary:hover {{ background-color: {C['accent_hover']}; }}
 .icon-danger {{ color: {C['error']}; }}
@@ -238,7 +238,7 @@ def _icon_image(name: str, px: int, color: str | None = None) -> Gtk.Image:
     return img
 
 
-def _icon_button(name: str, tooltip: str, icon_px: int = 12,
+def _icon_button(name: str, tooltip: str, icon_px: int = 10,
                  css: tuple[str, ...] = ("icon-24",),
                  color: str | None = None) -> Gtk.Button:
     """Square icon button; the label is the tooltip (r037 law).
@@ -382,19 +382,19 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         zoom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         zoom.get_style_context().add_class("zoom")
-        zoom.append(_icon_button("minus", "Out", 12))
+        zoom.append(_icon_button("minus", "Out", 10))
         self._zoom_val = Gtk.Label(label="100%")
         self._zoom_val.get_style_context().add_class("zv")
         self._zoom_val.set_margin_start(8)
         self._zoom_val.set_margin_end(8)
         zoom.append(self._zoom_val)
-        zoom.append(_icon_button("plus", "In", 12))
-        zoom.append(_icon_button("arrows-in", "Fit", 12))
+        zoom.append(_icon_button("plus", "In", 10))
+        zoom.append(_icon_button("arrows-in", "Fit", 10))
         bar.append(zoom)
 
         cap = _icon_button(
             "camera", "Capture",
-            12, css=("icon-24", "primary"), color=C["on_accent"],
+            10, css=("icon-24", "primary"), color=C["on_accent"],
         )
         cap.connect("clicked", lambda *_: self._start_capture("region"))
         bar.append(cap)
@@ -521,13 +521,13 @@ class StudioWindow(Gtk.ApplicationWindow):
         if self._left_collapsed:
             # r059: ALL buttons present when closed - no flyouts, no scroller
             rail.set_size_request(self.LEFT_COLLAPSED_W, -1)
-            expand = _icon_button("caret-right", "Expand", 12,
+            expand = _icon_button("caret-right", "Expand", 10,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_left())
             rail.append(expand)
             self._profile_buttons = {}
             for name, (icon, meta) in PROFILE_META.items():
-                b = _icon_button(icon, PROFILE_SHORT[name], 12,
+                b = _icon_button(icon, PROFILE_SHORT[name], 10,
                                  css=("icon-24", "pirow"))
                 b.connect("clicked", lambda _b, n=name: self._profile(n))
                 self._profile_buttons[name] = b
@@ -537,7 +537,7 @@ class StudioWindow(Gtk.ApplicationWindow):
             self._tool_buttons = {}
             for _group, tools in TOOL_GROUPS:
                 for name, icon in tools:
-                    b = _icon_button(icon, name, 12, css=("icon-24", "toolcell"))
+                    b = _icon_button(icon, name, 10, css=("icon-24", "toolcell"))
                     b.connect("clicked", lambda _b, n=name: self._pick_tool(n))
                     self._tool_buttons[name] = b
                     rail.append(b)
@@ -550,7 +550,7 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         rail.set_size_request(self.LEFT_W, -1)
         head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        collapse = _icon_button("caret-left", "Collapse", 12,
+        collapse = _icon_button("caret-left", "Collapse", 10,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_left())
         head.append(collapse)
@@ -559,7 +559,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._profile_buttons = {}
         pgrid = Gtk.Grid(row_spacing=4, column_spacing=4)  # 3 across fills 100
         for pi, (name, (icon, meta)) in enumerate(PROFILE_META.items()):
-            b = _icon_button(icon, PROFILE_SHORT[name], 12,
+            b = _icon_button(icon, PROFILE_SHORT[name], 10,
                              css=("icon-24", "pirow"))
             b.set_hexpand(True)  # cells stretch so 3 columns fill the pane
             b.connect("clicked", lambda _b, n=name: self._profile(n))
@@ -575,7 +575,7 @@ class StudioWindow(Gtk.ApplicationWindow):
                 rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
             grid = Gtk.Grid(row_spacing=4, column_spacing=4)
             for ti, (name, icon) in enumerate(tools):
-                b = _icon_button(icon, name, 12,
+                b = _icon_button(icon, name, 10,
                                  css=("icon-24", "toolcell"))
                 b.set_hexpand(True)  # 3 columns fill the 100px pane
                 b.connect("clicked", lambda _b, n=name: self._pick_tool(n))
@@ -609,10 +609,10 @@ class StudioWindow(Gtk.ApplicationWindow):
             ctx = b.get_style_context()
             ctx.remove_class("active")
             if name == self._active_tool:
-                b.set_child(_icon_image(TOOL_NAMES[name], 12, C["on_accent"]))
+                b.set_child(_icon_image(TOOL_NAMES[name], 10, C["on_accent"]))
                 ctx.add_class("active")
             else:
-                b.set_child(_icon_image(TOOL_NAMES[name], 12))
+                b.set_child(_icon_image(TOOL_NAMES[name], 10))
 
     def _pick_tool(self, name: str):
         self._active_tool = name
@@ -669,7 +669,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         bar = self._options_bar
         self._clear(bar)
         name = self._active_tool
-        bar.append(_icon_image(TOOL_NAMES.get(name, "cursor"), 12))
+        bar.append(_icon_image(TOOL_NAMES.get(name, "cursor"), 10))
         label = Gtk.Label(label=name)
         label.get_style_context().add_class("lt-strong")
         bar.append(label)
@@ -823,12 +823,12 @@ class StudioWindow(Gtk.ApplicationWindow):
         if self._right_collapsed:
             # r059: everything listed - panels, palette, eyedropper
             right.set_size_request(self.RIGHT_COLLAPSED_W, -1)
-            expand = _icon_button("caret-left", "Expand", 12,
+            expand = _icon_button("caret-left", "Expand", 10,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_right())
             right.append(expand)
             for name, (icon, _page) in PANEL_PAGES.items():
-                b = _icon_button(icon, name, 12)
+                b = _icon_button(icon, name, 10)
                 b.connect("clicked", lambda _b, n=name: self._show_panel(n))
                 right.append(b)
             right.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
@@ -836,14 +836,14 @@ class StudioWindow(Gtk.ApplicationWindow):
                 b = _hex_button(hexc, hexc, "swp", 24)
                 b.connect("clicked", lambda _b, h=hexc: self._set_fg(h))
                 right.append(b)
-            pick = _icon_button("eyedropper", "Eyedropper", 12)
+            pick = _icon_button("eyedropper", "Eyedropper", 10)
             pick.connect("clicked", lambda *_: self._pick_colour())
             right.append(pick)
             return
 
         right.set_size_request(self.RIGHT_W, -1)
         head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        collapse = _icon_button("caret-right", "Collapse", 12,
+        collapse = _icon_button("caret-right", "Collapse", 10,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_right())
         head.append(collapse)
@@ -854,7 +854,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         panels = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         self._panel_buttons = {}
         for name, (icon, _page) in PANEL_PAGES.items():
-            b = _icon_button(icon, name, 12, css=("icon-24",))
+            b = _icon_button(icon, name, 10, css=("icon-24",))
             b.connect("clicked", lambda _b, n=name: self._show_panel(n))
             self._panel_buttons[name] = b
             panels.append(b)
@@ -913,7 +913,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         kind = Gtk.Label(label="IMG")
         kind.get_style_context().add_class("lkind")
         row.append(kind)
-        eye = _icon_button("eye", "Visibility", 12, css=("icon-24",))
+        eye = _icon_button("eye", "Visibility", 10, css=("icon-24",))
         eye.set_sensitive(False)  # visibility toggles land with the object model
         row.append(eye)
         self._layers_box.append(row)
@@ -927,8 +927,8 @@ class StudioWindow(Gtk.ApplicationWindow):
         card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
 
         tabs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        self._sw_tab = _icon_button("grid-four", "Swatches", 12, css=("icon-24", "ptab"))
-        self._pr_tab = _icon_button("sliders-horizontal", "Precise", 12,
+        self._sw_tab = _icon_button("grid-four", "Swatches", 10, css=("icon-24", "ptab"))
+        self._pr_tab = _icon_button("sliders-horizontal", "Precise", 10,
                                     css=("icon-24", "ptab"))
         for b in (self._sw_tab, self._pr_tab):
             b.set_hexpand(True)
@@ -968,7 +968,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         circle.set_child(area)
         circle.set_tooltip_text("Foreground")
         bottom.append(circle)
-        pick = _icon_button("eyedropper", "Eyedropper", 12)
+        pick = _icon_button("eyedropper", "Eyedropper", 10)
         pick.connect("clicked", lambda *_: self._pick_colour())
         bottom.append(pick)
         card.append(bottom)
@@ -1092,7 +1092,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _captures_menu_button(self) -> Gtk.MenuButton:
         captures = Gtk.MenuButton()
         captures.set_tooltip_text("Captures")
-        captures.set_child(_icon_image("images", 12))
+        captures.set_child(_icon_image("images", 10))
         ctx = captures.get_style_context()
         ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-24")
         popover = Gtk.Popover()
@@ -1113,16 +1113,16 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _action_buttons(self) -> dict[str, Gtk.Button]:
         """The former action bar's icons (r052: they live in the sidebar)."""
         discard = _icon_button(
-            "trash", "Discard", 12,
+            "trash", "Discard", 10,
             css=("icon-24", "icon-danger"), color=C["error"])
         discard.connect("clicked", lambda *_: self._discard())
-        flatten = _icon_button("stack", "Flatten", 12)
+        flatten = _icon_button("stack", "Flatten", 10)
         captures = self._captures_menu_button()
-        copy = _icon_button("copy", "Copy", 12)
+        copy = _icon_button("copy", "Copy", 10)
         copy.connect("clicked", lambda *_: self._copy_clipboard())
         save = _icon_button(
             "download-simple", "Save",
-            12, css=("icon-24", "primary"), color=C["on_accent"])
+            10, css=("icon-24", "primary"), color=C["on_accent"])
         save.connect("clicked", lambda *_: self._save())
         return {"discard": discard, "flatten": flatten, "captures": captures,
                 "copy": copy, "save": save}
