@@ -81,3 +81,23 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   CSS priority, tools/ convention + teardown, freeze-frame invariant).
 - Tests 13/13 (new test_icons: every referenced icon resolves, pixbuf
   sizes correct); compileall clean; rig render verified.
+
+## 2026-10-07 - r041 documentation deep-dive + design-corpus correction
+
+- Deep-dive across the whole design corpus: v2 spec, the s044 mockup DOM
+  (exact formation order), DESIGN-CONTRACT.md r027 (25 checkable items,
+  linshot3 read-only), s035 component sheet + s036 freeze overlay + s037
+  gallery renders, GUI guide + docs/01-07. Finding: the r039 audit
+  under-called deviations - profile ROWS, 2-col 40x40 tool grid, top
+  panel tabs, size chip top-center + 4 corner handles are spec'd
+  formation (r037 changes labels, not formation); the overlay's
+  auto-confirm-on-release contradicts the documented capture bar
+  (Annotate/Copy/Save + saves-as hint); stateful status chip vocabulary,
+  freeze chips, end toast, magnifier, color well, min window 720x540 are
+  all documented intent not yet built. Operator verdict confirmed: the
+  current shell does not yet adequately represent the intended design.
+- docs/HANDOFF.md: new section 2a (design corpus + authority order +
+  r039 corrections), work queue rebuilt as F (formation pass, overlay
+  contract items) vs B (behavior phases) with the full deviation list;
+  pitfall added: live-desktop grabs are not evidence, rig only.
+- No code changes this marker; correction plan queued for r042.

@@ -45,6 +45,30 @@ hover via tooltip. Padding/margins must be **even** — 4px grid (4/8/12;
 never ad-hoc 5/7/10). Sections/state text may remain as labels (they are not
 buttons); buttons themselves carry no text.
 
+## 2a. Design corpus & authority order (r041 deep-dive)
+
+The design intent lives in five places (v1 tree is read-only; r033-era):
+
+| Source | Authority |
+|---|---|
+| `docs/design/STUDIO-EDITOR-SPEC.md` (r034) | **structure** for v2: regions, 216/280 rails, panel stack, phase map (§5) |
+| `s044_studio_editor_graphite_night.html` (linshot3 `docs/design/redesign-2026/`, render in `docs/design/`) | **formation**: exact DOM order of every region, label and control; s045–s048 are theme variants only |
+| `linshot3/docs/design/DESIGN-CONTRACT.md` (r027, 25 items) | **component + interaction law** where the v2 spec is silent: overlay (handles, chip docked top-CENTER 32px, magnifier 132px 8×, capture bar Annotate/Copy/Save + hint, freeze chips, end toast), state vocabulary (Ready ✓/Selecting/Captured/Can't-capture), 12 fixed swatch hexes, a11y floors, min window 720×540 |
+| `s035`/`s036`/`s037` renders | component sheet, freeze overlay, gallery/Captures reference art |
+| `docs/design/linapptemplate/GUI-GUIDE…` + `docs/01–07` | kit-level laws (what·why·next messages, acceptance checklists) |
+
+Operator law **overrides** all of it: r037 labels→tooltips, r034 24px
+primaries (contract says 48 — r034 wins, recorded), no pills. Note the
+contract's nav-rail/Gallery/Settings structure is **v1-only** — superseded
+by the Studio single-window spec.
+
+r039 audit correction: profile ROWS (not grid), 2-col 40×40 tool grid, and
+top panel tabs are **spec'd formation** — r037 changes labels, not
+formation. They were misclassified as free choices; treat them as
+deviations. Size chip belongs top-center above the selection with 4 corner
+handles (s044 lines 109–115, 224–226); the v1 top-right chip position we
+ported is wrong per s044.
+
 ## 3. Architecture
 
 Flat packages at repo root; no nested trees. Data flow for a capture:
@@ -131,6 +155,9 @@ update, ledger r-index + session note, D13 backup, commit, push.
   window (250 ms) first. XGetImage needs exact root dims (query attributes).
 - **at-spi CRITICAL** in rigs is killed by `NO_AT_BRIDGE=1` (D7); app output
   must stay free of criticals — check the log every rig run.
+- **Live-desktop grabs are not evidence**: on `:0` other windows overlap the
+  app (a r040 crop caught a browser sidebar). Render/verify in the rig only;
+  use `capture.grab_root()` on the rig display, never on the desktop.
 
 Rig snapshot pattern (render any window state to PNG):
 
@@ -141,20 +168,40 @@ pb.savev("/tmp/lsc2-rig/<name>.png", "png", [], [])
 
 ## 7. Work queue
 
-Priority order (per ledger plan and spec §5); each item = one r-marker.
+Priority order (per ledger plan, spec §5, and the r041 contract deep-dive);
+each item = one r-marker. Formation items (F) make the shell match the
+documented intent; behavior items (B) are the scheduled phases.
 
-1. **Options bar** — per-tool controls (segments, swatches, numerics),
-   content swaps per active tool (spec §3, E1 registry).
-2. **Panels** — Layers/Captures/Props as real widgets (library-backed
-   Captures list is possible today, read-only, per D2).
-3. **Window snapping** — port v1 phase-3 `window_geometry` (XQueryTree via
-   ctypes) into `FreezeOverlay` (click/Enter/arrow-cycle); unblocks the
+1. **F — Formation pass** (the r041 deviation list): 6 profile ROWS with
+   active raised+accent state; tools 2-col 40×40 with group dividers
+   (Select | Draw | Redact | Transform); color well (fg/bg, swap); panel
+   tabs to TOP of the right column; header doc-title/sub format
+   ("LinCapture_….png" / "Edit · N layers · unsaved changes"); stateful
+   status chip (Ready ✓/Selecting/Captured/Can't-capture vocabulary);
+   deduplicate action-bar status into the header chip; "Captures ▾" menu
+   scaffold; window title "LinScreenCapture — Studio Editor"; min window
+   720×540.
+2. **F — Overlay contract items**: 4 corner handles; size chip docked
+   top-center above the selection (32px, icon + tabular W×H); freeze-state
+   chips top-left ("Selecting on the frozen frame · Esc unfreezes" /
+   "Frozen at HH:MM:SS · apps keep running"); capture bar below selection
+   (Annotate primary / Copy / Save / "saves as LinCapture_… · Enter copies
+   · Esc unfreezes" / ✕) replacing auto-confirm on release; end toast
+   ("Captured W×H · copied · saved NAME") instead of bare status; 8×
+   magnifier loupe last (biggest lift).
+3. **B — Options bar** (spec E1, effort M): segments, 12-swatch content
+   palette (contract §9 hexes), toggles, per-tool numerics, shape segment.
+4. **B — Panels**: Layers/Captures/Props as real widgets (Captures can be
+   library-backed read-only today, D2); quick styles, Steps next-№,
+   Navigator minimap footer (s044 pfoot formation).
+5. **B — Window snapping** — port v1 phase-3 `window_geometry` (XQueryTree
+   via ctypes) into `FreezeOverlay` (click/Enter/arrow-cycle); unblocks the
    Window profile.
-4. **Zoom model** on canvas (percent · Fit · HUD), then Navigator minimap.
-5. **Annotation object model** (phase 12/15) — first real tool set + z-order.
-6. PrintScreen global hotkey + hidden-instance relaunch (v1 parity).
-7. Wayland portal capture path (X11-only today; `display_is_x11` guards).
-8. Settings > Keyboard table (spec §2/§4) once shortcuts exist.
+6. **B — Annotation object model** (phase 12/15) — tools become real.
+7. **B — Zoom model** (percent · Fit · HUD), then Navigator live minimap.
+8. **B — PrintScreen global hotkey + hidden-instance relaunch** (v1 parity).
+9. **B — Wayland portal capture** (X11-only today; `display_is_x11` guards).
+10. **B — Settings > Keyboard table** (spec §2/§4) once shortcuts exist.
 
 ## 8. Bookkeeping conventions
 
