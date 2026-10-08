@@ -164,6 +164,14 @@ update, ledger r-index + session note, D13 backup, commit, push.
   driver using the same `Gtk.Application` id silently no-ops (run()
   returns, activate never fires). Rig drivers set
   `Gio.ApplicationFlags.NON_UNIQUE` (D11, r043).
+- **GTK4 layout laws for fixed panes** (r047): (a) expand flags PROPAGATE
+  from descendants — buttons with `hexpand` inside a pane make the pane
+  itself claim extra space unless the pane pins `set_hexpand(False)`;
+  (b) Box AND Grid distribute extra space to non-expanding children up
+  to their NATURAL — so a pane is only as fixed as its natural width;
+  (c) for wrapping labels, `width_chars` raises the MINIMUM while
+  `max_width_chars` caps the NATURAL. Fixed 100px panes = Grid + explicit
+  hexpand(False) panes + max_width_chars labels + hexpanding canvas column.
 
 Rig snapshot pattern (render any window state to PNG):
 
