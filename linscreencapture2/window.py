@@ -600,10 +600,6 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         rail.set_size_request(self.LEFT_W, -1)
         head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        cap = Gtk.Label(label="PROFILES", halign=Gtk.Align.START, xalign=0)
-        cap.get_style_context().add_class("sect"); cap.get_style_context().add_class("muted")
-        cap.set_hexpand(True)
-        head.append(cap)
         collapse = _icon_button("caret-left", "Collapse", 16,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_left())
@@ -622,11 +618,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         rail.append(pgrid)
         self._mark_active_profile()
 
-        tools = Gtk.Label(label="TOOLS", halign=Gtk.Align.START, xalign=0)
-        tools.get_style_context().add_class("sect"); tools.get_style_context().add_class("muted")
-        rail.append(tools)
-
-        # dense: grouped 24px cells fill the pane width (216 -> 7 per row)
+        # dense: grouped 24px cells fill the pane width (r057: no captions)
         self._tool_buttons = {}
         for gi_, (group, tools) in enumerate(TOOL_GROUPS):
             if gi_ > 0:
@@ -646,10 +638,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         spacer.set_vexpand(True)  # pins the actions to the lower left
         rail.append(spacer)
         rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
-        act = Gtk.Label(label="ACTIONS", halign=Gtk.Align.START, xalign=0)
-        act.get_style_context().add_class("grouplabel")
-        act.get_style_context().add_class("muted")
-        rail.append(act)
         actions = self._action_buttons()
         grid = Gtk.Grid(row_spacing=4, column_spacing=4)
         for i, key in enumerate(("discard", "flatten", "captures",
@@ -886,11 +874,6 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         right.set_size_request(self.RIGHT_W, -1)
         head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        cap = Gtk.Label(label="PANELS", halign=Gtk.Align.START, xalign=0)
-        cap.get_style_context().add_class("sect")
-        cap.get_style_context().add_class("muted")
-        cap.set_hexpand(True)
-        head.append(cap)
         collapse = _icon_button("caret-right", "Collapse", 16,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_right())
@@ -906,27 +889,15 @@ class StudioWindow(Gtk.ApplicationWindow):
             panels.append(b)
         right.append(panels)
 
-        colour_label = Gtk.Label(label="COLOUR", halign=Gtk.Align.START, xalign=0)
-        colour_label.get_style_context().add_class("sect")
-        colour_label.get_style_context().add_class("muted")
-        right.append(colour_label)
         right.append(self._build_colour_card())
 
         spacer = Gtk.Box()
         spacer.set_vexpand(True)  # pins the navigator to the bottom
         right.append(spacer)
-        qs_label = Gtk.Label(label="QUICK STYLES", halign=Gtk.Align.START, xalign=0)
-        qs_label.get_style_context().add_class("sect")
-        qs_label.get_style_context().add_class("muted")
-        right.append(qs_label)
         qs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
         for name, hexc in QUICK_STYLES:
             qs.append(_hex_button(hexc, STYLE_SHORT[name], "qs-sw", 18))
         right.append(qs)
-        nav_label = Gtk.Label(label="NAVIGATOR", halign=Gtk.Align.START, xalign=0)
-        nav_label.get_style_context().add_class("sect")
-        nav_label.get_style_context().add_class("muted")
-        right.append(nav_label)
         right.append(self._build_minimap())
 
     def _build_minimap(self):
