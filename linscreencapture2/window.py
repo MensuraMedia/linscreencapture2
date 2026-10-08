@@ -116,7 +116,7 @@ menubutton.icon-btn > button > box {{ min-width: 16px; min-height: 16px; }}
 .seg button:hover {{ background-color: {C['surface_hover']}; color: {C['text']}; }}
 .seg button.sel {{ background-color: {C['accent']}; color: {C['on_accent']}; }}
 .sw {{
-  min-width: 20px; min-height: 20px; border-radius: 3px;
+  min-width: 18px; min-height: 18px; border-radius: 3px;
   border: 1px solid {C['border']}; padding: 0;
 }}
 .sw.sel {{ outline: 2px solid {C['accent']}; outline-offset: 1px; }}
@@ -150,7 +150,7 @@ menubutton.icon-btn > button > box {{ min-width: 16px; min-height: 16px; }}
   border-radius: 4px; padding: 1px 4px;
 }}
 .qs-sw {{
-  min-width: 20px; min-height: 20px; border-radius: 6px; padding: 0;
+  min-width: 18px; min-height: 18px; border-radius: 6px; padding: 0;
   border: 1px solid {C['border']};
 }}
 .badge {{
@@ -362,7 +362,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         middle.attach(self._build_left_rail(), 0, 0, 1, 1)
         middle.attach(self._build_center(), 1, 0, 1, 1)
         middle.attach(self._build_right_panels(), 2, 0, 1, 1)
-        root.append(self._build_action_bar())
+        # r052: no bottom action bar - its icons live in the left sidebar
         self._set_chip("ready")
 
     # --- header (s044 hdr: doc block, chip, spacer, zoom, Capture) ------------
@@ -478,7 +478,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._capture = pix
         self._saved_path = None
         self._refresh_doc()
-        self._summary.set_text(self._capture_summary())
         self._canvas.queue_draw()
         self._rebuild_layers()
         self.show()
@@ -494,11 +493,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._doc_title.set_text(title)
         self._docsub.set_text(f"Edit · {n} layer{'s' if n != 1 else ''} · {state}")
 
-    def _capture_summary(self) -> str:
-        if self._capture is None:
-            return "no capture"
-        w, h = self._capture.get_width(), self._capture.get_height()
-        return f"{w} \u00d7 {h} · PNG · {self._layer_count()} layer · 100%"
 
     def _profile(self, name: str):
         if name == "Region":
@@ -573,6 +567,10 @@ class StudioWindow(Gtk.ApplicationWindow):
                 rail.append(_flyout_button(
                     GROUP_ICONS[group], f"{group} tools - hover", group_fly))
             self._mark_active_tool()
+            rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
+            actions = self._action_buttons()
+            for key in ("discard", "flatten", "captures", "copy", "save"):
+                rail.append(actions[key])
             return
 
         rail.set_size_request(self.LEFT_W, -1)
@@ -623,6 +621,23 @@ class StudioWindow(Gtk.ApplicationWindow):
             rail.append(grid)
         self._mark_active_tool()
 
+        spacer = Gtk.Box()
+        spacer.set_vexpand(True)  # pins the actions to the lower left
+        rail.append(spacer)
+        rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
+        act = Gtk.Label(label="ACTIONS", halign=Gtk.Align.START, xalign=0)
+        act.get_style_context().add_class("grouplabel")
+        act.get_style_context().add_class("muted")
+        rail.append(act)
+        actions = self._action_buttons()
+        grid = Gtk.Grid(row_spacing=4, column_spacing=4)
+        for i, key in enumerate(("discard", "flatten", "captures",
+                                 "copy", "save")):
+            b = actions[key]
+            b.set_hexpand(True)
+            grid.attach(b, i % 3, i // 3, 1, 1)
+        rail.append(grid)
+
     def _mark_active_profile(self):
         for name, b in self._profile_buttons.items():
             ctx = b.get_style_context()
@@ -653,8 +668,9 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         self._options_bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self._options_bar.get_style_context().add_class("studio-options")
+        # equal margins around the bar (r052)
         self._options_bar.set_margin_start(8); self._options_bar.set_margin_end(8)
-        self._options_bar.set_margin_top(4); self._options_bar.set_margin_bottom(4)
+        self._options_bar.set_margin_top(8); self._options_bar.set_margin_bottom(8)
         # horizontal scroll keeps the options bar's minimum width small, so
         # the window itself can shrink (r043); the bar scrolls when narrow
         opt_scroll = Gtk.ScrolledWindow()
@@ -697,16 +713,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         if name in ("Arrow", "Line", "Pen", "Marker"):
             bar.append(self._segment(("Thin", "Body", "Chunky"), 0,
                                      f"{name} stroke weight"))
-        if name in ("Arrow", "Line", "Box", "Circle", "Text", "Pen", "Step",
-                    "Callout", "Fill", "Marker"):
-            sw = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-            sw.get_style_context().add_class("swrow")
-            for i, hexc in enumerate(CONTENT_COLORS):
-                b = _hex_button(hexc, f"Content color {hexc}", "sw")
-                if i == 0:
-                    b.get_style_context().add_class("sel")
-                sw.append(b)
-            bar.append(sw)
         if name in ("Arrow", "Box", "Circle", "Text", "Step", "Callout"):
             bar.append(self._toggle("Shadow", True, f"{name} drop shadow"))
         if name == "Arrow":
@@ -724,7 +730,19 @@ class StudioWindow(Gtk.ApplicationWindow):
             num = Gtk.Label(label="Next \u2116 1")
             num.get_style_context().add_class("numeric")
             bar.append(num)
-        # keep the bar airy: controls stay left-aligned per s044
+        if name in ("Arrow", "Line", "Box", "Circle", "Text", "Pen", "Step",
+                    "Callout", "Fill", "Marker"):
+            spacer = Gtk.Box()
+            spacer.set_hexpand(True)
+            bar.append(spacer)
+            sw = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+            sw.get_style_context().add_class("swrow")
+            for i, hexc in enumerate(CONTENT_COLORS):
+                b = _hex_button(hexc, f"Content color {hexc}", "sw")
+                if i == 0:
+                    b.get_style_context().add_class("sel")
+                sw.append(b)
+            bar.append(sw)  # right-aligned (r052)
         return
 
     def _segment(self, options: tuple[str, ...], selected: int, tooltip: str) -> Gtk.Box:
@@ -832,13 +850,6 @@ class StudioWindow(Gtk.ApplicationWindow):
                       for name, hexc in QUICK_STYLES]
             right.append(_flyout_button("magic-wand", "Quick styles - hover: presets",
                                         qs_fly))
-            badge_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-            badge = Gtk.Label(label="1")
-            badge.get_style_context().add_class("badge")
-            badge.set_halign(Gtk.Align.CENTER)
-            badge.set_valign(Gtk.Align.CENTER)
-            badge_row.append(badge)
-            right.append(badge_row)
             spacer = Gtk.Box()
             spacer.set_vexpand(True)
             right.append(spacer)
@@ -1070,15 +1081,6 @@ class StudioWindow(Gtk.ApplicationWindow):
             qs.append(_hex_button(hexc, name, "qs-sw", 24))
         foot.append(qs)
 
-        steps = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        badge = Gtk.Label(label="1")
-        badge.get_style_context().add_class("badge")
-        steps.append(badge)
-        step_text = Gtk.Label(label="Steps - next \u2116", xalign=0)
-        step_text.set_tooltip_text("Steps - auto-increments per capture")
-        step_text.get_style_context().add_class("muted")
-        steps.append(step_text)
-        foot.append(steps)
 
         nav_label = Gtk.Label(label="NAVIGATOR", halign=Gtk.Align.START, xalign=0)
         nav_label.get_style_context().add_class("sect"); nav_label.get_style_context().add_class("muted")
@@ -1120,20 +1122,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     # --- action bar (s044 ab: Discard · Flatten · Captures-menu · summary ·
     #     Copy · Save; the status lives in the header chip only) -------------------
 
-    def _build_action_bar(self):
-        bar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        bar.get_style_context().add_class("studio-actionbar")
-        bar.set_margin_start(8); bar.set_margin_end(8)
-        bar.set_margin_top(4); bar.set_margin_bottom(4)
-
-        discard = _icon_button(
-            "trash", "Discard - drop the current capture", 16,
-            css=("icon-24", "icon-danger"), color=C["error"],
-        )
-        discard.connect("clicked", lambda *_: self._discard())
-        bar.append(discard)
-        bar.append(_icon_button("stack", "Flatten - merge layers (phase 15)", 16))
-
+    def _captures_menu_button(self) -> Gtk.MenuButton:
         captures = Gtk.MenuButton()
         captures.set_tooltip_text("Captures - versions and the captures folder")
         captures.set_child(_icon_image("images", 16))
@@ -1151,24 +1140,24 @@ class StudioWindow(Gtk.ApplicationWindow):
         pop_box.append(later)
         popover.set_child(pop_box)
         captures.set_popover(popover)
-        bar.append(captures)
+        return captures
 
-        spacer = Gtk.Box(); bar.append(spacer); spacer.set_hexpand(True)
-        self._summary = Gtk.Label(label="no capture")
-        self._summary.get_style_context().add_class("muted")
-        self._summary.set_margin_start(4); self._summary.set_margin_end(4)
-        bar.append(self._summary)
-
+    def _action_buttons(self) -> dict[str, Gtk.Button]:
+        """The former action bar's icons (r052: they live in the sidebar)."""
+        discard = _icon_button(
+            "trash", "Discard - drop the current capture", 16,
+            css=("icon-24", "icon-danger"), color=C["error"])
+        discard.connect("clicked", lambda *_: self._discard())
+        flatten = _icon_button("stack", "Flatten - merge layers (phase 15)", 16)
+        captures = self._captures_menu_button()
         copy = _icon_button("copy", "Copy to clipboard", 16)
         copy.connect("clicked", lambda *_: self._copy_clipboard())
-        bar.append(copy)
         save = _icon_button(
             "download-simple", "Save PNG to the captures folder",
-            16, css=("icon-24", "primary"), color=C["on_accent"],
-        )
+            16, css=("icon-24", "primary"), color=C["on_accent"])
         save.connect("clicked", lambda *_: self._save())
-        bar.append(save)
-        return bar
+        return {"discard": discard, "flatten": flatten, "captures": captures,
+                "copy": copy, "save": save}
 
     def _open_captures_folder(self):
         folder = Path(self.settings.screenshot_path)
@@ -1184,7 +1173,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._frame = None
         self._saved_path = None
         self._refresh_doc()
-        self._summary.set_text(self._capture_summary())
         self._canvas.queue_draw()
         self._rebuild_layers()
         self._set_chip("ready", "Capture discarded")
@@ -1208,5 +1196,4 @@ class StudioWindow(Gtk.ApplicationWindow):
         folder = Path(self.settings.screenshot_path)
         self._saved_path = capture.save_png(self._capture, folder)
         self._refresh_doc()
-        self._summary.set_text(self._capture_summary())
         self._set_chip("captured", f"Saved {self._saved_path.name}")

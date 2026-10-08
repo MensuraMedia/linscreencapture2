@@ -44,6 +44,10 @@ universal standards here.
    assets/icons/phosphor/regular (copy, not reference). No other icon
    type anywhere. Icons render at 2x and constrain to display size
    (never stretch a smaller texture - that is what blurred buttons).
+6. Layout (operator r052): NO bottom action bar - the action icons
+   (Discard/Flatten/Captures/Copy/Save) live in the lower left of the
+   left sidebar (grid when expanded, stacked when collapsed). Capture
+   summary (WxH/PNG/layers) lives in the header doc sub-line.
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry

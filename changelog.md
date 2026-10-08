@@ -309,3 +309,26 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - New display-free tests tests/test_colour.py (hex parse/format):
   tests 17/17. Evidence: docs/design/r051_colour_picker.png; desktop
   relaunched, 0 criticals.
+
+## 2026-10-08 - r052 layout directives: options bar margins, swatch move, no bottom bar
+
+- Operator directives (annotated screenshot): equal margins around the
+  top (options) bar; move the top-bar swatch right-aligned and make the
+  colour square 10% smaller; remove the bottom bar and place the icons
+  in the lower left of the left sidebar; remove the red icon with the
+  number 1 on the right.
+- Options bar: equal 8px margins on all sides; swatch row moved to the
+  right end of the bar (after Shadow/Head/shape) behind an expanding
+  spacer; swatch squares 20 -> 18px (10% smaller; quick-styles tiles
+  follow for swatch consistency).
+- Bottom action bar removed: Discard/Flatten/Captures-menu/Copy/Save
+  relocated to the lower left of the left sidebar - expanded: ACTIONS
+  caption + 3-column grid pinned to the pane bottom; collapsed: the
+  icons stack below the group anchors. Summary folded into the header
+  doc sub-line (Edit - WxH - PNG - N layers - state). AGENTS rule 6
+  records the no-bottom-bar law.
+- Red next-No steps badge removed from the right pane footer (operator
+  order); reintroduces with the Step tool (HANDOFF queue 11).
+- Evidence: docs/design/r052_actions_in_sidebar.png (expanded; collapsed
+  renders the same actions stacked). Tests 17/17; desktop relaunched,
+  0 criticals.

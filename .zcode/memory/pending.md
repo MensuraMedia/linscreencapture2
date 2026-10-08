@@ -1,5 +1,10 @@
 # Pending
 
+- Steps badge (red next-No) removed r052 per operator; reintroduce with the
+  Step tool in the annotation milestone (auto-increment counter).
+- Summary text folded into the header doc sub-line (r052); zoom % not
+  shown anywhere until the zoom model lands.
+
 - Next milestone (ledger plan): options bar (per-tool controls), then
   Layers/Captures/Props panels. Reference: docs/HANDOFF.md section 7.
 - Window snapping in the overlay: port v1 phase-3 window_geometry

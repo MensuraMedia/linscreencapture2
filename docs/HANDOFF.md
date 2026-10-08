@@ -28,6 +28,7 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | **s044 formation reproduction** (doc header, stateful chip, profile rows, 2-col grouped tools, options-bar formation, top tabs, Layers row, quick styles/steps/navigator footer, Captures menu, summary format, zoom HUD, title, min 720×540) | **landed r042** — render `docs/design/r042_formation_reproduction.png` | `window.py` |
 | Compact chrome: 24px standard buttons, colour well on right footer, default window 960×640, scrollable options bar | landed r043 | `window.py` |
 | Uniform 16px/24px icons, right-side flyouts, 100px panes | landed r047 | `window.py` |
+| Options bar equal margins, right-aligned 18px swatches, bottom bar removed (actions in sidebar lower left), steps badge removed | landed r052 — render `docs/design/r052_actions_in_sidebar.png` | `window.py` |
 | **Left sidebar specification** (toggle, dimensions, collapsed consolidation, icon standard) | **documented r048 — section 2b** | `window.py`, HANDOFF 2b |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
@@ -260,6 +261,10 @@ documented intent; behavior items (B) are the scheduled phases.
 8. **B — PrintScreen global hotkey + hidden-instance relaunch** (v1 parity).
 9. **B — Wayland portal capture** (X11-only today; `display_is_x11` guards).
 10. **B — Settings > Keyboard table** (spec §2/§4) once shortcuts exist.
+11. **B — Steps badge** returns with the annotation milestone (phase 8):
+    the red next-№ badge was removed from the right-pane footer on
+    operator order r052; the auto-increment counter belongs with the
+    Step tool itself.
 
 ## 8. Bookkeeping conventions
 
