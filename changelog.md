@@ -353,3 +353,12 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   (_flyout_box) so arbitrary content (layer rows, notes) can pop out.
 - Evidence: docs/design/r053_right_sidebar_rebuilt.png; tests 17/17;
   desktop relaunched, 0 criticals.
+
+## 2026-10-08 - r054 documentation: full right-sidebar specification
+
+- HANDOFF 2b: the right sidebar note expanded to full specification
+  parity with the left - toggle, dimension table (100/40px), expanded
+  contents order (panel flyout tools, colour picker card, quick styles,
+  navigator), collapsed anchors (stack/palette/magic-wand), and the
+  generalized _flyout_box builder note.
+- Docs-only change; no code touched. Tests 17/17 as due diligence.

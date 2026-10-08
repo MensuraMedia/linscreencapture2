@@ -120,13 +120,27 @@ arrows). Hovering an anchor pops the full group out to the **right**
 (`PositionType.RIGHT`) at identical 24px button size, closing after a
 220ms grace; flyout items act immediately (arm profile / pick tool).
 
-**Right sidebar (r053).** Mirrors this model exactly: `RIGHT_W = 100`
-expanded / `RIGHT_COLLAPSED_W = 40` collapsed, PANELS header + caret
-toggle, Layers/Captures/Props as icon tools whose content lives in
-hover flyouts (`_panel_content`; Layers = live layer rows), the colour
-picker card, QUICK STYLES, and the NAVIGATOR minimap (expanded only).
-Generalized flyout builder: `_flyout_box` accepts arbitrary content
-boxes. Old tabs/stack shell removed (r053).
+**Right sidebar (r053).** Mirrors the left model exactly:
+
+- **Toggle**: 24px caret in the `PANELS` header (`›` collapses, `‹`
+  expands); instant rebuild, fixed pixels.
+- **Dimensions**: expanded `RIGHT_W = 100` (8px margins + three 24px
+  columns); collapsed `RIGHT_COLLAPSED_W = 40` (one icon column).
+- **Expanded contents** (top to bottom): `PANELS` header row; the three
+  panel icon tools — Layers / Captures / Props — each a hover flyout
+  carrying its content (`_panel_content`: Layers shows the live layer
+  rows; Captures and Props show their scheduled-phase notes); `COLOUR`
+  caption + the picker card (swatches/precise tabs, palette grid,
+  current-colour circle, eyedropper, hex entry); an expanding spacer;
+  `QUICK STYLES` (4 preset tiles); `NAVIGATOR` caption + minimap pinned
+  to the bottom (informational — expanded only).
+- **Collapsed contents** (one icon per row under the expand caret):
+  three consolidated anchors — `stack` (flyout: the three panel tools),
+  `palette` (flyout: 12-colour palette + eyedropper), `magic-wand`
+  (flyout: the four quick-style presets).
+- The old tabs/stack panel shell was removed in r053; panel content
+  lives only in flyouts. Generalized flyout builder: `_flyout_box`
+  accepts arbitrary content boxes (buttons, layer rows, notes).
 
 ## 3. Architecture
 
