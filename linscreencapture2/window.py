@@ -99,6 +99,15 @@ menubutton.icon-btn > button > box {{ min-width: 12px; min-height: 12px; }}
   padding: 0; border: 1px solid {C['border']}; }}
 .hexentry {{ font-size: 12px; font-family: monospace; padding: 4px 6px; }}
 
+/* tooltips: flat #141414, minimal (r059 phase 3) */
+tooltip.background {{
+  background-color: #141414; border: none; box-shadow: none;
+  border-radius: 0; padding: 0;
+}}
+tooltip.background label {{
+  color: {C['text']}; font-size: 11px; padding: 1px 4px;
+}}
+
 /* hover flyouts: flat dark-gray #141414, minimal chrome (r056) */
 popover.hoverfly > contents {{
   background-color: #141414; border: none; box-shadow: none;
