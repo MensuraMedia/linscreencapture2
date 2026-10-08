@@ -866,10 +866,6 @@ class StudioWindow(Gtk.ApplicationWindow):
             pick_btn.connect("clicked", lambda *_: self._pick_colour())
             colour_fly.append(pick_btn)
             right.append(_flyout_button("palette", "Colour", colour_fly))
-            # consolidated quick styles
-            qs_fly = [_hex_button(hexc, STYLE_SHORT[name], "qs-sw", 18)
-                      for name, hexc in QUICK_STYLES]
-            right.append(_flyout_button("magic-wand", "Styles", qs_fly))
             return
 
         right.set_size_request(self.RIGHT_W, -1)
@@ -894,10 +890,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         spacer = Gtk.Box()
         spacer.set_vexpand(True)  # pins the navigator to the bottom
         right.append(spacer)
-        qs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-        for name, hexc in QUICK_STYLES:
-            qs.append(_hex_button(hexc, STYLE_SHORT[name], "qs-sw", 18))
-        right.append(qs)
         right.append(self._build_minimap())
 
     def _build_minimap(self):
