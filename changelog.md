@@ -466,3 +466,20 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   box CSS matched. Buttons stay the standardized 24x24 square.
 - Evidence: docs/design/r060_glyphs_10px.png; tests 17/17; desktop
   relaunched, 0 criticals.
+
+## 2026-10-08 - r061 window obeys the user-set size
+
+- Operator directive: do not expand the window to accommodate the
+  sidebar - the window is only the size the user sets.
+- Root cause: GTK propagates content minimums, so the header and the
+  sidebar stacks were forcing the window larger (measured toplevel
+  minimum was 453px wide).
+- Fix: the editor body Grid is wrapped in a ScrolledWindow
+  (automatic/automatic) and the header in its own
+  (automatic/never) - content scrolls instead of expanding anything.
+  The imposed 720x540 minimum floor is retired; 960x640 remains only
+  the OPENING default. Measured toplevel minimum after: 46x107.
+- Rig-verified at a user-set 420x360: window obeys, panes keep their
+  fixed widths, content scrolls. AGENTS rule 9 records the law.
+- Evidence: docs/design/r061_user_set_size.png; tests 17/17; desktop
+  relaunched at the default, 0 criticals.

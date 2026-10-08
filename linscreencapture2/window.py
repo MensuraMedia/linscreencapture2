@@ -306,8 +306,9 @@ class StudioWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("LinScreenCapture - Studio Editor")
-        self.set_default_size(960, 640)  # compact default (r043); min below
-        self.set_size_request(720, 540)  # contract #14 minimum window
+        # r061: the window is only ever the size the user sets - the
+        # default is just the opening size and there is no minimum floor
+        self.set_default_size(960, 640)
         apply.install(self)
         self._install_css()
 
@@ -335,15 +336,25 @@ class StudioWindow(Gtk.ApplicationWindow):
         root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.set_child(root)
 
-        root.append(self._build_header())
+        # the header also scrolls rather than forcing a minimum width (r061)
+        header_scroll = Gtk.ScrolledWindow()
+        header_scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER)
+        header_scroll.set_child(self._build_header())
+        root.append(header_scroll)
         # Grid, not Box: pane columns hold their exact fixed width and the
         # canvas column absorbs all extra space (r047)
         middle = Gtk.Grid()
-        middle.set_vexpand(True)
-        root.append(middle)
         middle.attach(self._build_left_rail(), 0, 0, 1, 1)
         middle.attach(self._build_center(), 1, 0, 1, 1)
         middle.attach(self._build_right_panels(), 2, 0, 1, 1)
+        # r061: the ScrolledWindow decouples the content's size from the
+        # window - the window never expands to accommodate the sidebars,
+        # it stays exactly the size the user set (content scrolls instead)
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        scroll.set_child(middle)
+        scroll.set_vexpand(True)
+        root.append(scroll)
         # r052: no bottom action bar - its icons live in the left sidebar
         self._set_chip("ready")
 

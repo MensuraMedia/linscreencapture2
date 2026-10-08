@@ -62,6 +62,11 @@ universal standards here.
    flyouts - when a sidebar is closed, ALL of its buttons are listed
    stacked (overflow is reached by expanding; never a scroller).
    Tooltips: flat #141414 background, 11px text, square.
+9. Window size (operator r061): the window is ONLY the size the user
+   sets - it never expands to accommodate content. The header and the
+   editor body live in ScrolledWindows (content scrolls instead); no
+   minimum-size floor (the old 720x540 contract minimum is retired).
+   The default size is only the OPENING size.
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry
