@@ -78,6 +78,10 @@ APP_CSS = f"""
 .icon-btn {{ padding: 0; border-radius: 6px; }}
 .icon-32 {{ min-width: 32px; min-height: 32px; }}
 .icon-24 {{ min-width: 24px; min-height: 24px; }}
+/* MenuButton carries an internal theme-padded button: size IT to the same
+   24px square or flyout anchors render larger than plain buttons (r050) */
+menubutton.icon-btn > button {{ padding: 0; min-width: 24px; min-height: 24px; }}
+menubutton.icon-btn > button > box {{ min-width: 16px; min-height: 16px; }}
 .icon-24.primary {{ background-color: {C['accent']}; }}
 .icon-24.primary:hover {{ background-color: {C['accent_hover']}; }}
 .icon-danger {{ color: {C['error']}; }}

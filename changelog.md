@@ -271,3 +271,19 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Handoff 2b icon-standard note stands application-wide. Evidence:
   docs/design/r049_uniform_icons.png; tests 14/14; desktop relaunched,
   0 criticals.
+
+## 2026-10-08 - r050 icon-size consistency: expanded == collapsed
+
+- Operator directive with side-by-side examples: examine icon size and
+  ensure consistency between expanded and collapsed views (the camera
+  anchor read oversized against the tool anchors below it).
+- Root cause measured, not guessed: flyout anchors are Gtk.MenuButton,
+  whose INTERNAL theme-padded button measured 32px while plain buttons
+  measured 26px (24 + borders) - the button CSS never reached inside the
+  menubutton node. Fix: child-selector CSS
+  `menubutton.icon-btn > button { padding: 0; min 24x24 }` + inner box
+  16px. Post-fix measurement: every anchor plain or menu = 26 outer /
+  24 inner / 16 glyph, identical in both view states.
+- Zoom evidence: docs/design/r050_collapsed_consistent.png; HANDOFF 2b
+  icon standard updated with the MenuButton caveat. Tests 14/14;
+  desktop relaunched, 0 criticals.
