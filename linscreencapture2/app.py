@@ -1,5 +1,11 @@
 """Gtk.Application entry point (GTK4)."""
 
+import os
+
+# kills the at-spi bus CRITICAL seen in the rig (accessibility stays available
+# via the desktop bus when the app is launched normally)
+os.environ.setdefault("NO_AT_BRIDGE", "1")
+
 import gi
 
 gi.require_version("Gtk", "4.0")
