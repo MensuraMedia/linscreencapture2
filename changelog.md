@@ -241,3 +241,19 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   10px/0.04em so the 100px header fits.
 - Evidence: docs/design/r047_100px_panes.png; tests 14/14; desktop
   relaunched 960x640, 0 criticals.
+
+## 2026-10-08 - r048 left sidebar documented
+
+- Operator directive: document the left sidebar - toggle, dimensions,
+  collapsed icon size/dimensions - in the handoff.
+- docs/HANDOFF.md section 2b: canonical sidebar spec verified against
+  code (constants LEFT_W=100, LEFT_COLLAPSED_W=40, RIGHT_W=100,
+  RIGHT_COLLAPSED_W=100): fixed-pixel toggle (PROFILES-caret header /
+  lone expand caret), dimension table (100px expanded = 8px margins +
+  three 24px columns; 40px collapsed = one icon), the 16px-glyph/
+  24px-button icon standard (2x raster, never stretched), expanded
+  contents order (profiles 3-col grid, six contract-#4 tool groups),
+  collapsed consolidation (camera + GROUP_ICONS anchors, right-side
+  hover flyouts, 220ms grace), right-pane parity note. State table
+  updated.
+- Docs-only change; no code touched. Tests 14/14 as due diligence.

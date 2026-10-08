@@ -27,6 +27,8 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | Icon-button chrome, hover-only labels, 4px-grid spacing | working (r037) | `window.py`, `ui/icons.py` |
 | **s044 formation reproduction** (doc header, stateful chip, profile rows, 2-col grouped tools, options-bar formation, top tabs, Layers row, quick styles/steps/navigator footer, Captures menu, summary format, zoom HUD, title, min 720×540) | **landed r042** — render `docs/design/r042_formation_reproduction.png` | `window.py` |
 | Compact chrome: 24px standard buttons, colour well on right footer, default window 960×640, scrollable options bar | landed r043 | `window.py` |
+| Uniform 16px/24px icons, right-side flyouts, 100px panes | landed r047 | `window.py` |
+| **Left sidebar specification** (toggle, dimensions, collapsed consolidation, icon standard) | **documented r048 — section 2b** | `window.py`, HANDOFF 2b |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
 
@@ -70,6 +72,49 @@ formation. They were misclassified as free choices; treat them as
 deviations. Size chip belongs top-center above the selection with 4 corner
 handles (s044 lines 109–115, 224–226); the v1 top-right chip position we
 ported is wrong per s044.
+
+## 2b. Left sidebar specification (r048, verified against code)
+
+The canonical statement of the left sidebar's construction. Constants live
+in `window.py` (`LEFT_W`, `LEFT_COLLAPSED_W`); all widths are FIXED PIXELS
+— collapse/expand never scale by percentage (r046).
+
+**Toggle.** A 24px caret button in the pane header toggles collapse/expand
+(`_toggle_left`): expanded header is `PROFILES ‹`, collapsed state shows a
+lone `›` at the top. Toggling rebuilds the pane contents in place; widths
+switch between the two fixed constants. The collapse transition is instant
+(no animation).
+
+**Dimensions.**
+
+| State | Width | Composition |
+|---|---|---|
+| Expanded | 100px (`LEFT_W`) | 8px pane margins + 84px content: three 24px columns (4px gaps) whose cells stretch to fill exactly |
+| Collapsed | 40px (`LEFT_COLLAPSED_W`) | 8px pane margins + one 24px icon column |
+
+**Icon standard (everywhere, r047).** 16px Phosphor glyph (rasterized at
+2× and size-constrained — never stretched, so never blurry) inside a
+24×24px button, radius 6. Collapsed, expanded and flyout buttons are
+identical. Active state: accent fill + on-accent glyph.
+
+**Expanded contents** (top to bottom, 4px spacing):
+1. `PROFILES` header row (10px/0.04em caption + collapse caret).
+2. Capture profiles — 6 icons in a 3-column grid (2 rows): Region, Window,
+   Full screen, Scrolling, Delayed 3 s, Pin to screen; active profile raised.
+3. `TOOLS` caption.
+4. Tool groups, each a caption + 3-column grid of 24px cells, separated by
+   1px rules: SELECT · DRAW (7) · REDACT (3) · CONTENT (2) · TRANSFORM (4)
+   · EDIT (2) per the contract-#4 grouping. Tool click = pick (accent fill).
+
+**Collapsed contents** (one icon per row, stacked under the caret):
+consolidated anchors only — `camera` (flyout: all six profiles) plus one
+anchor per tool group (`GROUP_ICONS`: cursor/pen/drop-half/chat/rotate/
+arrows). Hovering an anchor pops the full group out to the **right**
+(`PositionType.RIGHT`) at identical 24px button size, closing after a
+220ms grace; flyout items act immediately (arm profile / pick tool).
+
+Right pane parity: `RIGHT_W = 100`, `RIGHT_COLLAPSED_W = 100` (single
+state; same icon standard).
 
 ## 3. Architecture
 
