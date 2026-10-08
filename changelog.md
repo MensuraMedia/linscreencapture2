@@ -101,3 +101,41 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   contract items) vs B (behavior phases) with the full deviation list;
   pitfall added: live-desktop grabs are not evidence, rig only.
 - No code changes this marker; correction plan queued for r042.
+
+## 2026-10-08 - r042 formation pass: s044 mockup reproduced
+
+- Operator directive: reproduce the mockup using the analyzed standards
+  before any further build. The shell now matches s044 formation under
+  the authority order (spec s2/s3 + DESIGN-CONTRACT items + r034/r037
+  overrides):
+  - header: doc block ("Untitled" / "LinCapture_….png" after save +
+    "Edit · N layer(s) · unsaved changes|saved"), stateful chip with dot
+    and contract #6 vocabulary (Ready/Selecting/Captured/Can't capture +
+    ok/busy/attention colors, reason in tooltip), zoom control (radius 8
+    container), 24px Capture primary.
+  - left rail: 6 capture-profile ROWS (40px, active raised, meta in
+    tooltip), TOOLS as 2-column 40x40 grids per contract #4 groups
+    (Select | Draw | Redact | Content | Transform | Edit) with
+    separators, active tool accent-filled with on-accent icon, color
+    well (fg red / bg white over + swap) pinned to rail bottom.
+  - options bar: per-tool formation (s044 optbar): tool identity,
+    Thin/Body/Chunky + Square/Rounded segments (accent-selected),
+    12-swatch contract-#9 content palette with selection ring, Shadow
+    toggle, Head 1.0x / Body 16px / intensity / next-No numerics.
+  - right column: tabs at TOP (accent underline, icon-only per r037),
+    Layers page with lrow formation (thumb · Base capture · IMG · eye),
+    placeholder Captures/Props, footer: quick styles (4 presets), steps
+    next-No badge, navigator minimap (live thumbnail).
+  - action bar: Discard(danger) · Flatten · Captures menu (caret popover:
+    Open captures folder works; re-open editable disabled-with-reason) ·
+    summary "W × H · PNG · N layer(s) · 100%" · Copy · Save; duplicate
+    status label removed (status = header chip only).
+  - window: title "LinScreenCapture - Studio Editor", min size 720x540
+    (contract #14).
+- GTK CSS lesson: no display:flex/gap/width - layout via widget
+  properties, CSS paints only (rendered clean after rewrite).
+- Capture pipeline untouched and re-verified in the rig render (real
+  XTEST capture during the render). Tests 14/14 (content-palette test
+  added); compileall clean. Evidence: docs/design/r042_formation_
+  reproduction.png. PAUSED for operator review before further build
+  (overlay contract items are next, HANDOFF 7.2).

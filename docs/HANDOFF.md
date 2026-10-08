@@ -25,6 +25,7 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | Canvas Base layer (fitted draw over checker page) | working | `window.py._draw_canvas` |
 | Save PNG (v1 naming, collision-safe) / Copy (clipboard) / Discard | working | `core/capture.py`, `window.py` |
 | Icon-button chrome, hover-only labels, 4px-grid spacing | working (r037) | `window.py`, `ui/icons.py` |
+| **s044 formation reproduction** (doc header, stateful chip, profile rows, 2-col grouped tools, color well, options-bar formation, top tabs, Layers row, quick styles/steps/navigator footer, Captures menu, summary format, zoom HUD, title, min 720×540) | **landed r042** — render `docs/design/r042_formation_reproduction.png` | `window.py` |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
 
@@ -172,15 +173,9 @@ Priority order (per ledger plan, spec §5, and the r041 contract deep-dive);
 each item = one r-marker. Formation items (F) make the shell match the
 documented intent; behavior items (B) are the scheduled phases.
 
-1. **F — Formation pass** (the r041 deviation list): 6 profile ROWS with
-   active raised+accent state; tools 2-col 40×40 with group dividers
-   (Select | Draw | Redact | Transform); color well (fg/bg, swap); panel
-   tabs to TOP of the right column; header doc-title/sub format
-   ("LinCapture_….png" / "Edit · N layers · unsaved changes"); stateful
-   status chip (Ready ✓/Selecting/Captured/Can't-capture vocabulary);
-   deduplicate action-bar status into the header chip; "Captures ▾" menu
-   scaffold; window title "LinScreenCapture — Studio Editor"; min window
-   720×540.
+1. **F — Formation pass** — **LANDED r042** (`docs/design/r042_formation_reproduction.png`).
+   Remaining formation scraps, folded into the overlay item and later phases:
+   canvas size chip/selection belong to the overlay contract below.
 2. **F — Overlay contract items**: 4 corner handles; size chip docked
    top-center above the selection (32px, icon + tabular W×H); freeze-state
    chips top-left ("Selecting on the frozen frame · Esc unfreezes" /
