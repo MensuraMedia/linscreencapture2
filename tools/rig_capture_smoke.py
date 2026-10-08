@@ -28,7 +28,7 @@ import gi  # noqa: E402
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
-from gi.repository import GLib, Gtk  # noqa: E402
+from gi.repository import Gio, GLib, Gtk  # noqa: E402
 
 from linscreencapture2.app import App  # noqa: E402
 from linscreencapture2.core import capture  # noqa: E402
@@ -58,6 +58,8 @@ def _button(down: bool):
 class Driver:
     def __init__(self):
         self.app = App()
+        # a desktop instance may own the DBus id: run non-unique
+        self.app.set_flags(Gio.ApplicationFlags.NON_UNIQUE)
         self.win = None
         self.errors: list[str] = []
         self._pressed = False

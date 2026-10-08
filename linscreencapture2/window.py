@@ -85,10 +85,10 @@ APP_CSS = f"""
 .icon-btn.active:hover {{ background-color: {C['accent_hover']}; }}
 
 /* profile rows: 6 rows, 40px, active raised (spec section 3) */
-.pirow {{ min-height: 40px; padding: 0 8px; border-radius: 6px; }}
+.pirow {{ min-height: 28px; padding: 0 6px; border-radius: 6px; }}
 .pirow.active {{ background-color: {C['surface_hover']}; }}
 
-.toolcell {{ min-width: 40px; min-height: 40px; }}
+.toolcell {{ min-width: 24px; min-height: 24px; }}
 
 /* color well: foreground over background (spec section 3) */
 .colorwell {{ margin-top: 8px; }}
@@ -139,7 +139,7 @@ APP_CSS = f"""
   border-radius: 4px; padding: 1px 4px;
 }}
 .qs-sw {{
-  min-width: 24px; min-height: 24px; border-radius: 6px; padding: 0;
+  min-width: 20px; min-height: 20px; border-radius: 6px; padding: 0;
   border: 1px solid {C['border']};
 }}
 .badge {{
@@ -195,9 +195,10 @@ PANEL_PAGES = {"Layers": ("stack", "layers"), "Captures": ("images", "captures")
 
 
 def _icon_button(name: str, tooltip: str, icon_px: int = 20,
-                 css: tuple[str, ...] = ("icon-32",),
+                 css: tuple[str, ...] = ("icon-24",),
                  color: str | None = None) -> Gtk.Button:
-    """Square icon button; the label is the tooltip (r037 law)."""
+    """Square icon button; the label is the tooltip (r037 law).
+    r043: buttons minimized - the 24px square is the standard size."""
     pixbuf = icons.pixbuf(name, icon_px, color)
     b = Gtk.Button()
     b.set_child(Gtk.Image.new_from_paintable(Gdk.Texture.new_for_pixbuf(pixbuf)))
@@ -235,7 +236,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_title("LinScreenCapture - Studio Editor")
-        self.set_default_size(1280, 800)
+        self.set_default_size(960, 640)  # compact default (r043); min below
         self.set_size_request(720, 540)  # contract #14 minimum window
         apply.install(self)
         self._install_css()
@@ -308,14 +309,14 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         zoom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
         zoom.get_style_context().add_class("zoom")
-        zoom.append(_icon_button("minus", "Zoom out (zoom model: HANDOFF 7.7)", 16))
+        zoom.append(_icon_button("minus", "Zoom out (zoom model: HANDOFF 7.7)", 14))
         self._zoom_val = Gtk.Label(label="100%")
         self._zoom_val.get_style_context().add_class("zv")
         self._zoom_val.set_margin_start(8)
         self._zoom_val.set_margin_end(8)
         zoom.append(self._zoom_val)
-        zoom.append(_icon_button("plus", "Zoom in (zoom model: HANDOFF 7.7)", 16))
-        zoom.append(_icon_button("arrows-in", "Fit to window (zoom model: HANDOFF 7.7)", 16))
+        zoom.append(_icon_button("plus", "Zoom in (zoom model: HANDOFF 7.7)", 14))
+        zoom.append(_icon_button("arrows-in", "Fit to window (zoom model: HANDOFF 7.7)", 14))
         bar.append(zoom)
 
         cap = _icon_button(
@@ -435,7 +436,7 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         self._profile_buttons: dict[str, Gtk.Button] = {}
         for name, (icon, meta) in PROFILE_META.items():
-            b = _icon_button(icon, f"{name} capture \u2014 {meta}", 20, css=("icon-32", "pirow"))
+            b = _icon_button(icon, f"{name} capture \u2014 {meta}", 16, css=("icon-24", "pirow"))
             b.set_halign(Gtk.Align.START)
             b.connect("clicked", lambda _b, n=name: self._profile(n))
             self._profile_buttons[name] = b
@@ -452,26 +453,12 @@ class StudioWindow(Gtk.ApplicationWindow):
                 rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
             grid = Gtk.Grid(row_spacing=4, column_spacing=4)  # 2 columns per spec s3
             for ti, (name, icon) in enumerate(tools):
-                b = _icon_button(icon, f"{group}: {name} tool", 20, css=("icon-32", "toolcell"))
+                b = _icon_button(icon, f"{group}: {name} tool", 16, css=("icon-24", "toolcell"))
                 b.connect("clicked", lambda _b, n=name: self._pick_tool(n))
                 self._tool_buttons[name] = b
                 grid.attach(b, ti % 2, ti // 2, 1, 1)
             rail.append(grid)
         self._mark_active_tool()
-
-        spacer = Gtk.Box()
-        spacer.set_vexpand(True)  # pins the color well to the rail bottom
-        rail.append(spacer)
-        well = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        well.get_style_context().add_class("colorwell")
-        fg = _hex_button(CONTENT_COLORS[0], "Foreground color - content palette",
-                         "sw", 24)
-        bg = _hex_button(CONTENT_COLORS[9], "Background color - content palette",
-                         "sw", 24)
-        well.append(fg); well.append(bg)
-        swap = _icon_button("swap", "Swap foreground and background (X)", 16)
-        well.append(swap)
-        rail.append(well)
         return rail
 
     def _mark_active_profile(self):
@@ -509,7 +496,13 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._options_bar.get_style_context().add_class("studio-options")
         self._options_bar.set_margin_start(12); self._options_bar.set_margin_end(12)
         self._options_bar.set_margin_top(6); self._options_bar.set_margin_bottom(6)
-        center.append(self._options_bar)
+        # horizontal scroll keeps the options bar's minimum width small, so
+        # the window itself can shrink (r043); the bar scrolls when narrow
+        opt_scroll = Gtk.ScrolledWindow()
+        opt_scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER)
+        opt_scroll.set_propagate_natural_height(True)
+        opt_scroll.set_child(self._options_bar)
+        center.append(opt_scroll)
         self._refresh_options_bar()
 
         overlay = Gtk.Overlay()
@@ -712,9 +705,23 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._layers_box.append(row)
 
     def _build_panel_footer(self):
-        """s044 pfoot: quick styles, steps next-No, navigator minimap."""
+        """s044 pfoot, r043: colour well moved to the right pane, then
+        quick styles, steps next-No, navigator minimap."""
         foot = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         foot.set_margin_top(8); foot.set_margin_bottom(8)
+
+        colour_label = Gtk.Label(label="COLOUR", halign=Gtk.Align.START, xalign=0)
+        colour_label.get_style_context().add_class("sect")
+        colour_label.get_style_context().add_class("muted")
+        foot.append(colour_label)
+        well = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        well.get_style_context().add_class("colorwell")
+        well.append(_hex_button(CONTENT_COLORS[0],
+                                "Foreground color - content palette", "sw", 20))
+        well.append(_hex_button(CONTENT_COLORS[9],
+                                "Background color - content palette", "sw", 20))
+        well.append(_icon_button("swap", "Swap foreground and background (X)", 14))
+        foot.append(well)
 
         qs_label = Gtk.Label(label="QUICK STYLES", halign=Gtk.Align.START, xalign=0)
         qs_label.get_style_context().add_class("sect"); qs_label.get_style_context().add_class("muted")
@@ -780,7 +787,7 @@ class StudioWindow(Gtk.ApplicationWindow):
 
         discard = _icon_button(
             "trash", "Discard - drop the current capture", 16,
-            css=("icon-32", "icon-danger"), color=C["error"],
+            css=("icon-24", "icon-danger"), color=C["error"],
         )
         discard.connect("clicked", lambda *_: self._discard())
         bar.append(discard)
@@ -795,7 +802,7 @@ class StudioWindow(Gtk.ApplicationWindow):
             icons.pixbuf("caret-down", 12))))
         captures.set_child(cap_box)
         ctx = captures.get_style_context()
-        ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-32")
+        ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn"); ctx.add_class("icon-24")
         popover = Gtk.Popover()
         pop_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         pop_box.set_margin_start(8); pop_box.set_margin_end(8)

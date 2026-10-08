@@ -25,7 +25,8 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | Canvas Base layer (fitted draw over checker page) | working | `window.py._draw_canvas` |
 | Save PNG (v1 naming, collision-safe) / Copy (clipboard) / Discard | working | `core/capture.py`, `window.py` |
 | Icon-button chrome, hover-only labels, 4px-grid spacing | working (r037) | `window.py`, `ui/icons.py` |
-| **s044 formation reproduction** (doc header, stateful chip, profile rows, 2-col grouped tools, color well, options-bar formation, top tabs, Layers row, quick styles/steps/navigator footer, Captures menu, summary format, zoom HUD, title, min 720×540) | **landed r042** — render `docs/design/r042_formation_reproduction.png` | `window.py` |
+| **s044 formation reproduction** (doc header, stateful chip, profile rows, 2-col grouped tools, options-bar formation, top tabs, Layers row, quick styles/steps/navigator footer, Captures menu, summary format, zoom HUD, title, min 720×540) | **landed r042** — render `docs/design/r042_formation_reproduction.png` | `window.py` |
+| Compact chrome: 24px standard buttons, colour well on right footer, default window 960×640, scrollable options bar | landed r043 | `window.py` |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
 
@@ -159,6 +160,10 @@ update, ledger r-index + session note, D13 backup, commit, push.
 - **Live-desktop grabs are not evidence**: on `:0` other windows overlap the
   app (a r040 crop caught a browser sidebar). Render/verify in the rig only;
   use `capture.grab_root()` on the rig display, never on the desktop.
+- **DBus app-id uniqueness**: if the desktop instance is running, a rig
+  driver using the same `Gtk.Application` id silently no-ops (run()
+  returns, activate never fires). Rig drivers set
+  `Gio.ApplicationFlags.NON_UNIQUE` (D11, r043).
 
 Rig snapshot pattern (render any window state to PNG):
 

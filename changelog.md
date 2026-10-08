@@ -139,3 +139,23 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   added); compileall clean. Evidence: docs/design/r042_formation_
   reproduction.png. PAUSED for operator review before further build
   (overlay contract items are next, HANDOFF 7.2).
+
+## 2026-10-08 - r043 compact chrome: minimized buttons, swatch right, smaller window
+
+- Operator directives: minimize buttons further; place swatch on the
+  right pane; ensure window dimensions shrink smaller.
+- Buttons: the 24px square is now the standard for ALL icon buttons
+  (were 32px) - header zoom (14px glyphs), capture profiles (28px rows,
+  16px glyphs), tool cells 24x24, action bar, layers eye, menu button,
+  quick styles 20px. Primaries stay 24px (r034 floor).
+- Colour well moved from the left rail to the right-pane footer:
+  COLOUR section (fg red / bg white + swap) above QUICK STYLES.
+- Window: default 1280x800 -> 960x640; options bar wrapped in a
+  horizontal ScrolledWindow so its single row no longer forces the
+  window minimum up (it scrolls when narrow). Desktop relaunch: 960
+  wide, zero criticals. Note: natural content minimum keeps height
+  around 790 until the panel stack scrolls (queued with panels work).
+- Rig pitfall fixed (D11): a running desktop instance owns the DBus app
+  id, so rig drivers silently no-op'd (activate never fired) - drivers
+  now set Gio.ApplicationFlags.NON_UNIQUE.
+- Tests 14/14; compileall clean.
