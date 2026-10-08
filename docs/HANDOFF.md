@@ -1,0 +1,193 @@
+# LinScreenCapture 2 — Build Handoff & QA Reference
+
+Single entry point for (a) a fresh agent session continuing this project and
+(b) an adversarial reviewer auditing build quality. Read top to bottom;
+everything here is verified state as of **r038 (2026-10-07)**. Sections:
+[state](#1-state-summary) · [law](#2-operator-law-normative) ·
+[architecture](#3-architecture) · [decisions](#4-decision-register) ·
+[QA protocol](#5-verification--qa-protocol) · [pitfalls](#6-known-pitfalls) ·
+[work queue](#7-work-queue) · [bookkeeping](#8-bookkeeping-conventions) ·
+[review checklist](#9-adversarial-review-checklist).
+
+## 1. State summary
+
+GTK4/Python Studio Editor (Photoshop × Snagit hybrid) on the vendored
+`lintheme` kit. v1 (`../linshot3`, GTK3/C) is frozen legacy; v2 imports its
+data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
+
+| Capability | State | Where |
+|---|---|---|
+| Studio shell (header / rails / canvas / panels / action bar) | working | `linscreencapture2/window.py` |
+| Freeze-frame capture: whole-root grab | working, rig-verified | `core/capture.py` (ctypes libX11) |
+| Region select overlay (drag, dim, dashed border, W×H chip, crosshair) | working, rig-verified | `ui/capture_overlay.py` |
+| Profiles: Region / Full screen / Delayed 3 s / header Capture | working | `window.py` |
+| Window / Scrolling / Pin profiles | inert, status message only | `window.py._profile` |
+| Canvas Base layer (fitted draw over checker page) | working | `window.py._draw_canvas` |
+| Save PNG (v1 naming, collision-safe) / Copy (clipboard) / Discard | working | `core/capture.py`, `window.py` |
+| Icon-button chrome, hover-only labels, 4px-grid spacing | working (r037) | `window.py`, `ui/icons.py` |
+| Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
+| Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
+
+## 2. Operator law (normative)
+
+Violations are release blockers. Two directive sets, both recorded in the
+ledger and enforced in code review + rig renders:
+
+**r034**: No pill shapes (fully-rounded controls prohibited; radius 6
+buttons/inputs, 8 grouped containers, 16 cards; circular allowed only for
+canvas content badges). Primary buttons (Capture/Save/Copy) 24px tall.
+Keyboard references never on the surface — tooltips or Settings → Keyboard
+table only. The captured-images list is named **“Captures”** everywhere
+(History is reserved for a future undo panel).
+
+**r037**: Every button is an **icon button**; label text is visible only on
+hover via tooltip. Padding/margins must be **even** — 4px grid (4/8/12;
+never ad-hoc 5/7/10). Sections/state text may remain as labels (they are not
+buttons); buttons themselves carry no text.
+
+## 3. Architecture
+
+Flat packages at repo root; no nested trees. Data flow for a capture:
+
+```
+header/profile button -> StudioWindow._start_capture(mode)
+  -> hide() + 250ms settle            (window must not be in frame)
+  -> core.capture.grab_root()         (ctypes libX11 XGetImage, whole root)
+  -> ui.capture_overlay.FreezeOverlay(frame).run(cb)
+       [per-monitor undecorated fullscreen windows paint the frozen frame;
+        GestureDrag >=5px selects; Esc/Return; seat grab/ungrab]
+  -> cb(rect) -> capture.crop(frame, rect)   (normalized + clamped subpixbuf)
+  -> canvas Base layer (fitted); Copy = Gdk.Texture -> clipboard;
+     Save = save_png() into settings.screenshot_path (v1 shared folder)
+```
+
+| Path | Role |
+|---|---|
+| `linscreencapture2/app.py` | Gtk.Application; NO_AT_BRIDGE before Gtk import (D7) |
+| `linscreencapture2/window.py` | StudioWindow shell + capture wiring + APP_CSS (USER priority, D10) |
+| `linscreencapture2/core/capture.py` | X11 grab, Rect math (pure), crop, v1 naming, save |
+| `linscreencapture2/core/settings.py` | v2 settings.conf with v1 import (D2) |
+| `linscreencapture2/core/paths.py` | v1/v2 data locations |
+| `linscreencapture2/core/library.py` | read-only v1 library.db handle (D2) |
+| `linscreencapture2/ui/capture_overlay.py` | freeze-frame selection overlay |
+| `linscreencapture2/ui/icons.py` | Phosphor loader over the full vendored set |
+| `lintheme/` | vendored kit (tokens/css/apply/icons); do not modify |
+| `assets/icons/phosphor/` | full Phosphor regular set (MIT), SOURCE/LICENSE recorded |
+| `tools/rig.sh` | Xephyr rig up/down/status — teardown mandatory |
+| `tools/rig_capture_smoke.py` | end-to-end XTEST-driven capture smoke (RIG PASS gate) |
+| `tests/` | display-free pytest suite (13 tests) |
+| `docs/00-DECISIONS.md` | canonical decision register D1–D10 |
+| `docs/design/STUDIO-EDITOR-SPEC.md` | buildable UI spec; §2 r034 rules normative |
+
+## 4. Decision register
+
+Canonical: `docs/00-DECISIONS.md`. Digest: D1 GTK4+Python per operator;
+D2 import v1 data in place; D3 vendor lintheme (copy, never reference);
+D4 Studio Editor is the UI spec; D5 r034 UI law; D6 capture pixels via
+ctypes libX11 (GTK4 removed the Gdk APIs; freeze-frame invariant kept);
+D7 NO_AT_BRIDGE app-side; D8 rig drivers root-relative + XTEST; D9 every
+button is an icon button + 4px-grid evenness (r037); D10 app CSS loads at
+USER priority after `apply.install` (kit CSS is USER; APPLICATION loses
+ties — this silently killed accent backgrounds in r037).
+
+## 5. Verification & QA protocol
+
+Every milestone clears all four gates before commit; evidence lands in the
+changelog entry and, for UI work, as rig renders in `docs/`.
+
+1. **Unit gate** — `python3 -m pytest -q` (display-free; Rect math, naming,
+   settings roundtrip, icon resolution). Current: 13/13.
+2. **Compile gate** — `python3 -m compileall -q linscreencapture2 lintheme
+   tests tools`.
+3. **Rig render gate** (UI changes) — `tools/rig.sh up`; run a render script
+   (see §6 snapshot pattern); **inspect the PNG** (chrome, spacing, theme);
+   `tools/rig.sh down` — teardown is not optional, the rig window is on the
+   operator's desktop.
+4. **End-to-end gate** (capture changes) — `HOME=/tmp/lsc2-rig-home
+   DISPLAY=:61 python3 tools/rig_capture_smoke.py` must print
+   `RIG PASS`: real XTEST drag → exact crop size → pixel-verified content →
+   PNG written under the sandbox HOME.
+
+Bookkeeping gate: changelog entry, decisions register, `.zcode/memory/`
+update, ledger r-index + session note, D13 backup, commit, push.
+
+## 6. Known pitfalls (each one cost a debug cycle — do not re-learn them)
+
+- **GTK 4.14 API deletions**: no `Gdk.pixbuf_get_from_window`, no
+  `Gdk.Screen`, no `set_skip_taskbar_hint`/`set_keep_above`, monitors are a
+  ListModel (`display.get_monitors().get_n_items()/get_item(i)`).
+- **CSS `var()` unsupported** in 4.14 — lintheme substitutes tokens in
+  Python; app must do the same (r034-era `var(--border)` never rendered).
+- **CSS provider priority** (D10): kit at USER; app CSS must also be USER
+  and installed after `apply.install`.
+- **GdkPixbuf crops keep the parent rowstride** — sample pixels via
+  `get_rowstride()`, never `w*3`. `Pixbuf.fill()` maps 0xRRGGBB00.
+- **muffin resizes the Xephyr root** to host RandR modes (a `-screen
+  1280x800` rig becomes 1600×1200): always root-relative geometry (D8).
+- **XTEST, not xdotool** (not installed): `ctypes` libXtst fake events.
+- **PyGObject signal order**: instance `activate` handlers run *before* a
+  `do_activate` override — fetch app windows on a timeout, not in the handler.
+- **Freeze-frame invariant**: grab before any window exists; hide the studio
+  window (250 ms) first. XGetImage needs exact root dims (query attributes).
+- **at-spi CRITICAL** in rigs is killed by `NO_AT_BRIDGE=1` (D7); app output
+  must stay free of criticals — check the log every rig run.
+
+Rig snapshot pattern (render any window state to PNG):
+
+```python
+pb = capture.grab_root()          # after window.present() + ~1.2s settle
+pb.savev("/tmp/lsc2-rig/<name>.png", "png", [], [])
+```
+
+## 7. Work queue
+
+Priority order (per ledger plan and spec §5); each item = one r-marker.
+
+1. **Options bar** — per-tool controls (segments, swatches, numerics),
+   content swaps per active tool (spec §3, E1 registry).
+2. **Panels** — Layers/Captures/Props as real widgets (library-backed
+   Captures list is possible today, read-only, per D2).
+3. **Window snapping** — port v1 phase-3 `window_geometry` (XQueryTree via
+   ctypes) into `FreezeOverlay` (click/Enter/arrow-cycle); unblocks the
+   Window profile.
+4. **Zoom model** on canvas (percent · Fit · HUD), then Navigator minimap.
+5. **Annotation object model** (phase 12/15) — first real tool set + z-order.
+6. PrintScreen global hotkey + hidden-instance relaunch (v1 parity).
+7. Wayland portal capture path (X11-only today; `display_is_x11` guards).
+8. Settings > Keyboard table (spec §2/§4) once shortcuts exist.
+
+## 8. Bookkeeping conventions
+
+- Response markers `[rNNN]` per project; ledger `~/projects/Zai-ZCode/s-register.md`
+  r-index must match the latest marker; session note appended per milestone.
+- `changelog.md` append-only, one entry per completed change.
+- Decisions: `docs/00-DECISIONS.md` (canonical) + `.zcode/memory/decisions.md`
+  (digest with rationale); pending queue in `.zcode/memory/pending.md` —
+  both updated at session end, never left stale.
+- Repo tooling lives in `tools/` without global s-numbers (project rule 3);
+  operator-facing one-off scripts outside the repo keep sNNN naming.
+- D13 backup after every completed phase and before session close
+  (`s009_backup_project.sh`, `-m` describes the work).
+- Commits: conventional, one per milestone; push to origin/main after gates.
+
+## 9. Adversarial review checklist
+
+Attack surfaces, in priority order:
+
+1. **Data safety** — Save must never overwrite (`unique_path` collision
+   suffix; verify by saving twice within one second). v1 files read-only
+   except the shared captures folder written by explicit user action (D2).
+2. **Law compliance** — run a rig render; grep `window.py` for any
+   `Gtk.Button(label=...)` (should find none); check margins against the
+   4px grid; check radius values against D5.
+3. **Freeze-frame invariant** — the studio window must never appear in its
+   own capture: covered by hide+settle; reviewer should capture with the
+   app visible pre-hide (start capture, screenshot fast) and confirm.
+4. **Selection math** — property-test `Rect.normalized`/`clamped_to` with
+   negative/exterior rects (v1 semantics: ≥5px else cancel).
+5. **Resource leaks** — overlay windows destroyed on every finish path
+   (accept, Esc, click-cancel, close-request); seat ungrabbed; X display
+   closed (`grab_root` opens/closes per call).
+6. **Startup hygiene** — zero CRITICALs in app output (at-spi, GTK).
+7. **Toolkit assumptions** — anything touching Gdk/Gtk APIs must hold on
+   4.14 (see §6 list); reviewer greps for APIs in the §6 deletion set.

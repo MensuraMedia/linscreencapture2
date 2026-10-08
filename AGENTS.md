@@ -9,10 +9,36 @@ universal standards here.
 - Ledger: ~/projects/Zai-ZCode/s-register.md
 
 ## Stack
-(fill in: languages, frameworks, package manager, build/test/lint commands)
+- Language: Python 3.10+ (system python3), GUI: GTK 4 via PyGObject (gi)
+  on X11 (ctypes libX11 for capture pixels; Wayland portal is future work).
+- Icons: Phosphor regular SVGs, vendored full set at
+  assets/icons/phosphor/regular (loaded app-side via
+  linscreencapture2/ui/icons.py; lintheme's curated subset stays stock).
+- Theme: vendored lintheme kit (tokens -> generated CSS -> apply.install).
+- Tests: `python3 -m pytest -q` (pyproject pythonpath=["."]); display-free.
+- Gates: pytest + `python3 -m compileall -q linscreencapture2 lintheme tests tools`.
+- Run: `python3 -m linscreencapture2`. Rig: `tools/rig.sh up|down|status`
+  (Xephyr :61 + muffin; driver: `tools/rig_capture_smoke.py`).
+- No package manager lockfile; system packages only (python3-gi, gir1.2-gtk-4.0,
+  x11-apps, xephyr, muffin). No pip installs required.
 
 ## Project rules
-(add project-specific rules as new entries; do not restate global rules)
+(new entries append; never restate or edit earlier ones)
+
+1. UI law (operator r037): EVERY button is an icon button - labels live
+   only in tooltips (hover). Even padding/margins on a 4px grid (4/8/12).
+   Carried from r034: no pill shapes (radius 6 controls / 8 groups / 16
+   cards); primary buttons 24px tall; keyboard hints hover-only or
+   Settings > Keyboard; the images list is named "Captures".
+2. App CSS loads at USER priority AFTER apply.install (kit CSS is USER;
+   APPLICATION loses ties - r038 fix). Tokens are substituted Python-side
+   (GTK 4.14 has no CSS var()).
+3. Repo tooling lives in tools/ without global s-numbers (project-code
+   precedent set r035). Rig teardown is mandatory: `tools/rig.sh down`
+   when a render/verification session ends - the rig window shows on the
+   operator's desktop.
+4. Frozen frame invariant (v1 phase 1): grab_root() strictly before any
+   overlay window exists; the studio window hides (250 ms) pre-freeze.
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry

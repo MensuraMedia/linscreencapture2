@@ -29,3 +29,18 @@ process unless the desktop sets the variable itself.
   override; pick up app windows on a timeout, not in the handler.
 - xdotool absent; drive rigs with ctypes XTEST (tools/rig_capture_smoke.py).
 
+## D9 (r037): icon-button law + 4px-grid evenness
+
+Every button is an icon button; labels only in hover tooltips. Even
+padding/margins: 4px grid (4/8/12). Carries r034 law forward. Icon maps
+live in window.py (PROFILE_ICONS/TOOL_ICONS/PANEL_ICONS); loader is
+ui/icons.py over the full vendored Phosphor regular set.
+
+## D10 (r038): app CSS must load at USER priority, after apply.install
+
+lintheme apply.install loads kit CSS at USER priority; APP_CSS at
+APPLICATION priority loses specificity ties, so kit rules (e.g.
+.lt-icon-btn transparent background) silently beat app rules (accent
+chips never rendered). Fixed in window.py._install_css; a parsing-error
+reporter prints APP_CSS mistakes to stdout.
+

@@ -54,3 +54,30 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Tests 11/11 display-free; compileall gate clean.
 - Not in this pass: window snapping (needs the v1 phase-3 geometry
   port), Wayland portal capture, zoom model, options bar, panels.
+
+## 2026-10-07 - r037/r038 icon-button chrome + handoff docs
+
+- UI law r037 (operator): every button is an icon button, labels only in
+  hover tooltips; even padding/margins on a 4px grid. Applied across the
+  shell: header (zoom group, camera Capture 24px primary), capture
+  profiles 3x2 grid, tools 4-column grid, panel switcher, action bar
+  (Discard red, Flatten, Captures, Copy, Save 24px primary). Labels live
+  as tooltips; icon set per PROFILE_ICONS/TOOL_ICONS/PANEL_ICONS maps.
+- ui/icons.py: app-side Phosphor loader over the full vendored
+  assets/icons/phosphor/regular set (kit's curated 20-icon subset stays
+  stock); currentColor mechanism identical to lintheme.icons.
+- D10 fix: kit CSS loads at USER priority, so APP_CSS at APPLICATION
+  priority lost ties - accent backgrounds on primary icon buttons never
+  rendered. APP_CSS now installs at USER priority after apply.install,
+  with a parsing-error reporter. Verified by rig render: accent chips
+  render (chrome_r038).
+- tools/rig.sh (up/down/status): mandatory rig teardown - the Xephyr
+  window shows on the operator's desktop and must not linger (operator
+  noticed it mid-session).
+- docs/HANDOFF.md: comprehensive build handoff + QA reference (state,
+  operator law, architecture, D1-D10, 4-gate verification protocol,
+  pitfalls, work queue, bookkeeping, adversarial review checklist).
+- AGENTS.md: stack filled in; project rules 1-4 recorded (r037 law,
+  CSS priority, tools/ convention + teardown, freeze-frame invariant).
+- Tests 13/13 (new test_icons: every referenced icon resolves, pixbuf
+  sizes correct); compileall clean; rig render verified.
