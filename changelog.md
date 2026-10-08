@@ -394,3 +394,47 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Evidence (profiles flyout popped via popover API):
   docs/design/r056_minimal_flyout.png; tests 17/17; desktop relaunched,
   0 criticals.
+
+## 2026-10-08 - r057 five-phase major layout pass (one commit per phase)
+
+- Phase 1: ALL icons dimensionally uniform - root cause was ink variance
+  inside the shared 256-viewBox Phosphor artwork (drawn marks ranged
+  18-26px in a 32px raster: cursor/copy filled 75%, arrows-out 69%,
+  number-circle-one 81%). The app icon loader now ink-normalizes: render
+  at 4x, crop to the drawn bounds, scale the long edge to the target,
+  center (aspect preserved). The flagged Select/Step/Callout/Move/Dupe
+  all measure identical now. Sidebar section captions removed in both
+  panes (PROFILES/TOOLS/ACTIONS, PANELS/COLOUR/QUICK STYLES/NAVIGATOR);
+  the pane headers keep only the collapse/expand carets.
+- Phase 2: quick styles removed from the right sidebar (expanded row and
+  the collapsed wand anchor); navigator kept.
+- Phase 3: the stage shows captures at ORIGINAL size - no auto-fit -
+  centered at 1x; ctrl+mouse-wheel zooms (1.1x per notch, clamped
+  0.1x-8x, EventControllerScroll with the control modifier checked via
+  get_current_event_state); HUD and header zoom labels update live and
+  the static "Fit" suffix is gone.
+- Phase 4: options-bar swatch squares now match the right-pane swatch
+  dimensions exactly (the DrawingArea content size had forced a 20px
+  box; both are 18px).
+- Phase 5: pane margin lines removed (header/options/rails border
+  rules) - the bars read as one continuous stage.
+- Rig-verified: 1x render shows the capture at original 400x300; 2x
+  render shows the mid-band spanning 219 -> 402px; icons uniform;
+  captions and margin lines gone. Tests 17/17; desktop relaunched,
+  0 criticals. Evidence: docs/design/r057_phases_1x.png,
+  r057_phases_2x.png. Commits: one per phase.
+
+## 2026-10-08 - r058 correction: button sizes standardized, glyphs 14px
+
+- Operator correction: "icon size" meant BUTTON size - glyphs should be
+  reduced to what stays clear, and button sizes standardized.
+- All icon buttons standardized to the 24x24 square (26px measured outer
+  with borders; MenuButton internals pinned to the same via CSS, closing
+  a 2px variance). The colour-circle button joins the standard (20 -> 24)
+  and swatch squares were raised to 24px (options bar, picker grid -
+  now 3-across - and collapsed flyout), so every button in the app is
+  the same dimensions. Glyphs reduced 16 -> 14px (still ink-normalized
+  and crisp).
+- Measured post-fix: 65/65 icon buttons at identical minimum width.
+- Evidence: docs/design/r058_standard_buttons.png; tests 17/17; desktop
+  relaunched, 0 criticals.

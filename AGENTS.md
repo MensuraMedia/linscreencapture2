@@ -43,15 +43,20 @@ universal standards here.
    source ~/projects/assets/icons/regular; sync by copy into
    assets/icons/phosphor/regular (copy, not reference). No other icon
    type anywhere. Icons render at 2x and constrain to display size
-   (never stretch a smaller texture - that is what blurred buttons).
+   (never stretch a smaller texture - that is what blurred buttons);
+   glyphs are ink-normalized (14px marks, r058) on STANDARDIZED 24x24
+   buttons (26px measured outer) - no other button size for icon
+   controls; swatch squares share the 24px standard.
 6. Layout (operator r052): NO bottom action bar - the action icons
    (Discard/Flatten/Captures/Copy/Save) live in the lower left of the
    left sidebar (grid when expanded, stacked when collapsed). Capture
    summary (WxH/PNG/layers) lives in the header doc sub-line.
-7. Captions and stage (operator r055): every button hover caption is a
-   SINGLE WORD (status-chip tooltips keep their detail). Sidebar tool
-   segments carry no text titles (groups are separated by rules only).
-   The canvas stage background is #242424.
+7. Captions and stage (operator r055/r057): every button hover caption
+   is a SINGLE WORD (status-chip tooltips keep their detail). Sidebar
+   tool segments carry no text titles (groups are separated by rules
+   only). The canvas stage background is #242424; captures render at
+   ORIGINAL size (never auto-fit) and ctrl+mouse-wheel zooms (0.1x-8x,
+   live % in the HUD and header).
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry
