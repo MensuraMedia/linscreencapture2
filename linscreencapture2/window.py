@@ -482,10 +482,14 @@ class StudioWindow(Gtk.ApplicationWindow):
         else:
             self._set_chip("cant", f"{name} capture is scheduled (HANDOFF 7)")
 
-    # --- left rail (r044: 216px expanded / 100px collapsed, hover flyouts) ------
+    # --- left rail (r044 flyouts; r046 fixed-pixel widths, >=5 icons wide) ------
 
+    # pane widths are FIXED pixels (r046: collapse/expand never scale by
+    # percentage): expanded fits >=5 icons per row; the left sidebar
+    # collapses to exactly one 24px icon plus its 8px pane margins
     PANE_W = 216
-    PANE_COLLAPSED_W = 100
+    LEFT_COLLAPSED_W = 40   # 1 icon wide; remaining icons stack below
+    RIGHT_COLLAPSED_W = 100
 
     def _build_left_rail(self):
         rail = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
@@ -505,7 +509,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _fill_left(self):
         rail = self._left_rail
         if self._left_collapsed:
-            rail.set_size_request(self.PANE_COLLAPSED_W, -1)
+            rail.set_size_request(self.LEFT_COLLAPSED_W, -1)
             expand = _icon_button("caret-right", "Expand the capture pane", 14,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_left())
@@ -550,13 +554,14 @@ class StudioWindow(Gtk.ApplicationWindow):
         rail.append(head)
 
         self._profile_buttons = {}
-        for name, (icon, meta) in PROFILE_META.items():
+        pgrid = Gtk.Grid(row_spacing=4, column_spacing=4)  # 6 across (r046)
+        for pi, (name, (icon, meta)) in enumerate(PROFILE_META.items()):
             b = _icon_button(icon, f"{name} capture \u2014 {meta}", 16,
                              css=("icon-24", "pirow"))
-            b.set_halign(Gtk.Align.START)
             b.connect("clicked", lambda _b, n=name: self._profile(n))
             self._profile_buttons[name] = b
-            rail.append(b)
+            pgrid.attach(b, pi % 6, pi // 6, 1, 1)
+        rail.append(pgrid)
         self._mark_active_profile()
 
         tools = Gtk.Label(label="TOOLS", halign=Gtk.Align.START, xalign=0)
@@ -759,7 +764,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _fill_right(self):
         right = self._right_pane
         if self._right_collapsed:
-            right.set_size_request(self.PANE_COLLAPSED_W, -1)
+            right.set_size_request(self.RIGHT_COLLAPSED_W, -1)
             expand = _icon_button("caret-left", "Expand the panels pane", 14,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_right())

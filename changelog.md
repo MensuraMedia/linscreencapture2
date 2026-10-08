@@ -199,3 +199,21 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   exactly 960x640 (earlier 791 height caveat resolved).
 - Evidence: docs/design/r045_spacing_even.png; tests 14/14; desktop
   relaunched, 0 criticals.
+
+## 2026-10-08 - r046 left sidebar: >=5 icons wide, 1-icon collapse, fixed pixels
+
+- Operator directives: sidebar minimum 5 icons wide with icons side by
+  side horizontally; collapse/expand never by percentage; collapsed
+  width fits exactly 1 icon with remaining icons stacked below or
+  consolidated by group and type.
+- Capture profiles now render as a horizontal 6-across grid (was 6
+  rows); tool groups stay 7-wide - the expanded 216px pane fits 6-7
+  icons per row, above the 5 minimum.
+- Collapse widths are fixed pixels, recorded as constants: left
+  collapses to 40px (LEFT_COLLAPSED_W = one 24px icon + 8px pane
+  margins) with the consolidated anchors stacked one per row below the
+  expand caret; right stays 100px (RIGHT_COLLAPSED_W). No percentage
+  logic anywhere.
+- Evidence: docs/design/r046_sidebar_expanded.png,
+  r046_sidebar_collapsed_1icon.png; tests 14/14; desktop relaunched
+  960x640, 0 criticals.
