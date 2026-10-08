@@ -159,3 +159,27 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   id, so rig drivers silently no-op'd (activate never fired) - drivers
   now set Gio.ApplicationFlags.NON_UNIQUE.
 - Tests 14/14; compileall clean.
+
+## 2026-10-08 - r044 pane parity, collapse-to-100px, crisp Phosphor icons
+
+- Operator directives: right pane same width as left; both collapsible
+  to 100px with like-buttons consolidated and expanded on hover; buttons
+  packed densely to fill the pane, grouped by type/function; fix icon
+  size/blur; icons only Phosphor from the master local source
+  ~/projects/assets/icons/regular.
+- Panes: right 280 -> 216 (matches left); both collapse to 100px via a
+  caret in the pane header. Collapsed: one consolidated anchor per type
+  (camera = profiles; one anchor per tool group via GROUP_ICONS;
+  stack/colour/magic-wand on the right) and hover pops the full group
+  out as a flyout (EventControllerMotion, 220ms grace); flyout items
+  act (profiles arm, tools pick, panel jumps auto-expand the pane).
+- Dense expanded layout: tool groups render as captioned 24px-cell
+  grids (7 per row fills the 216 pane), captions SELECT/DRAW/...
+  per contract-#4 grouping; profiles stay rows.
+- Icons: blur and size mismatch fixed - Gtk.Image was stretching a
+  smaller texture to the button allocation; icons now raster at 2x and
+  constrain to the display size (_icon_image), glyphs 16px in 24px
+  buttons. Sources: caret-left, caret-right, magic-wand vendored from
+  the master Phosphor source (copy, not reference); no other icon type.
+- Renders: docs/design/r044_panes_expanded.png, r044_panes_collapsed.png.
+- Tests 14/14; compileall clean; desktop relaunched, 0 criticals.

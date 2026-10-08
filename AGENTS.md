@@ -39,6 +39,11 @@ universal standards here.
    operator's desktop.
 4. Frozen frame invariant (v1 phase 1): grab_root() strictly before any
    overlay window exists; the studio window hides (250 ms) pre-freeze.
+5. Icons (operator r044): Phosphor regular only, from the master local
+   source ~/projects/assets/icons/regular; sync by copy into
+   assets/icons/phosphor/regular (copy, not reference). No other icon
+   type anywhere. Icons render at 2x and constrain to display size
+   (never stretch a smaller texture - that is what blurred buttons).
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry
