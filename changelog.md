@@ -483,3 +483,21 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   fixed widths, content scrolls. AGENTS rule 9 records the law.
 - Evidence: docs/design/r061_user_set_size.png; tests 17/17; desktop
   relaunched at the default, 0 criticals.
+
+## 2026-10-08 - r062 documentation pass
+
+- Operator directive: thoroughly update the changelog, the handoff, and
+  add documentation on the latest features; local backup; commit+push.
+- docs/HANDOFF.md: section 2b rewritten to the CURRENT sidebar model -
+  the r048-era text still documented flyouts, section captions and
+  quick styles, all since removed. Now covers both sidebars (toggle,
+  100/40px dimensions, full collapsed listing, in-pane panel content,
+  colour picker, navigator), the stage (#242424, original-size,
+  ctrl+scroll zoom), and the window size law (r061). State table rows
+  for r058-r061 added; pitfalls gained the ScrolledWindow decoupling
+  note; work queue item 7 corrected (ctrl+scroll zoom landed r057;
+  remaining: zoom-around-pointer, button wiring).
+- docs/FEATURES.md added: user-facing feature documentation as built
+  (capture pipeline, stage zoom, sidebars, colour picker, header state
+  chip, known limits) with pointers from README and the handoff doc
+  table. Docs-only; tests 17/17.

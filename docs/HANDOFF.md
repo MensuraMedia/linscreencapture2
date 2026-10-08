@@ -29,7 +29,10 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | Compact chrome: 24px standard buttons, colour well on right footer, default window 960×640, scrollable options bar | landed r043 | `window.py` |
 | Uniform 16px/24px icons, right-side flyouts, 100px panes | landed r047 | `window.py` |
 | Options bar equal margins, right-aligned 18px swatches, bottom bar removed (actions in sidebar lower left), steps badge removed | landed r052 — render `docs/design/r052_actions_in_sidebar.png` | `window.py` |
-| Right sidebar rebuilt on the left model (100/40px, caret, flyouts; panels/colour/quick-styles/navigator as icon tools) | landed r053 — render `docs/design/r053_right_sidebar_rebuilt.png` | `window.py` |
+| Right sidebar rebuilt on the left model (100/40px, caret; panels/colour/navigator as icon tools) | landed r053 — render `docs/design/r053_right_sidebar_rebuilt.png` | `window.py` |
+| Square buttons, 12px glyphs, caption-free segments, full sidebar listing when collapsed (no flyouts/scroller), minimal #141414 tooltips | landed r059 — renders `docs/design/r059_*.png` | `window.py` |
+| Glyphs reduced to 10px | landed r060 — render `docs/design/r060_glyphs_10px.png` | `window.py` |
+| Window obeys the user-set size exactly (scroll wrappers, no minimum floor) | landed r061 — render `docs/design/r061_user_set_size.png` | `window.py` |
 | **Left sidebar specification** (toggle, dimensions, collapsed consolidation, icon standard) | **documented r048 — section 2b** | `window.py`, HANDOFF 2b |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
@@ -75,77 +78,61 @@ deviations. Size chip belongs top-center above the selection with 4 corner
 handles (s044 lines 109–115, 224–226); the v1 top-right chip position we
 ported is wrong per s044.
 
-## 2b. Left sidebar specification (r048, verified against code)
+## 2b. Sidebar specification — left + right (r062, verified against code)
 
-The canonical statement of the left sidebar's construction. Constants live
-in `window.py` (`LEFT_W`, `LEFT_COLLAPSED_W`); all widths are FIXED PIXELS
-— collapse/expand never scale by percentage (r046).
+The canonical statement of both sidebars. Constants live in `window.py`;
+all widths are FIXED PIXELS — collapse/expand never scale by percentage
+(r046). There are NO section captions (r059), NO hover flyouts (r059),
+NO border-radius on any button (r059), and the window never expands to
+fit them (r061 — content scrolls instead).
 
-**Toggle.** A 24px caret button in the pane header toggles collapse/expand
-(`_toggle_left`): expanded header is `PROFILES ‹`, collapsed state shows a
-lone `›` at the top. Toggling rebuilds the pane contents in place; widths
-switch between the two fixed constants. The collapse transition is instant
-(no animation).
+**Shared icon/button standard (r047/r050/r058/r060).** 10px Phosphor
+glyph (ink-normalized: rendered at 4×, cropped to drawn bounds, long-edge
+fit, centered — every mark measures the same) inside a SQUARE 24×24px
+button (26px measured outer with borders; no radius; MenuButton internals
+pinned via `menubutton.icon-btn > button`). Swatch buttons share the same
+24px square. Active state: accent fill + on-accent glyph. Hover captions:
+single words, flat #141414 square tooltips, 11px.
+
+**Toggle.** A 24px caret in each pane's header toggles collapse/expand
+(left: `‹`/`›`; right: `›`/`‹`) — instant rebuild between the fixed
+widths. Header rows carry ONLY the caret (r059 removed the captions).
 
 **Dimensions.**
 
-| State | Width | Composition |
+| Pane | Expanded | Collapsed |
 |---|---|---|
-| Expanded | 100px (`LEFT_W`) | 8px pane margins + 84px content: three 24px columns (4px gaps) whose cells stretch to fill exactly |
-| Collapsed | 40px (`LEFT_COLLAPSED_W`) | 8px pane margins + one 24px icon column |
+| Left | 100px (`LEFT_W`) | 40px (`LEFT_COLLAPSED_W`) |
+| Right | 100px (`RIGHT_W`) | 40px (`RIGHT_COLLAPSED_W`) |
 
-**Icon/button standard (everywhere, r047/r050/r058/r060).** 10px Phosphor
-glyph (ink-normalized: rendered at 4×, cropped to drawn bounds, long-edge
-fit, centered — every mark measures the same) inside a standardized
-SQUARE 24×24px button (26px measured outer with borders; no
-border-radius anywhere on button chrome — r059; MenuButton internals
-pinned via `menubutton.icon-btn > button`). Swatch buttons share the
-same square 24px. Active state: accent fill + on-accent glyph.
-**No hover flyouts (r059)**: when a sidebar is closed, ALL of its
-buttons are listed stacked (no scroller — overflow is reached by
-expanding). Panel content shows in-pane, switched by the panel buttons.
-Tooltips: flat #141414, square, 11px label. MenuButton caveat: the anchor's INTERNAL theme-padded
-button needs its own CSS (`menubutton.icon-btn > button`); classes on the
-MenuButton node alone leave the inner button at ~32px, which read as an
-oversized first anchor (r050).
+**Left sidebar, expanded** (top to bottom): collapse caret; 6 capture
+profiles in a 3-column grid (Region/Window/Fullscreen/Scrolling/Delayed/
+Pin; active raised); separator; the 19 tools in their contract-#4 groups
+as 3-column grids separated by 1px rules (no captions since r059);
+expanding spacer; separator; ACTIONS — Discard/Flatten/Captures-menu/
+Copy/Save in a 3-column grid pinned to the pane bottom.
 
-**Expanded contents** (top to bottom, 4px spacing):
-1. `PROFILES` header row (10px/0.04em caption + collapse caret).
-2. Capture profiles — 6 icons in a 3-column grid (2 rows): Region, Window,
-   Full screen, Scrolling, Delayed 3 s, Pin to screen; active profile raised.
-3. `TOOLS` caption.
-4. Tool groups, each a caption + 3-column grid of 24px cells, separated by
-   1px rules: SELECT · DRAW (7) · REDACT (3) · CONTENT (2) · TRANSFORM (4)
-   · EDIT (2) per the contract-#4 grouping. Tool click = pick (accent fill).
+**Left sidebar, collapsed**: expand caret, then EVERY button listed
+stacked one per row — 6 profiles, separator, 19 tools, separator, 5
+actions (r059: no consolidation, no flyouts, no scroller; overflow is
+reached by expanding).
 
-**Collapsed contents** (one icon per row, stacked under the caret):
-consolidated anchors only — `camera` (flyout: all six profiles) plus one
-anchor per tool group (`GROUP_ICONS`: cursor/pen/drop-half/chat/rotate/
-arrows). Hovering an anchor pops the full group out to the **right**
-(`PositionType.RIGHT`) at identical 24px button size, closing after a
-220ms grace; flyout items act immediately (arm profile / pick tool).
+**Right sidebar, expanded** (top to bottom): collapse caret; PANELS —
+Layers/Captures/Props icon tools (active = accent fill) switching an
+in-pane content box (`_panel_content`: Layers = live layer rows;
+Captures/Props = scheduled-phase notes); the colour picker card
+(swatches/precise tabs, 3-column palette grid with selection ring,
+current-colour square + eyedropper, hex entry); expanding spacer;
+NAVIGATOR minimap pinned to the bottom.
 
-**Right sidebar (r053).** Mirrors the left model exactly:
+**Right sidebar, collapsed**: expand caret, then every control listed —
+3 panel tools, separator, the 12-colour palette, eyedropper.
 
-- **Toggle**: 24px caret in the `PANELS` header (`›` collapses, `‹`
-  expands); instant rebuild, fixed pixels.
-- **Dimensions**: expanded `RIGHT_W = 100` (8px margins + three 24px
-  columns); collapsed `RIGHT_COLLAPSED_W = 40` (one icon column).
-- **Expanded contents** (top to bottom): `PANELS` header row; the three
-  panel icon tools — Layers / Captures / Props — each a hover flyout
-  carrying its content (`_panel_content`: Layers shows the live layer
-  rows; Captures and Props show their scheduled-phase notes); `COLOUR`
-  caption + the picker card (swatches/precise tabs, palette grid,
-  current-colour circle, eyedropper, hex entry); an expanding spacer;
-  `QUICK STYLES` (4 preset tiles); `NAVIGATOR` caption + minimap pinned
-  to the bottom (informational — expanded only).
-- **Collapsed contents** (one icon per row under the expand caret):
-  three consolidated anchors — `stack` (flyout: the three panel tools),
-  `palette` (flyout: 12-colour palette + eyedropper), `magic-wand`
-  (flyout: the four quick-style presets).
-- The old tabs/stack panel shell was removed in r053; panel content
-  lives only in flyouts. Generalized flyout builder: `_flyout_box`
-  accepts arbitrary content boxes (buttons, layer rows, notes).
+**Stage** (center column): solid #242424; captures render at ORIGINAL
+size, centered at 1x (never auto-fit — r057); ctrl+mouse-wheel zooms
+1.1x per notch, clamped 0.1x–8x, with the live percentage in the HUD
+chip and the header zoom label (r057). Window: only the size the user
+sets (r061) — header and body are ScrolledWindows, content scrolls.
 
 ## 3. Architecture
 
@@ -180,6 +167,7 @@ header/profile button -> StudioWindow._start_capture(mode)
 | `tests/` | display-free pytest suite (13 tests) |
 | `docs/00-DECISIONS.md` | canonical decision register D1–D10 |
 | `docs/design/STUDIO-EDITOR-SPEC.md` | buildable UI spec; §2 r034 rules normative |
+| `docs/FEATURES.md` | user-facing feature documentation as built (r062) |
 
 ## 4. Decision register
 
@@ -233,6 +221,10 @@ update, ledger r-index + session note, D13 backup, commit, push.
   window (250 ms) first. XGetImage needs exact root dims (query attributes).
 - **at-spi CRITICAL** in rigs is killed by `NO_AT_BRIDGE=1` (D7); app output
   must stay free of criticals — check the log every rig run.
+- **Window minimum = propagated content minimum**: GTK grows a window to
+  its content unless the content is in ScrolledWindows (r061 — the
+  header and the editor body each live in one; toplevel minimum measured
+  46x107 after). Any new top-level region must not add a bare minimum.
 - **Live-desktop grabs are not evidence**: on `:0` other windows overlap the
   app (a r040 crop caught a browser sidebar). Render/verify in the rig only;
   use `capture.grab_root()` on the rig display, never on the desktop.
@@ -282,7 +274,10 @@ documented intent; behavior items (B) are the scheduled phases.
    via ctypes) into `FreezeOverlay` (click/Enter/arrow-cycle); unblocks the
    Window profile.
 6. **B — Annotation object model** (phase 12/15) — tools become real.
-7. **B — Zoom model** (percent · Fit · HUD), then Navigator live minimap.
+7. **B — Zoom model** — ctrl+scroll zoom (0.1x–8x) + live HUD/header %
+   landed r057; remaining: zoom-around-pointer, zoom buttons wiring
+   (Out/In/Fit are single-word placeholders until then). Navigator live
+   minimap also done (r053).
 8. **B — PrintScreen global hotkey + hidden-instance relaunch** (v1 parity).
 9. **B — Wayland portal capture** (X11-only today; `display_is_x11` guards).
 10. **B — Settings > Keyboard table** (spec §2/§4) once shortcuts exist.
