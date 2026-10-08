@@ -97,6 +97,12 @@ menubutton.icon-btn > button > box {{ min-width: 16px; min-height: 16px; }}
 
 /* color well: foreground over background (spec section 3) */
 .colorwell {{ margin-top: 8px; }}
+.swp {{ min-width: 18px; min-height: 18px; border-radius: 4px; padding: 0;
+  border: 1px solid {C['border']}; }}
+.swp.sel {{ outline: 2px solid {C['accent']}; outline-offset: 1px; }}
+.fgcircle {{ border-radius: 999px; min-width: 20px; min-height: 20px;
+  padding: 0; border: 1px solid {C['border']}; }}
+.hexentry {{ font-size: 12px; font-family: monospace; padding: 4px 6px; }}
 
 /* options bar (s044 optbar): segments, swatches, numerics */
 .seg {{
@@ -296,6 +302,23 @@ def _hex_rgb(hexcolor: str):
     hexcolor = hexcolor.lstrip("#")
     r, g, b = (int(hexcolor[i:i + 2], 16) / 255 for i in (0, 2, 4))
     return (r, g, b, 1.0)
+
+
+def _parse_hex(text: str):
+    """'#6f19e6' / '6f1' -> (r, g, b) 0-255, else None (r051 picker)."""
+    t = text.strip().lstrip("#")
+    if len(t) == 3:
+        t = "".join(c * 2 for c in t)
+    if len(t) != 6:
+        return None
+    try:
+        return tuple(int(t[i:i + 2], 16) for i in (0, 2, 4))
+    except ValueError:
+        return None
+
+
+def _to_hex(rgb) -> str:
+    return "#%02x%02x%02x" % tuple(rgb)
 
 
 class StudioWindow(Gtk.ApplicationWindow):
@@ -790,15 +813,19 @@ class StudioWindow(Gtk.ApplicationWindow):
                 panel_fly.append(b)
             right.append(_flyout_button("stack", "Panels - hover: Layers/Captures/Props",
                                         panel_fly))
-            # consolidated colour well
-            colour_fly = [
-                _hex_button(CONTENT_COLORS[0],
-                            "Foreground color - content palette", "sw", 20),
-                _hex_button(CONTENT_COLORS[9],
-                            "Background color - content palette", "sw", 20),
-                _icon_button("swap", "Swap foreground and background (X)", 16),
-            ]
-            right.append(_flyout_button("palette", "Colour - hover: fg/bg/swap",
+            # consolidated colour: palette flyout + screen eyedropper
+            if not hasattr(self, "_fg"):
+                self._fg = CONTENT_COLORS[0]
+            colour_fly = []
+            for hexc in CONTENT_COLORS:
+                b = _hex_button(hexc, hexc, "swp", 18)
+                b.connect("clicked", lambda _b, h=hexc: self._set_fg(h))
+                colour_fly.append(b)
+            pick_btn = _icon_button("eyedropper",
+                                    "Pick a colour from the screen", 16)
+            pick_btn.connect("clicked", lambda *_: self._pick_colour())
+            colour_fly.append(pick_btn)
+            right.append(_flyout_button("palette", "Colour - hover: palette + eyedropper",
                                         colour_fly))
             # consolidated quick styles
             qs_fly = [_hex_button(hexc, name, "qs-sw", 20)
@@ -913,6 +940,116 @@ class StudioWindow(Gtk.ApplicationWindow):
         row.append(eye)
         self._layers_box.append(row)
 
+    # --- colour picker (r051: swatches/precise card, right pane) ----------------
+
+    def _build_colour_card(self):
+        """Reference restructure: swatches/precise tabs, current-colour
+        circle, eyedropper, hex entry - fitted to the 100px pane."""
+        self._fg = CONTENT_COLORS[0]
+        card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+
+        tabs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        self._sw_tab = _icon_button("grid-four", "Swatches", 16, css=("icon-24", "ptab"))
+        self._pr_tab = _icon_button("sliders-horizontal", "Precise hex entry", 16,
+                                    css=("icon-24", "ptab"))
+        for b in (self._sw_tab, self._pr_tab):
+            b.set_hexpand(True)
+            tabs.append(b)
+        self._sw_tab.connect("clicked", lambda *_: self._colour_page("swatches"))
+        self._pr_tab.connect("clicked", lambda *_: self._colour_page("precise"))
+        card.append(tabs)
+
+        self._colour_stack = Gtk.Stack()
+        self._colour_stack.set_transition_type(Gtk.StackTransitionType.NONE)
+        grid = Gtk.Grid(row_spacing=2, column_spacing=2)
+        self._palette_buttons: dict[str, Gtk.Button] = {}
+        for i, hexc in enumerate(CONTENT_COLORS):
+            b = _hex_button(hexc, f"{hexc}", "swp", 18)
+            b.set_hexpand(True)
+            b.connect("clicked", lambda _b, h=hexc: self._set_fg(h))
+            self._palette_buttons[hexc] = b
+            grid.attach(b, i % 4, i // 4, 1, 1)
+        self._colour_stack.add_named(grid, "swatches")
+        entry = Gtk.Entry()
+        entry.get_style_context().add_class("hexentry")
+        entry.set_tooltip_text("Precise hex entry - press Enter to apply")
+        entry.set_max_width_chars(8)
+        entry.connect("activate", lambda e: self._set_fg(e.get_text()))
+        self._hex_entry = entry
+        self._colour_stack.add_named(entry, "precise")
+        card.append(self._colour_stack)
+
+        bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        circle = Gtk.Button()
+        circle.get_style_context().add_class("fgcircle")
+        area = Gtk.DrawingArea()
+        area.set_content_width(12)
+        area.set_content_height(12)
+        self._fg_area = area
+        area.set_draw_func(self._draw_fg_circle)
+        circle.set_child(area)
+        circle.set_tooltip_text("Current foreground colour")
+        bottom.append(circle)
+        pick = _icon_button("eyedropper", "Pick a colour from the screen", 16)
+        pick.connect("clicked", lambda *_: self._pick_colour())
+        bottom.append(pick)
+        card.append(bottom)
+
+        self._colour_page("swatches")
+        return card
+
+    def _colour_page(self, page: str):
+        self._colour_stack.set_visible_child_name(page)
+        for tab, name in ((self._sw_tab, "swatches"), (self._pr_tab, "precise")):
+            ctx = tab.get_style_context()
+            ctx.remove_class("sel")
+            if name == page:
+                ctx.add_class("sel")
+
+    def _draw_fg_circle(self, _area, cr, _w, _h):
+        cr.set_source_rgba(*_hex_rgb(self._fg))
+        cr.paint()
+
+    def _set_fg(self, text: str):
+        rgb = _parse_hex(text)
+        if rgb is None:
+            self._set_chip("cant", f"Not a hex colour: {text}")
+            return
+        self._fg = _to_hex(rgb)
+        self._fg_area.queue_draw()
+        for hexc, b in self._palette_buttons.items():
+            ctx = b.get_style_context()
+            ctx.remove_class("sel")
+            if hexc.lower() == self._fg:
+                ctx.add_class("sel")
+        text_now = _to_hex(rgb)
+        if self._hex_entry.get_text().lstrip("#").lower() != text_now[1:]:
+            self._hex_entry.set_text(text_now)
+
+    def _pick_colour(self):
+        """Eyedropper: one-shot root grab + pixel read at the pointer."""
+        if not capture.display_is_x11():
+            self._set_chip("cant", "Colour picking needs X11")
+            return
+        frame = capture.grab_root()
+        if frame is None:
+            self._set_chip("cant", "Colour pick failed - could not grab the screen")
+            return
+        try:
+            dev = self.get_display().get_default_seat().get_pointer()
+            surface, sx, sy = dev.get_surface_at_position()
+            if surface is None:
+                raise ValueError("no surface under the pointer")
+            rx, ry = surface.get_root_coords(sx, sy)
+            pix = capture.crop(frame, Rect(rx, ry, 1, 1))
+            if pix is None:
+                raise ValueError("pixel outside the grabbed frame")
+            px = pix.get_pixels()
+            self._set_fg("#%02x%02x%02x" % (px[0], px[1], px[2]))
+            self._set_chip("captured", f"Picked {self._fg}")
+        except Exception as exc:  # pointer/coords quirks must not crash the app
+            self._set_chip("cant", f"Colour pick failed: {exc}")
+
     def _build_panel_footer(self):
         """s044 pfoot, r043: colour well moved to the right pane, then
         quick styles, steps next-No, navigator minimap."""
@@ -923,14 +1060,7 @@ class StudioWindow(Gtk.ApplicationWindow):
         colour_label.get_style_context().add_class("sect")
         colour_label.get_style_context().add_class("muted")
         foot.append(colour_label)
-        well = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        well.get_style_context().add_class("colorwell")
-        well.append(_hex_button(CONTENT_COLORS[0],
-                                "Foreground color - content palette", "sw", 20))
-        well.append(_hex_button(CONTENT_COLORS[9],
-                                "Background color - content palette", "sw", 20))
-        well.append(_icon_button("swap", "Swap foreground and background (X)", 16))
-        foot.append(well)
+        foot.append(self._build_colour_card())
 
         qs_label = Gtk.Label(label="QUICK STYLES", halign=Gtk.Align.START, xalign=0)
         qs_label.get_style_context().add_class("sect"); qs_label.get_style_context().add_class("muted")

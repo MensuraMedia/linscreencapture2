@@ -287,3 +287,25 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Zoom evidence: docs/design/r050_collapsed_consistent.png; HANDOFF 2b
   icon standard updated with the MenuButton caveat. Tests 14/14;
   desktop relaunched, 0 criticals.
+
+## 2026-10-08 - r051 colour picker in the right pane
+
+- Operator directive with reference screenshot: make the colour swatch
+  like the reference (Swatches/Precise tabs, shade grid, current-colour
+  circle, eyedropper, hex field), restructured to fit the 100px pane.
+- Right-pane COLOUR section is now a picker card: Swatches/Precise tabs
+  (grid-four / sliders-horizontal icons, accent underline), the 12-colour
+  contract-#9 palette as a 4-across grid with selection ring, bottom row
+  with the current-colour circle + screen eyedropper; the Precise page
+  holds the hex entry (3- or 6-digit, Enter applies). Eyedropper: one-shot
+  root grab + pointer-position pixel read (X11; errors land in the chip).
+  Screen pick honours surface->root coords so multi-monitor setups are
+  addressed in root space.
+- Restructure note: at 84px content width the reference's one-row
+  circle+eyedropper+hex cannot fit - hex moved into the Precise page,
+  circle+eyedropper stay visible on both tabs. The old fg/bg well and
+  swap button are retired (fg semantics land with the tool milestone).
+- Collapsed right anchor flyout = palette + eyedropper (sets fg).
+- New display-free tests tests/test_colour.py (hex parse/format):
+  tests 17/17. Evidence: docs/design/r051_colour_picker.png; desktop
+  relaunched, 0 criticals.
