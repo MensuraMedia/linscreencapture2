@@ -29,6 +29,7 @@ data in place (D2). Commit-by-commit history in `changelog.md` (append-only).
 | Compact chrome: 24px standard buttons, colour well on right footer, default window 960×640, scrollable options bar | landed r043 | `window.py` |
 | Uniform 16px/24px icons, right-side flyouts, 100px panes | landed r047 | `window.py` |
 | Options bar equal margins, right-aligned 18px swatches, bottom bar removed (actions in sidebar lower left), steps badge removed | landed r052 — render `docs/design/r052_actions_in_sidebar.png` | `window.py` |
+| Right sidebar rebuilt on the left model (100/40px, caret, flyouts; panels/colour/quick-styles/navigator as icon tools) | landed r053 — render `docs/design/r053_right_sidebar_rebuilt.png` | `window.py` |
 | **Left sidebar specification** (toggle, dimensions, collapsed consolidation, icon standard) | **documented r048 — section 2b** | `window.py`, HANDOFF 2b |
 | Zoom model, options bar content, Layers/Captures/Props panels, tools | stubs / placeholders | see work queue |
 | Window snapping in overlay | not ported (v1 phase-3 geometry) | work queue |
@@ -119,8 +120,13 @@ arrows). Hovering an anchor pops the full group out to the **right**
 (`PositionType.RIGHT`) at identical 24px button size, closing after a
 220ms grace; flyout items act immediately (arm profile / pick tool).
 
-Right pane parity: `RIGHT_W = 100`, `RIGHT_COLLAPSED_W = 100` (single
-state; same icon standard).
+**Right sidebar (r053).** Mirrors this model exactly: `RIGHT_W = 100`
+expanded / `RIGHT_COLLAPSED_W = 40` collapsed, PANELS header + caret
+toggle, Layers/Captures/Props as icon tools whose content lives in
+hover flyouts (`_panel_content`; Layers = live layer rows), the colour
+picker card, QUICK STYLES, and the NAVIGATOR minimap (expanded only).
+Generalized flyout builder: `_flyout_box` accepts arbitrary content
+boxes. Old tabs/stack shell removed (r053).
 
 ## 3. Architecture
 

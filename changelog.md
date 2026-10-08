@@ -332,3 +332,24 @@ Append-only. Newest entries at the bottom. One entry per completed change.
 - Evidence: docs/design/r052_actions_in_sidebar.png (expanded; collapsed
   renders the same actions stacked). Tests 17/17; desktop relaunched,
   0 criticals.
+
+## 2026-10-08 - r053 right sidebar rebuilt on the left-sidebar model
+
+- Operator directive: remove the right sidebar completely (remembering
+  its icon tools) and recreate it with the same model and structure as
+  the left sidebar, placing the icon tools back into it.
+- The right pane now mirrors section 2b exactly: RIGHT_W=100 expanded /
+  RIGHT_COLLAPSED_W=40 collapsed (one icon), caret toggle in the
+  PANELS header, captioned sections, dense 3-across 24px icon grids,
+  consolidated hover flyouts when collapsed.
+- Expanded order: PANELS header + Layers/Captures/Props icon tools
+  (each a hover flyout carrying its content - Layers shows the live
+  layer rows, Captures/Props show their scheduled-phase notes), COLOUR
+  picker card, QUICK STYLES, NAVIGATOR minimap pinned to the bottom.
+- Collapsed: expand caret + three consolidated anchors (stack = panels
+  flyout, palette = colour palette + eyedropper, magic-wand = quick
+  styles). Navigator is informational and stays expanded-only.
+- The old tabs/stack panel shell is gone; flyout builder generalized
+  (_flyout_box) so arbitrary content (layer rows, notes) can pop out.
+- Evidence: docs/design/r053_right_sidebar_rebuilt.png; tests 17/17;
+  desktop relaunched, 0 criticals.

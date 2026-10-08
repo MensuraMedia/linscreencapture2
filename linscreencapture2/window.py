@@ -247,6 +247,12 @@ def _flyout_button(icon: str, tooltip: str, buttons: list[Gtk.Button],
     box.set_margin_top(4); box.set_margin_bottom(4)
     for b in buttons:
         box.append(b)
+    return _flyout_box(icon, tooltip, box, css)
+
+
+def _flyout_box(icon: str, tooltip: str, box: Gtk.Box,
+                css: tuple[str, ...] = ("icon-24",)) -> Gtk.MenuButton:
+    """Hover flyout with arbitrary content (r053: panel pages live here)."""
     pop = Gtk.Popover()
     pop.set_child(box)
     pop.set_position(Gtk.PositionType.RIGHT)  # hover-expansion to the right
@@ -514,7 +520,7 @@ class StudioWindow(Gtk.ApplicationWindow):
     LEFT_W = 100        # r047: expanded sidebar is 100px - three 24px
     RIGHT_W = 100       # columns fill it accurately (hexpand cells)
     LEFT_COLLAPSED_W = 40   # 1 icon wide; remaining icons stack below
-    RIGHT_COLLAPSED_W = 100
+    RIGHT_COLLAPSED_W = 40   # one icon wide, matching the left sidebar
 
     def _build_left_rail(self):
         rail = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
@@ -798,12 +804,16 @@ class StudioWindow(Gtk.ApplicationWindow):
 
     # --- right panels (r044: 216px like the left, collapsible to 100px) ---------
 
+    # --- right sidebar (r053: rebuilt on the left-sidebar model) ---------------
+    # 100px expanded / 40px collapsed, caret toggle, captioned icon sections,
+    # hover flyouts for panel content. Fixed pixels, never percentage.
+
     def _build_right_panels(self):
-        right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        right = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
         right.get_style_context().add_class("studio-panels")
-        right.set_margin_start(2); right.set_margin_end(2)
+        right.set_margin_start(8); right.set_margin_end(8)
         right.set_margin_top(8); right.set_margin_bottom(8)
-        # explicit False: see rail - tabs buttons expand inside, pane must not
+        # explicit False: inner buttons expand, the pane must not (r047)
         right.set_hexpand(False)
         self._right_pane = right
         self._right_collapsed = False
@@ -815,25 +825,44 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._clear(self._right_pane)
         self._fill_right()
 
+    def _panel_content(self, name: str) -> Gtk.Box:
+        """The flyout content for a panel (r053: panels live in flyouts)."""
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+        if name == "Layers":
+            box.append(self._build_layers_page())
+        else:
+            text = {
+                "Captures": ("Captures - versions of this image. The list "
+                             "lands with the panels milestone; the catalog "
+                             "is read-only per D2."),
+                "Props": ("Props - per-tool settings (colour, width, shadow, "
+                          "usage note) land with the options-bar milestone."),
+            }[name]
+            l = Gtk.Label(label=text, wrap=True, xalign=0)
+            l.set_max_width_chars(24)
+            l.get_style_context().add_class("muted")
+            box.append(l)
+        return box
+
     def _fill_right(self):
         right = self._right_pane
         if self._right_collapsed:
-            right.set_size_request(self.RIGHT_COLLAPSED_W, -1)
+            right.set_size_request(self.LEFT_COLLAPSED_W, -1)
             expand = _icon_button("caret-left", "Expand the panels pane", 16,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_right())
             right.append(expand)
-            # consolidated panels: hover pops the three jumps out
+            # consolidated: panels anchor (hover pops the three panels)
             panel_fly = []
             for name, (icon, _page) in PANEL_PAGES.items():
-                b = _icon_button(icon, f"{name} panel - opens expanded", 16)
-                b.connect("clicked", lambda _b, n=name: self._expand_and_show(n))
-                panel_fly.append(b)
-            right.append(_flyout_button("stack", "Panels - hover: Layers/Captures/Props",
+                content = self._panel_content(name)
+                content.set_margin_start(4); content.set_margin_end(4)
+                panel_fly.append(_flyout_box(icon, f"{name} panel - hover",
+                                             content))
+            right.append(_flyout_button("stack",
+                                        "Panels - hover: Layers/Captures/Props",
                                         panel_fly))
             # consolidated colour: palette flyout + screen eyedropper
-            if not hasattr(self, "_fg"):
-                self._fg = CONTENT_COLORS[0]
             colour_fly = []
             for hexc in CONTENT_COLORS:
                 b = _hex_button(hexc, hexc, "swp", 18)
@@ -843,58 +872,60 @@ class StudioWindow(Gtk.ApplicationWindow):
                                     "Pick a colour from the screen", 16)
             pick_btn.connect("clicked", lambda *_: self._pick_colour())
             colour_fly.append(pick_btn)
-            right.append(_flyout_button("palette", "Colour - hover: palette + eyedropper",
+            right.append(_flyout_button("palette",
+                                        "Colour - hover: palette + eyedropper",
                                         colour_fly))
             # consolidated quick styles
-            qs_fly = [_hex_button(hexc, name, "qs-sw", 20)
+            qs_fly = [_hex_button(hexc, name, "qs-sw", 18)
                       for name, hexc in QUICK_STYLES]
-            right.append(_flyout_button("magic-wand", "Quick styles - hover: presets",
-                                        qs_fly))
-            spacer = Gtk.Box()
-            spacer.set_vexpand(True)
-            right.append(spacer)
-            right.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
-            right.append(self._build_minimap())
+            right.append(_flyout_button("magic-wand",
+                                        "Quick styles - hover: presets", qs_fly))
             return
 
         right.set_size_request(self.RIGHT_W, -1)
-        tabs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
-        tabs.set_halign(Gtk.Align.FILL)
-        self._panel_stack = Gtk.Stack()
-        self._panel_stack.set_vexpand(True)
-        self._panel_stack.set_transition_type(Gtk.StackTransitionType.NONE)
-        self._panel_tabs = {}
-        for i, (name, (icon, page)) in enumerate(PANEL_PAGES.items()):
-            b = _icon_button(icon, f"{name} panel", 16)
-            b.get_style_context().add_class("ptab")
-            b.set_hexpand(True)
-            b.connect("clicked", lambda _b, p=name: self._show_panel(p))
-            self._panel_tabs[name] = b
-            tabs.append(b)
+        head = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        cap = Gtk.Label(label="PANELS", halign=Gtk.Align.START, xalign=0)
+        cap.get_style_context().add_class("sect")
+        cap.get_style_context().add_class("muted")
+        cap.set_hexpand(True)
+        head.append(cap)
         collapse = _icon_button("caret-right", "Collapse pane", 16,
                                 css=("icon-24",), color=C["text_muted"])
         collapse.connect("clicked", lambda *_: self._toggle_right())
-        tabs.append(collapse)
-        right.append(tabs)
-        right.append(self._panel_stack)
+        head.append(collapse)
+        right.append(head)
 
-        self._panel_stack.add_named(self._build_layers_page(), "layers")
-        self._panel_stack.add_named(self._page_label(
-            "Captures - versions of this image (library-backed list lands with"
-            " the panels milestone; the catalog itself is read-only per D2)"),
-            "captures")
-        self._panel_stack.add_named(self._page_label(
-            "Props - active tool settings (per-tool card: colour, width,"
-            " shadow, usage note)"), "props")
+        # panels: three icon tools, each a hover flyout with its content
+        panels = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        for name, (icon, _page) in PANEL_PAGES.items():
+            content = self._panel_content(name)
+            content.set_margin_start(4); content.set_margin_end(4)
+            b = _flyout_box(icon, f"{name} panel - hover for content", content)
+            panels.append(b)
+        right.append(panels)
 
-        right.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
-        right.append(self._build_panel_footer())
-        self._show_panel("Layers")
+        colour_label = Gtk.Label(label="COLOUR", halign=Gtk.Align.START, xalign=0)
+        colour_label.get_style_context().add_class("sect")
+        colour_label.get_style_context().add_class("muted")
+        right.append(colour_label)
+        right.append(self._build_colour_card())
 
-    def _expand_and_show(self, name: str):
-        if self._right_collapsed:
-            self._toggle_right()
-        self._show_panel(name)
+        spacer = Gtk.Box()
+        spacer.set_vexpand(True)  # pins the navigator to the bottom
+        right.append(spacer)
+        qs_label = Gtk.Label(label="QUICK STYLES", halign=Gtk.Align.START, xalign=0)
+        qs_label.get_style_context().add_class("sect")
+        qs_label.get_style_context().add_class("muted")
+        right.append(qs_label)
+        qs = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        for name, hexc in QUICK_STYLES:
+            qs.append(_hex_button(hexc, name, "qs-sw", 18))
+        right.append(qs)
+        nav_label = Gtk.Label(label="NAVIGATOR", halign=Gtk.Align.START, xalign=0)
+        nav_label.get_style_context().add_class("sect")
+        nav_label.get_style_context().add_class("muted")
+        right.append(nav_label)
+        right.append(self._build_minimap())
 
     def _build_minimap(self):
         wrap = Gtk.Box()
@@ -907,14 +938,6 @@ class StudioWindow(Gtk.ApplicationWindow):
         wrap.set_margin_bottom(4)
         wrap.append(mini)
         return wrap
-
-    def _show_panel(self, name: str):
-        self._panel_stack.set_visible_child_name(PANEL_PAGES[name][1])
-        for n, b in self._panel_tabs.items():
-            ctx = b.get_style_context()
-            ctx.remove_class("sel")
-            if n == name:
-                ctx.add_class("sel")
 
     def _build_layers_page(self):
         page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
