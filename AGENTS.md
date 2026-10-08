@@ -48,6 +48,10 @@ universal standards here.
    (Discard/Flatten/Captures/Copy/Save) live in the lower left of the
    left sidebar (grid when expanded, stacked when collapsed). Capture
    summary (WxH/PNG/layers) lives in the header doc sub-line.
+7. Captions and stage (operator r055): every button hover caption is a
+   SINGLE WORD (status-chip tooltips keep their detail). Sidebar tool
+   segments carry no text titles (groups are separated by rules only).
+   The canvas stage background is #242424.
 
 ## Change tracking
 - changelog.md at repo root — append-only; every completed change gets an entry

@@ -362,3 +362,22 @@ Append-only. Newest entries at the bottom. One entry per completed change.
   navigator), collapsed anchors (stack/palette/magic-wand), and the
   generalized _flyout_box builder note.
 - Docs-only change; no code touched. Tests 17/17 as due diligence.
+
+## 2026-10-08 - r055 single-word captions, caption-free segments, #242424 stage
+
+- Operator directives: all button hover captions single word; tool
+  segments in the sidebar carry no text label titles; stage background
+  #242424.
+- 30 tooltip sites swept to single words (Out/In/Fit, Capture, Region/
+  Window/Fullscreen/Scrolling/Delayed/Pin, Profiles, group names,
+  tool names, Panels/Layers/Captures/Props, Colour/Styles/Eyedropper/
+  Foreground/Hex, Discard/Flatten/Copy/Save/Captures, Expand/Collapse,
+  Visibility, Swap, Later). PROFILE_SHORT/STYLE_SHORT caption maps
+  added. The status chip keeps its detail tooltip (contract: states say
+  why); menu items keep their visible text.
+- Sidebar tool-segment captions (SELECT/DRAW/...) removed - groups are
+  delimited by rules only; PROFILES/TOOLS/ACTIONS section titles stay.
+- Canvas stage: solid #242424 (checkerboard removed); navigator minimap
+  background matches.
+- Evidence: docs/design/r055_stage242424_singleword.png; tests 17/17;
+  desktop relaunched, 0 criticals.
