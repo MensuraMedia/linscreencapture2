@@ -253,56 +253,6 @@ GROUP_ICONS = {
 }
 
 
-def _flyout_button(icon: str, tooltip: str, buttons: list[Gtk.Button],
-                   css: tuple[str, ...] = ("icon-24",)) -> Gtk.MenuButton:
-    """Consolidated button: hover pops out the full group (r044 collapse law).
-    Icons per the vendored Phosphor set only."""
-    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
-    box.set_margin_start(2); box.set_margin_end(2)
-    box.set_margin_top(2); box.set_margin_bottom(2)
-    for b in buttons:
-        box.append(b)
-    return _flyout_box(icon, tooltip, box, css)
-
-
-def _flyout_box(icon: str, tooltip: str, box: Gtk.Box,
-                css: tuple[str, ...] = ("icon-24",)) -> Gtk.MenuButton:
-    """Hover flyout with arbitrary content (r053: panel pages live here)."""
-    pop = Gtk.Popover()
-    pop.get_style_context().add_class("hoverfly")
-    pop.set_child(box)
-    pop.set_position(Gtk.PositionType.RIGHT)  # hover-expansion to the right
-    mb = Gtk.MenuButton()
-    mb.set_child(_icon_image(icon, 12))
-    mb.set_popover(pop)
-    mb.set_tooltip_text(tooltip)
-    ctx = mb.get_style_context()
-    ctx.add_class("lt-icon-btn"); ctx.add_class("icon-btn")
-    for c in css:
-        ctx.add_class(c)
-
-    pending = {"src": None}
-
-    def _open(*_):
-        if pending["src"] is not None:
-            GLib.source_remove(pending["src"])
-            pending["src"] = None
-        pop.popup()
-
-    def _schedule_close(*_):
-        if pending["src"] is not None:
-            GLib.source_remove(pending["src"])
-        pending["src"] = GLib.timeout_add(220, pop.popdown)
-
-    motion = Gtk.EventControllerMotion()
-    motion.connect("enter", _open)
-    motion.connect("leave", _schedule_close)
-    mb.add_controller(motion)
-    inside = Gtk.EventControllerMotion()
-    inside.connect("enter", _open)
-    inside.connect("leave", _schedule_close)
-    box.add_controller(inside)
-    return mb
 
 
 def _hex_button(hexcolor: str, tooltip: str, css_class: str, px: int = 24) -> Gtk.Button:
@@ -560,33 +510,28 @@ class StudioWindow(Gtk.ApplicationWindow):
     def _fill_left(self):
         rail = self._left_rail
         if self._left_collapsed:
+            # r059: ALL buttons present when closed - no flyouts, no scroller
             rail.set_size_request(self.LEFT_COLLAPSED_W, -1)
             expand = _icon_button("caret-right", "Expand", 12,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_left())
             rail.append(expand)
-            # consolidated profiles: hover pops out all six
             self._profile_buttons = {}
-            profile_fly = []
             for name, (icon, meta) in PROFILE_META.items():
                 b = _icon_button(icon, PROFILE_SHORT[name], 12,
                                  css=("icon-24", "pirow"))
                 b.connect("clicked", lambda _b, n=name: self._profile(n))
                 self._profile_buttons[name] = b
-                profile_fly.append(b)
+                rail.append(b)
             self._mark_active_profile()
-            rail.append(_flyout_button("camera", "Profiles", profile_fly))
-            # consolidated tool groups: one anchor per function, hover = tools
+            rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
             self._tool_buttons = {}
-            for group, tools in TOOL_GROUPS:
-                group_fly = []
+            for _group, tools in TOOL_GROUPS:
                 for name, icon in tools:
-                    b = _icon_button(icon, name, 12,
-                                     css=("icon-24", "toolcell"))
+                    b = _icon_button(icon, name, 12, css=("icon-24", "toolcell"))
                     b.connect("clicked", lambda _b, n=name: self._pick_tool(n))
                     self._tool_buttons[name] = b
-                    group_fly.append(b)
-                rail.append(_flyout_button(GROUP_ICONS[group], group, group_fly))
+                    rail.append(b)
             self._mark_active_tool()
             rail.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
             actions = self._action_buttons()
@@ -838,50 +783,53 @@ class StudioWindow(Gtk.ApplicationWindow):
         self._clear(self._right_pane)
         self._fill_right()
 
-    def _panel_content(self, name: str) -> Gtk.Box:
-        """The flyout content for a panel (r053: panels live in flyouts)."""
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+    def _panel_content(self, name: str) -> Gtk.Widget:
+        """The in-pane content for a panel (r059: no flyouts)."""
         if name == "Layers":
-            box.append(self._build_layers_page())
-        else:
-            text = {
-                "Captures": ("Captures - versions of this image. The list "
-                             "lands with the panels milestone; the catalog "
-                             "is read-only per D2."),
-                "Props": ("Props - per-tool settings (colour, width, shadow, "
-                          "usage note) land with the options-bar milestone."),
-            }[name]
-            l = Gtk.Label(label=text, wrap=True, xalign=0)
-            l.set_max_width_chars(24)
-            l.get_style_context().add_class("muted")
-            box.append(l)
-        return box
+            return self._build_layers_page()
+        text = {
+            "Captures": ("Captures - versions of this image. The list "
+                         "lands with the panels milestone; the catalog "
+                         "is read-only per D2."),
+            "Props": ("Props - per-tool settings (colour, width, shadow, "
+                      "usage note) land with the options-bar milestone."),
+        }[name]
+        l = Gtk.Label(label=text, wrap=True, xalign=0)
+        l.set_max_width_chars(10)
+        l.get_style_context().add_class("muted")
+        return l
+
+    def _show_panel(self, name: str):
+        self._active_panel = name
+        self._clear(self._panel_content_box)
+        self._panel_content_box.append(self._panel_content(name))
+        for n, b in self._panel_buttons.items():
+            ctx = b.get_style_context()
+            ctx.remove_class("active")
+            if n == name:
+                ctx.add_class("active")
 
     def _fill_right(self):
         right = self._right_pane
         if self._right_collapsed:
-            right.set_size_request(self.LEFT_COLLAPSED_W, -1)
+            # r059: everything listed - panels, palette, eyedropper
+            right.set_size_request(self.RIGHT_COLLAPSED_W, -1)
             expand = _icon_button("caret-left", "Expand", 12,
                                   css=("icon-24",), color=C["text_muted"])
             expand.connect("clicked", lambda *_: self._toggle_right())
             right.append(expand)
-            # consolidated: panels anchor (hover pops the three panels)
-            panel_fly = []
             for name, (icon, _page) in PANEL_PAGES.items():
-                content = self._panel_content(name)
-                content.set_margin_start(4); content.set_margin_end(4)
-                panel_fly.append(_flyout_box(icon, name, content))
-            right.append(_flyout_button("stack", "Panels", panel_fly))
-            # consolidated colour: palette flyout + screen eyedropper
-            colour_fly = []
+                b = _icon_button(icon, name, 12)
+                b.connect("clicked", lambda _b, n=name: self._show_panel(n))
+                right.append(b)
+            right.append(Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL))
             for hexc in CONTENT_COLORS:
                 b = _hex_button(hexc, hexc, "swp", 24)
                 b.connect("clicked", lambda _b, h=hexc: self._set_fg(h))
-                colour_fly.append(b)
-            pick_btn = _icon_button("eyedropper", "Eyedropper", 12)
-            pick_btn.connect("clicked", lambda *_: self._pick_colour())
-            colour_fly.append(pick_btn)
-            right.append(_flyout_button("palette", "Colour", colour_fly))
+                right.append(b)
+            pick = _icon_button("eyedropper", "Eyedropper", 12)
+            pick.connect("clicked", lambda *_: self._pick_colour())
+            right.append(pick)
             return
 
         right.set_size_request(self.RIGHT_W, -1)
@@ -892,14 +840,20 @@ class StudioWindow(Gtk.ApplicationWindow):
         head.append(collapse)
         right.append(head)
 
-        # panels: three icon tools, each a hover flyout with its content
+        # panels: three icon tools switching the in-pane content box (r059)
+        self._active_panel = "Layers"
         panels = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
+        self._panel_buttons = {}
         for name, (icon, _page) in PANEL_PAGES.items():
-            content = self._panel_content(name)
-            content.set_margin_start(4); content.set_margin_end(4)
-            b = _flyout_box(icon, name, content)
+            b = _icon_button(icon, name, 12, css=("icon-24",))
+            b.connect("clicked", lambda _b, n=name: self._show_panel(n))
+            self._panel_buttons[name] = b
             panels.append(b)
         right.append(panels)
+        self._panel_content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL,
+                                          spacing=4)
+        right.append(self._panel_content_box)
+        self._show_panel(self._active_panel)
 
         right.append(self._build_colour_card())
 
