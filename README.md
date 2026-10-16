@@ -1,5 +1,7 @@
 # LinScreenCapture 2
 
+> **Status: Retired (2026-10-16).** This project is no longer maintained, and the repository is archived as read-only. The code is kept for reference only.
+
 GTK4 / Python screenshot tool with the **Studio Editor** - a Photoshop x
 Snagit hybrid: capture profiles + tool palette on the left, layers /
 captures / properties panels on the right, contextual options bar on top.
